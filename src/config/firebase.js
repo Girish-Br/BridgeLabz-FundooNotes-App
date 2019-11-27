@@ -28,8 +28,7 @@ async login(email,password){
 }
 async register(firstname,lastname,email,password){
     await this.auth.createUserWithEmailAndPassword(email,password)
-    
-    return ( this.db.collection('user').add({
+        return ( this.db.collection('user').add({
         firstname:firstname,
         lastname:lastname,
         email:email,
@@ -38,6 +37,7 @@ async register(firstname,lastname,email,password){
       .then(response => {
         console.log('Registered')
       })
+      .catch(response=>{console.log('not registered')})
      )
 }
 }

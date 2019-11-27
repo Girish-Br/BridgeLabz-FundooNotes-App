@@ -1,21 +1,9 @@
-//import services file
 import authServices from '../services/userServices';
 import fire from '../config/firebase'
-//import axios ,promised based http client for browser and node js
 import axios from 'axios';
 var controller = {
     register(firstName, lastName, email, password) {
        fire.register(firstName, lastName, email, password)
-       /* return axios.post(authServices.register, data).then(response => {
-            console.log("response--" + JSON.stringify(response));
-            if (response.status === 200) {
-                console.log("register sucess")
-            }
-        })
-            .catch(error => {
-                console.log("registration failed", error);
-                //return error;
-            })*/
     },
     login(email, password) {
         var data = {
@@ -30,7 +18,6 @@ var controller = {
         })
             .catch(error => {
                 console.log("login failed", error);
-                //return error;
             })
     },
     forgotPwd(email) {
@@ -45,7 +32,6 @@ var controller = {
         })
             .catch(error => {
                 console.log("forgot pwd failed", error);
-                //return error;
             })
     },
     resetPwd(password, confirmpassword) {
@@ -63,7 +49,6 @@ var controller = {
         })
             .catch(error => {
                 console.log("reset failed", error);
-                //return error;
             })
     },
     getAllUseres() {
@@ -75,10 +60,8 @@ var controller = {
             }
 
         })
-            // return data;
             .catch(error => {
                 console.log("get all useres failed", error);
-                //return error;
 
 
             })

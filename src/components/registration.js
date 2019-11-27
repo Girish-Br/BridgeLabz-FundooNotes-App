@@ -1,13 +1,7 @@
-//import react
 import React from 'react';
-//import required components from material-ui
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField';
-import { Card } from '@material-ui/core';
+import { Card,Button,TextField,Snackbar,IconButton } from '@material-ui/core';
 import Controller from '../controller/userController'
 import '../App.css'
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -76,7 +70,7 @@ export default class Register extends React.Component {
     return (
         <div>
       <form className="register">
-        <Card className="card">
+        <Card className="rcard">
           <Snackbar
             anchorOrigin={{
               vertical: 'top',

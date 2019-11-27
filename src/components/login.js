@@ -1,13 +1,6 @@
 import React from 'react';
 import Controller from '../controller/userController'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField';
-import { Card } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { Card,TextField,Button,Snackbar,IconButton,Toolbar,AppBar,Typography } from '@material-ui/core';
 export default class Login extends React.Component {
  constructor(props) {
    super(props);
@@ -72,7 +65,7 @@ export default class Login extends React.Component {
            </div>
            </Toolbar>
          </AppBar>
-         <Snackbar anchorOrigin={{vertical: 'bottom',horizontal: 'left',}}
+         <Snackbar anchorOrigin={{vertical: 'top',horizontal: 'left',}}
            open={this.state.snackbarOpen}
            autoHideDuration={6000}
            onClose={this.snackbarClose}
@@ -88,7 +81,7 @@ export default class Login extends React.Component {
                label="Email"
                type="email"
                name="email"
-               autoComplete="off"
+               autoComplete="email"
                margin="normal"
                variant="outlined"
                value={this.state.email}
@@ -114,7 +107,7 @@ export default class Login extends React.Component {
            </Button>
            </div>
            <div className='cbutton'>
-             <Button onClick={this.handleRegisterClick} variant="contained" style={{ backgroundColor: "#80deea" }}>
+             <Button onClick={this.handleRegisterClick} variant="contained" color="primary">
                Create Account
            </Button >
            <div className='lbutton'>
