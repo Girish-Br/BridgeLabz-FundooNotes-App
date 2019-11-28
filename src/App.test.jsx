@@ -1,17 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {shallow } from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-15';
-describe('<App/>',()=>{
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-  it('renders 1 <App/> component',()=>{
-    const component=shallow(<App />);
-    Enzyme.configure({ adapter: new Adapter() });
-    Expect(component).toHaveLength(1)
+import {shallow} from 'enzyme';
+import Login from './components/login';
+const Enzyme = require('enzyme');
+// this is where we reference the adapter package we installed  
+// earlier
+const EnzymeAdapter = require('enzyme-adapter-react-16');
+// This sets up the adapter to be used by Enzyme
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+/**
+ * describe what we are testing
+ **/
+describe('Login Component', () => {
+  /**
+   * make our assertion and what we expect to happen 
+   **/
+  it('should render without throwing an error', () => {
+    expect(shallow( <Login/> ).exists()).toBe(true)
+  })
+  /**
+   * within the Login components describe function
+   **/
+  it('renders a email input', () => {
+    expect(shallow( <Login/> ).find('#email').length).toEqual(true)
+  })
+  it('renders a password input', () => {
+    expect(shallow( <Login/> ).find('#password').length).toEqual(1)
   })
 })

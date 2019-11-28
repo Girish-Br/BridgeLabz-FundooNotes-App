@@ -1,4 +1,4 @@
-import fire from 'firebase'
+import firebase from 'firebase'
 const config = {
     apiKey: "AIzaSyDn0dCL3Ey1r4GFEJaTB0eT0wdR6Rcna1U",
     authDomain: "fundoonotes-c21bb.firebaseapp.com",
@@ -9,9 +9,11 @@ const config = {
     appId: "1:780516019049:web:69d1cbbb70ec2780d3cbf8",
     measurementId: "G-569Z7L381S"
   };
-  class firebase{
+  const fire=firebase.initializeApp(config);
+  export default fire;
+  /*class firebase{
       constructor(){
-          fire.initializeApp(config);
+          
           this.auth=fire.auth();
           this.db=fire.firestore();
   }
@@ -26,19 +28,17 @@ async login(email,password){
       })
     )
 }
-async register(firstname,lastname,email,password){
-    await this.auth.createUserWithEmailAndPassword(email,password)
+async register(user,res){
+    await this.auth.createUserWithEmailAndPassword(user.email,user.password)
         return ( this.db.collection('user').add({
-        firstname:firstname,
-        lastname:lastname,
-        email:email,
-        password:password
+        firstname:user.firstname,
+        lastname:user.lastname,
+        email:user.email,
+        password:user.password
       })
-      .then(response => {
-        console.log('Registered')
-      })
+    
       .catch(response=>{console.log('not registered')})
      )
 }
 }
-export default new firebase();
+export default new firebase();*/

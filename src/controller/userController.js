@@ -1,7 +1,38 @@
-import authServices from '../services/userServices';
+//import authServices from '../services/userServices';
 import fire from '../config/firebase'
-import axios from 'axios';
-var controller = {
+import firebase from 'firebase'
+const db=fire.firestore();
+export async function register (newUser,res){
+    try{
+    await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+          db.collection('user').doc(firebase.auth().currentUser.uid).set({
+          first_name: ""+newUser.first_name,
+          last_name: ""+newUser.last_name
+        })
+        res='success';
+        return res;
+      }
+      catch(error) {
+        console.log(error)
+        return error
+      }
+  }
+  export async function login(user,res){
+    fire.auth().signInWithEmailAndPassword(user.email, user.password)
+   /* var userData = db.collection("users").doc(firebase.auth().currentUser.uid)
+    userData.get().then(function(doc) {
+      if (doc.exists) {
+          console.log("Document data:", doc.data());
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  })*/
+    .catch((err) => {
+      return err;
+    })
+}
+/*var controller = {
     register(firstName, lastName, email, password) {
        fire.register(firstName, lastName, email, password)
     },
@@ -44,8 +75,6 @@ var controller = {
             if (response.status === 200) {
                 console.log("reset sucess")
             }
-
-
         })
             .catch(error => {
                 console.log("reset failed", error);
@@ -65,8 +94,5 @@ var controller = {
 
 
             })
-
-
     },
-}
-export default controller;
+}*/

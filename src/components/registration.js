@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card,Button,TextField,Snackbar,IconButton } from '@material-ui/core';
-import Controller from '../controller/userController'
+import { register } from '../controller/userController'
 import '../App.css'
 export default class Register extends React.Component {
   constructor(props) {
@@ -13,26 +13,49 @@ export default class Register extends React.Component {
       snackbarOpen: false,
       snackbarMsg: '',      
     }
-  }
+    
+    }
   snackbarClose = (e) => {
     this.setState({ snackbarOpen: false });
   }
   //function to handle submit button
   handleSubmit = () => {
-    console.log(this.state.firstName)
     if (this.state.firstName === null || this.state.firstName.length < 1) {
       this.setState({ snackbarOpen: true,snackbarMsg:"firstname cannot be empty" })
     }else if (this.state.lastName === null || this.state.lastName.length < 1) {
       this.setState({ snackbarOpen: true,snackbarMsg:"lastname cannot be empty"  })
-    }else if(this.state.email === null || this.state.email.length < 1) {
+    }
+      else if(this.state.email === null || this.state.email.length < 1) {
       this.setState({ snackbarOpen: true,snackbarMsg:"email cannot be empty"  })
-    }else if(this.state.password === null || this.state.password.length < 8) {
+    }
+    else if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)) {
+      this.setState({
+          snackbarOpen: true,
+          snackbarMsg: "Invalid email..!"
+      });
+  }
+  else if(this.state.password === null || this.state.password.length < 8) {
       this.setState({ snackbarOpen: true,snackbarMsg:"password should be min 8"  })
     }
     else {
-      Controller.register(this.state.firstName, this.state.lastName, this.state.email, this.state.password);
-      this.setState({ snackbarOpen: true,snackbarMsg:"successfully registered"  })
-      this.props.history.push('/login')
+      const user = {
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      }
+     
+    register(user).then(res => {
+      this.setState({
+        snackbarOpen:true,
+        snackbarMessage:res
+      })
+      this.setState({
+        snackbarOpen: true,
+        snackbarMsg: "Registration Successful"
+    });
+        this.props.history.push(`/login`);
+    })
     }
   }
   //function to handle log in button
@@ -42,28 +65,48 @@ export default class Register extends React.Component {
   //function to store values
   onChangeFirstName = (e) => {
     //this.setState({ [e.target.name]: e.target.value });
+    try{
     var firstName = e.target.value;
     this.setState({
       firstName: firstName
     })
   }
+  catch(err){
+    console.log(` error at changing firstname`)
+  }
+  }
   onChangeLastName = (e) => {
+    try{
     var LastName = e.target.value;
     this.setState({
       lastName: LastName
     })
   }
+  catch(err){
+    console.log(`error at changing lastname`)
+  }
+  }
   onChangeEmail = (e) => {
+    try{
     var Email = e.target.value;
     this.setState({
       email: Email
     })
   }
+  catch(err){
+    console.log(`error at changing email`)
+  }
+  }
   onChangePassword = (e) => {
+    try{
     var Password = e.target.value;
     this.setState({
       password: Password
     })
+  }
+  catch(err){
+    console.log(`error at changing password`)
+  }
   }
   //to display
   render() {
@@ -142,16 +185,15 @@ export default class Register extends React.Component {
               onChange={this.onChangePassword}
             />
           </div>
-          <div className="rlbutton">
-            <Button onClick={this.handleClick} variant="contained" color="primary">
-              login
-            </Button>
-            </div>
-            <div className="rsbutton">
+          <div className="rsbutton">
             <Button onClick={this.handleSubmit} variant="contained" color="primary">
               submit
             </Button>
           </div>
+          <div className="rlbutton">
+            <a href='/login'>Already have an account?Login</a>
+            </div>
+           
         </Card>
       </form >
       </div>

@@ -5,7 +5,7 @@ body {
   position: relative;
   margin-top: 80px;
   margin-left:350px;
-  width: 600px;
+  width: 550px;
   border: 2px solid rgb(176, 176, 196);
   align-items: center;
 }
@@ -20,17 +20,15 @@ body {
   color:#3f51b5;
 }
 .loginButton{
-  margin-left: 25px;
   margin-top: 15px;
  color:#3f51b5 ;
  }
-
-
 .cbutton {
   margin-top:25px;
-  margin-right:350px;
 }
-
+.lfbutton{
+  margin-top:15px;
+}
 .register {
   margin-top: 100px;
   border-color: 20ch, black;
@@ -57,7 +55,7 @@ body {
 color:#3f51b5;
 }
 .rlbutton{
-  margin-left:30px;
+  margin-left:1px;
   margin-top:20px;
 }
 .forgotpwd {
@@ -68,19 +66,10 @@ color:#3f51b5;
 .forgotpwd_head {
   color: #3f51b5;
 }
-
-
 .logout {
   margin-left: 200px;
 }
-
-
-
 .lbutton{
   margin-left:400px;
   margin-top:5px;
-}
-.rsbutton{
-  margin-left: 30px;
-  margin-top:60x;
 }

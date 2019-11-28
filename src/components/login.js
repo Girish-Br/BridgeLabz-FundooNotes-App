@@ -1,5 +1,5 @@
 import React from 'react';
-import Controller from '../controller/userController'
+import { login } from '../controller/userController'
 import { Card,TextField,Button,Snackbar,IconButton,Toolbar,AppBar,Typography } from '@material-ui/core';
 export default class Login extends React.Component {
  constructor(props) {
@@ -22,12 +22,31 @@ export default class Login extends React.Component {
    //checks email
    if (this.state.email === "") {
      this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
-   } else if (this.state.password === null || this.state.password.length < 8) {
-     this.setState({ snackbarOpen: true, snackbarMsg: "password should be min 8" })
-   } else {
+   }
+   else if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)) {
+    this.setState({
+        snackbarOpen: true,
+        snackbarMsg: "Invalid email..!"
+    });
+} 
+else if (this.state.password.length < 6) {
+    this.setState({
+        snackbarOpen: true,
+        snackbarMsg: "password must be of atleast 6 characters long..!"
+    });
+  }
+   else {
      //navigate to controller
-     Controller.login(this.state.email, this.state.password);
-     localStorage.setItem('Sender', this.state.email);
+     const user = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    login(user).then(res => {
+      if (res) {
+        this.props.history.push(`/profile`)
+      }
+    })
    }
  }
  //function to handle when we click register button
@@ -40,16 +59,26 @@ export default class Login extends React.Component {
  }
  //function to store values
  onChangeEmail = (e) => {
+   try{
    var Email = e.target.value;
    this.setState({
      email: Email
    })
+  }
+  catch(err){
+    console.log(`error at changing email`)
+  }
  }
  onChangePassword = (e) => {
+   try{
    var Password = e.target.value;
    this.setState({
      password: Password
    })
+  }
+  catch(err){
+    console.log(`error at changing password`)
+  }
  }
  //to display
  render() {
@@ -81,6 +110,7 @@ export default class Login extends React.Component {
                label="Email"
                type="email"
                name="email"
+               validations="{[required, email]}"
                autoComplete="email"
                margin="normal"
                variant="outlined"
@@ -110,7 +140,7 @@ export default class Login extends React.Component {
              <Button onClick={this.handleRegisterClick} variant="contained" color="primary">
                Create Account
            </Button >
-           <div className='lbutton'>
+           <div className='lfbutton'>
              <Button onClick={this.handleForgotClick} color='secondary' >
                Forgot Password??
            </Button>
