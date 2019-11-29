@@ -1,6 +1,11 @@
+/******************************************************************************
+ *  @Purpose        : to build complete fundooNotes App
+ *  @file           : index.js
+ *  @author         : GIRISH B R
+ *  @since          : 26-11-2019
+ *******************************************************************************/
 import React from 'react';
 import { login } from '../controller/userController'
-//import {forg} from '../components/forgotpassword'
 import { Card,TextField,Button,Snackbar,IconButton,Toolbar,AppBar,Typography } from '@material-ui/core';
 export default class Login extends React.Component {
  constructor(props) {
