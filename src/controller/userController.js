@@ -2,6 +2,7 @@ import authServices from '../services/userServices';
 import fire from '../config/firebase'
 import firebase from 'firebase'
 import axios from 'axios'
+import { EventEmitter } from 'events';
 const db=fire.firestore();
 export async function register (req){
     try{
@@ -10,7 +11,12 @@ export async function register (req){
           firstname: ""+req.firstname,
           lastname: ""+req.lastname
         })
-        firebase.auth().currentUser.sendEmailVerification()
+        const emitter=new EventEmitter();
+        function emailVerification() {
+          firebase.auth().currentUser.sendEmailVerification()
+        }
+       emitter.on('email verification',emailVerification);
+       emitter.emit('email verification');
         return 'success';
       }
       catch(error) {

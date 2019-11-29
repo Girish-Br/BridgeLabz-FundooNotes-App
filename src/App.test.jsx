@@ -19,11 +19,13 @@ describe('Login Component', () => {
   })
   /**
    * within the Login components describe function
-   **/
-  it('renders a email input', () => {
-    expect(shallow( <Login/> ).find('#email').length).toEqual(true)
-  })
-  it('renders a password input', () => {
-    expect(shallow( <Login/> ).find('#password').length).toEqual(1)
-  })
+**/
+describe('Login Component', () => {
+ // within the Login components describe function
+ it('renders a email input', () => {
+  expect(shallow(<Login />).find('#email').length).toEqual(1)
+ })
+ it('renders a password input', () => {
+  expect(shallow(<Login />).find('#password').length).toEqual(1)})
+ })
 })
