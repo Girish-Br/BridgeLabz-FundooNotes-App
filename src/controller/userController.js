@@ -1,59 +1,36 @@
-//import authServices from '../services/userServices';
+import authServices from '../services/userServices';
 import fire from '../config/firebase'
 import firebase from 'firebase'
+import axios from 'axios'
 const db=fire.firestore();
-export async function register (newUser,res){
+export async function register (req){
     try{
-    await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+    await firebase.auth().createUserWithEmailAndPassword(req.email, req.password)
           db.collection('user').doc(firebase.auth().currentUser.uid).set({
-          first_name: ""+newUser.first_name,
-          last_name: ""+newUser.last_name
+          firstname: ""+req.firstname,
+          lastname: ""+req.lastname
         })
-        res='success';
-        return res;
+        firebase.auth().currentUser.sendEmailVerification()
+        return 'success';
       }
       catch(error) {
         console.log(error)
-        return error
+        return error.message
       }
   }
-  export async function login(user,res){
-    fire.auth().signInWithEmailAndPassword(user.email, user.password)
-   /* var userData = db.collection("users").doc(firebase.auth().currentUser.uid)
-    userData.get().then(function(doc) {
-      if (doc.exists) {
-          console.log("Document data:", doc.data());
-      } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
+  export async function login(req){
+      try{
+   await fire.auth().signInWithEmailAndPassword(req.email, req.password)
+   return 'success';
       }
-  })*/
-    .catch((err) => {
-      return err;
-    })
+    catch(error){
+      console.log(error);
+      return error.message;
+    }
 }
-/*var controller = {
-    register(firstName, lastName, email, password) {
-       fire.register(firstName, lastName, email, password)
-    },
-    login(email, password) {
+export function  forgotPwd(user,res){
         var data = {
-            email: email,
-            password: password
-        }
-        return axios.post(authServices.login, data).then(response => {
-            console.log("response--" + JSON.stringify(response));
-            if (response.status === 200) {
-                console.log("login sucess")
-            }
-        })
-            .catch(error => {
-                console.log("login failed", error);
-            })
-    },
-    forgotPwd(email) {
-        var data = {
-            email: email,
+            email: user.email,
         }
         return axios.post(authServices.forgotPwd, data).then(response => {
             console.log("response--" + JSON.stringify(response));
@@ -64,35 +41,4 @@ export async function register (newUser,res){
             .catch(error => {
                 console.log("forgot pwd failed", error);
             })
-    },
-    resetPwd(password, confirmpassword) {
-        var data = {
-            password: password,
-            confirmpassword: confirmpassword
-        }
-        return axios.post(authServices.resetPwd, data).then(response => {
-            console.log("response--" + JSON.stringify(response));
-            if (response.status === 200) {
-                console.log("reset sucess")
-            }
-        })
-            .catch(error => {
-                console.log("reset failed", error);
-            })
-    },
-    getAllUseres() {
-        return axios.get(authServices.getAllUsers).then(response => {
-            console.log("response----------->>>>>>>>>>>>", response.data);
-            if (response.status === 200) {
-                console.log("get all useres sucess");
-                return response.data;
-            }
-
-        })
-            .catch(error => {
-                console.log("get all useres failed", error);
-
-
-            })
-    },
-}*/
+    }

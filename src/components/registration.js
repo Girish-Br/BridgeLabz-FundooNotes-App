@@ -13,8 +13,7 @@ export default class Register extends React.Component {
       snackbarOpen: false,
       snackbarMsg: '',      
     }
-    
-    }
+        }
   snackbarClose = (e) => {
     this.setState({ snackbarOpen: false });
   }
@@ -44,18 +43,29 @@ export default class Register extends React.Component {
         email: this.state.email,
         password: this.state.password
       }
-     
-    register(user).then(res => {
-      this.setState({
-        snackbarOpen:true,
-        snackbarMessage:res
+ register(user)
+      .then(res=>{
+        if(res==='success')
+        {
+        this.setState({
+          snackbarMsg:'Registration Successs'+res,
+          snackbarOpen:true
+        })
+        this.props.history.push(`/login`)
+        }
+        else{
+          this.setState({
+           snackbarMsg:res,
+            snackbarOpen:true
+          })
+          this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+          });
+        }
       })
-      this.setState({
-        snackbarOpen: true,
-        snackbarMsg: "Registration Successful"
-    });
-        this.props.history.push(`/login`);
-    })
     }
   }
   //function to handle log in button
@@ -111,7 +121,7 @@ export default class Register extends React.Component {
   //to display
   render() {
     return (
-        <div>
+      <div>
       <form className="register">
         <Card className="rcard">
           <Snackbar
@@ -193,8 +203,7 @@ export default class Register extends React.Component {
           <div className="rlbutton">
             <a href='/login'>Already have an account?Login</a>
             </div>
-           
-        </Card>
+            </Card>
       </form >
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { login } from '../controller/userController'
+//import {forg} from '../components/forgotpassword'
 import { Card,TextField,Button,Snackbar,IconButton,Toolbar,AppBar,Typography } from '@material-ui/core';
 export default class Login extends React.Component {
  constructor(props) {
@@ -17,8 +18,6 @@ export default class Login extends React.Component {
  }
  //function to handle when we click login button
  handleClick = () => {
-   console.log(this.state.email.length)
-   console.log(this.state.password)
    //checks email
    if (this.state.email === "") {
      this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
@@ -41,21 +40,32 @@ else if (this.state.password.length < 6) {
       email: this.state.email,
       password: this.state.password
     }
-
     login(user).then(res => {
-      if (res) {
-        this.props.history.push(`/profile`)
-      }
+      if(res==='success'){
+      this.setState({
+        snackbarOpen:true,
+        snackbarMessage:'login successful'
+      })
+      this.props.history.push(`/profile`);
+    }
+    else{
+      this.setState({
+        snackbarOpen:true,
+        snackbarMsg:res,
+        email:'',
+        password:''
+      })
+    }   
     })
-   }
- }
- //function to handle when we click register button
+  }
+  }
+ //function to handle when we click register button http://192.168.1.118:3001/ 
  handleRegisterClick = () => {
    this.props.history.push('/register');
  }
   //function to handle when we click forgot password link
  handleForgotClick = () => {
-   this.props.history.push('/forgotpwd');
+   this.props.history.push('/forgot');
  }
  //function to store values
  onChangeEmail = (e) => {
@@ -89,12 +99,12 @@ else if (this.state.password.length < 6) {
            <Toolbar>
                <div className="typoclass">
              <Typography>
-               WELCOME TO LOGIN PAGE
+               Welcome to FundooNotes App
            </Typography>
            </div>
            </Toolbar>
          </AppBar>
-         <Snackbar anchorOrigin={{vertical: 'top',horizontal: 'left',}}
+         <Snackbar anchorOrigin={{vertical: 'top',horizontal: 'center',}}
            open={this.state.snackbarOpen}
            autoHideDuration={6000}
            onClose={this.snackbarClose}
@@ -110,8 +120,7 @@ else if (this.state.password.length < 6) {
                label="Email"
                type="email"
                name="email"
-               validations="{[required, email]}"
-               autoComplete="email"
+               autoComplete="off"
                margin="normal"
                variant="outlined"
                value={this.state.email}
@@ -132,12 +141,12 @@ else if (this.state.password.length < 6) {
              />
            </div>
            <div className="loginButton">
-             <Button onClick={this.handleClick} variant="contained" color="primary">
+             <Button onClick={this.handleClick} fullwidth variant="contained" color="primary">
                Login
            </Button>
            </div>
            <div className='cbutton'>
-             <Button onClick={this.handleRegisterClick} variant="contained" color="primary">
+             <Button onClick={this.handleRegisterClick} fullwidth variant="contained" color="primary">
                Create Account
            </Button >
            <div className='lfbutton'>

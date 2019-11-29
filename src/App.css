@@ -10,7 +10,8 @@ body {
   align-items: center;
 }
 .typoclass{
-  margin-left: 530px;
+  margin-left: 500px;
+  size: 2cm;
 }
 .login {
   margin-top: 50px;
@@ -26,6 +27,7 @@ body {
 .cbutton {
   margin-top:25px;
 }
+
 .lfbutton{
   margin-top:15px;
 }
@@ -44,10 +46,9 @@ body {
   margin-top: 12px;
 }
 .rcard {
-  width: 275px;
+  width: 375px;
   padding: 0;
-  margin-top: 20px;
-  margin-left: 520px;
+  margin-left: 480px;
   border: 2px solid aliceblue;
   text-align: center
 }
@@ -72,4 +73,20 @@ color:#3f51b5;
 .lbutton{
   margin-left:400px;
   margin-top:5px;
+}
+.forgotpwd {
+  margin-top: 200px;
+  text-align: center;
+}
+
+.forgotpwd_head {
+  color: #4db6ac;
+}
+.fcard {
+  position: relative;
+  margin-top: 80px;
+  margin-left:350px;
+  width: 550px;
+  border: 2px solid rgb(176, 176, 196);
+  align-items: center;
 }
