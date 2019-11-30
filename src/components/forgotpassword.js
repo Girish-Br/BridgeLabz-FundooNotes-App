@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Card } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
@@ -49,4 +49,4 @@ export default class ForgotPwd extends React.Component {
       </form >
     );
   }
-}
+}*/
