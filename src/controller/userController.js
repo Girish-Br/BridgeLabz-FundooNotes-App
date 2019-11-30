@@ -4,7 +4,6 @@
  *  @author         : GIRISH B R
  *  @since          : 27-11-2019
  *******************************************************************************/
-import authServices from '../services/userServices';
 import fire from '../config/firebase'
 import jwt from 'jsonwebtoken';
 import firebase from 'firebase'
