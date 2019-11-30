@@ -73,29 +73,10 @@ else if (this.state.password.length < 6) {
    this.props.history.push('/forgot');
  }
  //function to store values
- onChangeEmail = (e) => {
-   try{
-   var Email = e.target.value;
-   this.setState({
-     email: Email
-   })
-  }
-  catch(err){
-    console.log(`error at changing email`)
-  }
- }
- onChangePassword = (e) => {
-   try{
-   var Password = e.target.value;
-   this.setState({
-     password: Password
-   })
-  }
-  catch(err){
-    console.log(`error at changing password`)
-  }
- }
- //to display
+ onChange=(e)=>{
+  this.setState({[e.target.name]:e.target.value})
+}
+//to display
  render() {
    return (
      <div>
@@ -129,7 +110,7 @@ else if (this.state.password.length < 6) {
                margin="normal"
                variant="outlined"
                value={this.state.email}
-               onChange={this.onChangeEmail}
+               onChange={this.onChange}
              />
            </div>
            <div>
@@ -142,7 +123,7 @@ else if (this.state.password.length < 6) {
                margin="normal"
                variant="outlined"
                value={this.state.password}
-               onChange={this.onChangePassword}
+               onChange={this.onChange}
              />
            </div>
            <div className="loginButton">
