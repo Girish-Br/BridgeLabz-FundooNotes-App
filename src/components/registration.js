@@ -25,77 +25,71 @@ export default class Register extends React.Component {
   snackbarClose = (e) => {
     this.setState({ snackbarOpen: false });
   }
-  //function to handle submit button
-  handleSubmit = () => {
-    //validation for all the inputs
-    if (this.state.firstName === null || this.state.firstName.length < 1) {
-      this.setState({ snackbarOpen: true, snackbarMsg: "firstname cannot be empty" })
-    } else if (this.state.lastName === null || this.state.lastName.length < 1) {
-      this.setState({ snackbarOpen: true, snackbarMsg: "lastname cannot be empty" })
-    }
-    else if (this.state.email === null || this.state.email.length < 1) {
-      this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
-    }
-    else if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)) {
-      this.setState({
-        snackbarOpen: true,
-        snackbarMsg: "Invalid email..!"
-      });
-    }
-    else if (this.state.password === null || this.state.password.length < 8) {
-      this.setState({ snackbarOpen: true, snackbarMsg: "password should be min 8" })
-    }
-    //if the validation is correct we will proceed the details to controller
-    else {
-      const EventEmitter=new EventEmitter()
-      EventEmitter.on('validation',emailValidation=>{
-        if(!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)){
-          this.setState({snackbarOpen:true,snackbarMsg:"invalid email address"})
-          return 'error';
-        }
-      })
-      EventEmitter.emit('validation').then(result=>{
-        if(result[0]!=='error'){
-          const user = {
-            firstname: this.state.firstName,
-            lastname: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password
-          }
-          register(user)
-            .then(res => {
-              if (res === 'success') {
-                this.setState({
-                  snackbarMsg: 'Registration Successs' + res,
-                  snackbarOpen: true
-                })
-                this.props.history.push(`/login`)
-              }
-              else {
-                this.setState({
-                  snackbarMsg: res,
-                  snackbarOpen: true
-                })
-                this.setState({
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  password: '',
-                });
-              }
-            })
-        }
-      })
-      
-    }
-  }
-  //function to handle log in button
+//function to handle log in button
   handleClick = () => {
     this.props.history.push('/login');
   }
   //function to store values
 onChange=(e)=>{
   this.setState({[e.target.name]:e.target.value})
+}
+//function to handle submit button
+handleSubmit = () => {
+  //validation for all the inputs
+  const eventEmitter=new EventEmitter()
+  if (this.state.firstName === null || this.state.firstName.length < 1) {
+    this.setState({ snackbarOpen: true, snackbarMsg: "firstname cannot be empty" })
+  } else if (this.state.lastName === null || this.state.lastName.length < 1) {
+    this.setState({ snackbarOpen: true, snackbarMsg: "lastname cannot be empty" })
+  }
+  else if (this.state.email === null || this.state.email.length < 1) {
+    this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
+  }
+  else if (this.state.password === null || this.state.password.length < 8) {
+    this.setState({ snackbarOpen: true, snackbarMsg: "password should be min 8" })
+  }
+  //if the validation is correct we will proceed the details to controller
+  else {
+    
+     eventEmitter.on('validation',emailValidation=>{
+      if(!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)){
+        this.setState({snackbarOpen:true,snackbarMsg:"invalid email address"})
+        return 'error';
+      }
+    });
+    eventEmitter.emit('validation').then(result=>{
+      if(result[0]!=='error'){
+        const user = {
+          firstname: this.state.firstName,
+          lastname: this.state.lastName,
+          email: this.state.email,
+          password: this.state.password
+        }
+        register(user)
+          .then(res => {
+            if (res === 'success') {
+              this.setState({
+                snackbarMsg: 'Registration Successs' + res,
+                snackbarOpen: true
+              })
+              this.props.history.push(`/login`)
+            }
+            else {
+              this.setState({
+                snackbarMsg: res,
+                snackbarOpen: true
+              })
+              this.setState({
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+              });
+            }
+          })
+      }
+    })
+  }
 }
   //to display
   render() {
@@ -185,6 +179,6 @@ onChange=(e)=>{
           </Card>
         </form >
       </div>
-    );
+    )
   }
 }
