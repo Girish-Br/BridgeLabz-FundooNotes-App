@@ -80,16 +80,16 @@ else if (this.state.password.length < 6) {
  render() {
    return (
      <div>
-       <Card className="lcard">
-         <AppBar color="primary">
-           <Toolbar>
-               <div className="typoclass">
+        <div className="typoclass">
+          <div className="typo">
              <Typography>
                Welcome to FundooNotes App
            </Typography>
-           </div>
-           </Toolbar>
-         </AppBar>
+    </div>
+      
+         </div>
+         <div>
+       <Card className="lcard">
          <Snackbar anchorOrigin={{vertical: 'top',horizontal: 'center',}}
            open={this.state.snackbarOpen}
            autoHideDuration={6000}
@@ -143,6 +143,7 @@ else if (this.state.password.length < 6) {
         </div>
          </form >
        </Card>
+       </div>
      </div>
    );
  }
