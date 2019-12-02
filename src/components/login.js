@@ -51,7 +51,7 @@ else if (this.state.password.length < 6) {
         snackbarOpen:true,
         snackbarMessage:'login successful'
       })
-      this.props.history.push(`/profile`);
+      this.props.history.push(`/dashboard`);
     }
     else{
       this.setState({

@@ -1,47 +1,61 @@
-/*import React from 'react';
-import Button from '@material-ui/core/Button';
-import { Card } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import {forgotPwd} from '../controller/userController';
+/****************************************************************************************
+ *  @Purpose        : To create a forgot password page for recover the password
+                      using mail.
+ *  @file           : forgotPassword.jsx       
+ *  @author         : Girish B R
+ *  @version        : v0.1
+ *  @since          : 1-12-2019
+ *****************************************************************************************/
+import React from 'react';
+import { Card,Button,TextField } from '@material-ui/core';
+import {forgotpassword} from '../controller/userController';
 export default class ForgotPwd extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-        email:''
+    this.state = {
+      email: ''
     }
   }
-  //function to handle forgot password button
-  handleClick=()=>{
-    forgotPwd(this.state.email);
-  }
-  //function to store values
-  onChangeEmail=(e)=>{
-    var  Email=e.target.value;
-    this.setState({
-        email:Email
+  handleClick = () => {
+    forgotpassword(this.state.email).then(res => {
+      if (res === 'success') {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMessage: 'rest password link sent to your email'
+        })
+      }
+      else {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: res
+          
+        })
+      }
     })
-}
-//function to display
+  }
+  onChangeEmail = (e) => {
+    this.setState({[e.target.name]:e.target.value})
+  }
   render() {
     return (
       <form className="forgotpwd">
-        <Card className="fcard">
-          <h1 className="forgotpwd_head">Enter email</h1>         
+        <Card className="card">
+          <h1 className="forgotpwd_head">Enter email</h1>
           <div>
             <TextField
               id="email"
               label="Email"
               type="email"
               name="email"
-              autoComplete="off"
+              autoComplete="email"
               margin="normal"
               variant="outlined"
               value={this.state.email}
               onChange={this.onChangeEmail}
             />
-          </div>       
+          </div>
           <div>
-            <Button onClick={this.handleClick} variant="contained" style={{color:"#212121" , backgroundColor:"#9fa8da"}}>
+            <Button onClick={this.handleClick} variant="contained" style={{ color: "#212121", backgroundColor: "#9fa8da" }}>
               Submit
             </Button>
           </div>
@@ -49,4 +63,4 @@ export default class ForgotPwd extends React.Component {
       </form >
     );
   }
-}*/
+}
