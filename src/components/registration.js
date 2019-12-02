@@ -8,6 +8,7 @@ import React from 'react';
 import { Card, Button, TextField, Snackbar, IconButton } from '@material-ui/core';
 import { register } from '../controller/userController'
 import '../App.css'
+import EventEmitter from 'promise-events'
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -46,34 +47,46 @@ export default class Register extends React.Component {
     }
     //if the validation is correct we will proceed the details to controller
     else {
-      const user = {
-        firstname: this.state.firstName,
-        lastname: this.state.lastName,
-        email: this.state.email,
-        password: this.state.password
-      }
-      register(user)
-        .then(res => {
-          if (res === 'success') {
-            this.setState({
-              snackbarMsg: 'Registration Successs' + res,
-              snackbarOpen: true
-            })
-            this.props.history.push(`/login`)
+      const EventEmitter=new EventEmitter()
+      EventEmitter.on('validation',emailValidation=>{
+        if(!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)){
+          this.setState({snackbarOpen:true,snackbarMsg:"invalid email address"})
+          return 'error';
+        }
+      })
+      EventEmitter.emit('validation').then(result=>{
+        if(result[0]!=='error'){
+          const user = {
+            firstname: this.state.firstName,
+            lastname: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password
           }
-          else {
-            this.setState({
-              snackbarMsg: res,
-              snackbarOpen: true
+          register(user)
+            .then(res => {
+              if (res === 'success') {
+                this.setState({
+                  snackbarMsg: 'Registration Successs' + res,
+                  snackbarOpen: true
+                })
+                this.props.history.push(`/login`)
+              }
+              else {
+                this.setState({
+                  snackbarMsg: res,
+                  snackbarOpen: true
+                })
+                this.setState({
+                  firstName: '',
+                  lastName: '',
+                  email: '',
+                  password: '',
+                });
+              }
             })
-            this.setState({
-              firstName: '',
-              lastName: '',
-              email: '',
-              password: '',
-            });
-          }
-        })
+        }
+      })
+      
     }
   }
   //function to handle log in button

@@ -67,6 +67,3 @@ export async function forgotpassword(email) {
     return error.message;
   }
 }
-export async function resetpasswd(req) {
-
-}
