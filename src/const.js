@@ -1,6 +1,5 @@
 import fire from './config/firebase.js'
-
-var servicesConstant={
+ var servicesConstant={
     firebaseAuthorization:fire.auth(),
     firestore:fire.firestore(),
 }

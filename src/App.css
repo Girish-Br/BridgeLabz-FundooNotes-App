@@ -3,14 +3,12 @@ body {
 }
 .lcard {
   /*position: relative;
-  margin-top: 80px;
   margin-left:350px;*/
   margin:auto;
   border: 2px solid rgb(176, 176, 196);
   align-items: center;
-}
-.typoclass{
-  size: 2cm;
+  width: 500px;
+  margin-top: 20px;
 }
 .login {
   margin-top: 50px;
@@ -38,9 +36,11 @@ body {
 .typo{
   color:white;
   background-color: #3f51b5;
- text-align: center;
- align-items: center;
   height:50px;
+  align-items: center;
+  align-content: center;
+  margin-left: 500px;
+  margin-top:15px
 }
 .button {
   display: flex;
@@ -112,3 +112,5 @@ color:#3f51b5;
     width: 500px;
   }
 }
+
+

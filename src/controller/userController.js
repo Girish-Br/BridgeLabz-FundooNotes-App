@@ -4,11 +4,9 @@
  *  @author         : GIRISH B R
  *  @since          : 27-11-2019
  *******************************************************************************/
-import fire from '../config/firebase'
 import serviceConstant from '../const.js'
 import jwt from 'jsonwebtoken';
 import { EventEmitter } from 'events';
-const db = fire.firestore();
 //async function
 export async function register(req) {
   try {
@@ -36,7 +34,7 @@ export async function register(req) {
 export async function login(req) {
   try {
     await serviceConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
-    var userData = db.collection("user").doc(serviceConstant.firebaseAuthorization.currentUser.uid)
+    var userData = serviceConstant.firestore.collection("user").doc(serviceConstant.firebaseAuthorization.currentUser.uid)
     await userData.get().then(function (doc) {
       console.log(doc.data())
       const payload = {
