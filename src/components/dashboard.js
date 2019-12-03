@@ -1,3 +1,11 @@
+/****************************************************************************************
+ *  @Purpose        : To create a dashboard page with side navigation bar and Dropdown menus
+                      using mail.
+ *  @file           : dashboard.js      
+ *  @author         : Girish B R
+ *  @version        : v0.1
+ *  @since          : 3-12-2019
+ *****************************************************************************************/
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { Container, Card, Grid, Button, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
@@ -9,8 +17,8 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import LabelIcon from '@material-ui/icons/Label';
 class dashboard extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       email: '',
       firstName: '',
@@ -29,7 +37,7 @@ class dashboard extends React.Component {
     })
   }
   handleDrawerToggle = () => {
-    this.setState({ "mobileOpen": !this.state.mobileOpen });
+    this.setState({ "mobileOpen": this.state.mobileOpen });
   };
   onSubmit(e) {
     e.preventDefault();
@@ -40,7 +48,7 @@ class dashboard extends React.Component {
     return (
       <div className="root">
         <CssBaseline />
-        <AppBar position="fixed" className="appBar">
+        <AppBar position="fixed" className="appBar" >
           <Toolbar>
             <IconButton
               color="inherit"
@@ -51,7 +59,7 @@ class dashboard extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" >
               Fundoonote
           </Typography>
           </Toolbar>

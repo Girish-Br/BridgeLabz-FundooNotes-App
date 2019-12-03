@@ -126,6 +126,8 @@ color:#3f51b5;
     .appBar{
       width:100%;
       margin-left: 240px;
+      color:rgb(128,0,128)
+
     }
     .menuButton{
       display:none;
