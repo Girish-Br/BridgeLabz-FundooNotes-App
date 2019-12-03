@@ -113,4 +113,40 @@ color:#3f51b5;
   }
 }
 
+/* Dasboard css*/
+.root{
+  display: flex;
+}
 
+@media only screen and (min-width: 600px) {
+    .drawer{
+      width: 240px;
+      flex-shrink: 0;
+    }
+    .appBar{
+      width:100%;
+      margin-left: 240px;
+    }
+    .menuButton{
+      display:none;
+    }
+  }
+.toolbar{
+  width: 240px;
+}
+.drawerPaper{
+  width: 240px;
+}
+.content{
+  flex-grow: 1;
+  padding: 3;
+}
+.profileCard{
+  position: relative;
+  margin: auto;
+  margin-top: 60px;
+  border: 2px solid rgb(180, 198, 216);
+  align-items: center;
+  
+  }
+/* dashboard css end*/
