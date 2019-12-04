@@ -37,47 +37,47 @@ class dashboard extends React.Component {
     })
   }
   handleDrawerToggle = () => {
-    this.setState({ "mobileOpen": ! this.state.mobileOpen });
+    this.setState({ "mobileOpen": !this.state.mobileOpen });
   };
   onSubmit(e) {
     e.preventDefault();
     this.props.history.push(`/login`)
   }
-   list=(
-  <List>
-                  <ListItem button key="Add Notes">
-                    <ListItemIcon> <AddIcon /></ListItemIcon>
-                    <ListItemText primary="Add Notes" />
-                  </ListItem>
-                  <ListItem button key="Remove">
-                    <ListItemIcon> <RemoveIcon /></ListItemIcon>
-                    <ListItemText primary="Remove" />
-                  </ListItem>
-                  <ListItem button key="Edit">
-                    <ListItemIcon> <EditIcon /></ListItemIcon>
-                    <ListItemText primary="Edit" />
-                  </ListItem>
-                  <ListItem button key="Archive">
-                    <ListItemIcon> <ArchiveIcon /></ListItemIcon>
-                    <ListItemText primary="Archive" />
-                  </ListItem>
-                  <ListItem button key="Pin">
-                    <ListItemIcon> <PinDropIcon /></ListItemIcon>
-                    <ListItemText primary="Pin" />
-                  </ListItem>
-                  <ListItem button key="Label">
-                    <ListItemIcon> <LabelIcon /></ListItemIcon>
-                    <ListItemText primary="Label" />
-                  </ListItem>
-                </List>
-   )
+  list = (
+    <List>
+      <ListItem button key="Add Notes">
+        <ListItemIcon> <AddIcon /></ListItemIcon>
+        <ListItemText primary="Add Notes" />
+      </ListItem>
+      <ListItem button key="Remove">
+        <ListItemIcon> <RemoveIcon /></ListItemIcon>
+        <ListItemText primary="Remove" />
+      </ListItem>
+      <ListItem button key="Edit">
+        <ListItemIcon> <EditIcon /></ListItemIcon>
+        <ListItemText primary="Edit" />
+      </ListItem>
+      <ListItem button key="Archive">
+        <ListItemIcon> <ArchiveIcon /></ListItemIcon>
+        <ListItemText primary="Archive" />
+      </ListItem>
+      <ListItem button key="Pin">
+        <ListItemIcon> <PinDropIcon /></ListItemIcon>
+        <ListItemText primary="Pin" />
+      </ListItem>
+      <ListItem button key="Label">
+        <ListItemIcon> <LabelIcon /></ListItemIcon>
+        <ListItemText primary="Label" />
+      </ListItem>
+    </List>
+  )
   render() {
     return (
       <div className="root">
         <CssBaseline />
         <AppBar position="fixed" className="appBar" >
           <Toolbar>
-    <div>{LongMenu}</div>
+            <div><LongMenu/></div>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -111,8 +111,8 @@ class dashboard extends React.Component {
                 <Divider />
               </div>
             </Drawer>
-            </Hidden>
-                <Hidden xsDown implementation="css">
+          </Hidden>
+          <Hidden xsDown implementation="css">
             <Drawer
               variant="permanent"
               open>

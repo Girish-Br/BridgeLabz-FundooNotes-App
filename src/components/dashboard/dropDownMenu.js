@@ -11,58 +11,54 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 export default class LongMenu extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.setState={
-            anchorEl:null,
-           setAnchorEl :null,
-         open: Boolean(this.anchorEl)
-        } 
-      }
-handleClick = event => {
-    this.setAnchorEl(event.currentTarget);
-  };
- handleClose = () => {
-    this.setAnchorEl(null);
-  };
- options = [
-    'Profile',
-    'Settings',
-    'Sign out'
-   ];
- ITEM_HEIGHT = 10;
- render(){
-     console.log("ggggggg")
-  return (
-    <div>
-      <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={this.handleClick}
-      >
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        anchorEl={this.anchorEl}
-        keepMounted
-        open={this.open}
-        onClose={this.handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: this.ITEM_HEIGHT * 4.5,
-            width: 200,
-          },
-        }}
-      >
-        {this.options.map(option => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-  );
-}
+        this.state = {
+            anchorEl: null
+        }
+    }
+    handleClick = (e) => {
+        this.setState({ "anchorEl": e.currentTarget });
+    };
+    handleClose = () => {
+        this.setState({ "anchorEl": null });
+    };
+    options = [
+        'Profile',
+        'Settings',
+        'Signout'
+    ]
+    ITEM_HEIGHT = 50;
+    render() {
+        return (
+            <div>
+                <IconButton
+                    aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                    class="icon"
+                    onClick={this.handleClick}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+                <Menu
+                    id="long-menu"
+                    anchorEl={this.state.anchorEl}
+                    keepMounted
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={this.handleClose}
+                    PaperProps={{
+                        style: {
+                            maxHeight: this.ITEM_HEIGHT * 4.5,
+                            width: 200,
+                        },
+                    }}
+                >
+                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={this.handleClose}>Settings</MenuItem>
+                    <MenuItem onClick={this.handleClose}>Signout</MenuItem>
+                </Menu>
+            </div>
+        );
+    }
 }
