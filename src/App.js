@@ -10,7 +10,7 @@ import Login from './components/login';
 import './App.css';
 import Register from './components/registration';
 import forgot from './components/forgotpassword'
-import  dashboard from './components/dashboard'
+import  dashboard from './components/dashboard/navigationBar'
 //helps to use properties of component
 class App extends Component {
   //returns the display contains

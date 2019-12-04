@@ -15,6 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import LabelIcon from '@material-ui/icons/Label';
+import LongMenu from '../dashboard/dropDownMenu';
 class dashboard extends React.Component {
   constructor(props) {
     super(props)
@@ -76,6 +77,7 @@ class dashboard extends React.Component {
         <CssBaseline />
         <AppBar position="fixed" className="appBar" >
           <Toolbar>
+    <div>{LongMenu}</div>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -94,12 +96,10 @@ class dashboard extends React.Component {
           {/* The implementation will be hidden if screen sixe is greater than 600px. */}
           <Hidden smUp implementation="css">
             <Drawer
-              container={this.container}
               variant="temporary"
               anchor="left"
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
-              classes="drawerPaper"
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
               }}
