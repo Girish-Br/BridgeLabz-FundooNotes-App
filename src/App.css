@@ -147,15 +147,16 @@ color:#3f51b5;
 .profileCard{
   position: relative;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 70px;
   border: 2px solid rgb(180, 198, 216);
   align-items: center;
-  
+  width: 500px;
   }
 /* dashboard css end*/
-.icon{
+.dropdown{
   position: absolute;
   right:20px;
+  bottom: 17px;
 }
 
 

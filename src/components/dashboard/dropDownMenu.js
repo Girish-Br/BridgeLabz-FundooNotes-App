@@ -10,12 +10,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+//import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+//import SettingsIcon from '@material-ui/icons/Settings';
 export default class LongMenu extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             anchorEl: null
         }
+        this.onSignOutClick = this.onSignOutClick.bind(this)
     }
     handleClick = (e) => {
         this.setState({ "anchorEl": e.currentTarget });
@@ -23,6 +26,9 @@ export default class LongMenu extends React.Component {
     handleClose = () => {
         this.setState({ "anchorEl": null });
     };
+    onSignOutClick=()=>{
+        this.props.history.push("/login");
+      };
     options = [
         'Profile',
         'Settings',
@@ -36,7 +42,7 @@ export default class LongMenu extends React.Component {
                     aria-label="more"
                     aria-controls="long-menu"
                     aria-haspopup="true"
-                    class="icon"
+                    class="dropdown"
                     onClick={this.handleClick}
                 >
                     <MoreVertIcon />
@@ -56,7 +62,7 @@ export default class LongMenu extends React.Component {
                 >
                     <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                     <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Signout</MenuItem>
+                    <MenuItem onClick={this.onSignOutClick}>Signout</MenuItem>
                 </Menu>
             </div>
         );

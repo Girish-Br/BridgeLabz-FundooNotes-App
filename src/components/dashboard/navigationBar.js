@@ -7,7 +7,7 @@
  *****************************************************************************************/
 import React from 'react'
 import jwt_decode from 'jwt-decode'
-import { Container, Card, Grid, Button, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { Container, Card, Grid, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -25,7 +25,6 @@ class dashboard extends React.Component {
       lastName: '',
       mobileOpen: false
     }
-    this.onSubmit = this.onSubmit.bind(this)
   }
   componentDidMount() {
     const token = localStorage.usertoken
@@ -39,10 +38,6 @@ class dashboard extends React.Component {
   handleDrawerToggle = () => {
     this.setState({ "mobileOpen": !this.state.mobileOpen });
   };
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.history.push(`/login`)
-  }
   list = (
     <List>
       <ListItem button key="Add Notes">
@@ -126,8 +121,7 @@ class dashboard extends React.Component {
         </nav>
         <main className="content">
           <div className="toolbar" />
-          <Typography paragraph>
-            <Card className="profileCard">
+            <Card class="profileCard">
               <Container component="main" maxWidth="xs">
                 <div>
                   <Typography component="h1" variant="h5">
@@ -144,21 +138,12 @@ class dashboard extends React.Component {
                   </div>
                   <Grid container>
                     <Grid item>
-                      <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        onClick={this.onSubmit}
-                      >
-                        Logout
-              </Button>
                     </Grid>
                   </Grid>
                 </div>
               </Container>
             </Card>
-          </Typography>
+       
         </main>
       </div>
     )
