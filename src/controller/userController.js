@@ -7,6 +7,7 @@
 import serviceConstant from '../const.js'
 import jwt from 'jsonwebtoken';
 import { EventEmitter } from 'events';
+import servicesConstant from '../const.js';
 //async function
 export async function register(req) {
   try {
@@ -64,4 +65,8 @@ export async function forgotpassword(email) {
     console.log(error)
     return error.message;
   }
+}
+export async function logout(){
+  await servicesConstant.firebaseAuthorization.signOut();
+  localStorage.removeItem('usertoken')
 }

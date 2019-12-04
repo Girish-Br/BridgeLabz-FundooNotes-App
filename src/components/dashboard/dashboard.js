@@ -7,6 +7,7 @@
  *****************************************************************************************/
 import React from 'react'
 import jwt_decode from 'jwt-decode'
+import {withRouter } from "react-router-dom";
 import { Container, Card, Grid, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,8 +16,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import LabelIcon from '@material-ui/icons/Label';
-import LongMenu from '../dashboard/dropDownMenu';
-class dashboard extends React.Component {
+import LongMenu from './dropDownMenu';
+class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -149,4 +150,4 @@ class dashboard extends React.Component {
     )
   }
 }
-export default dashboard;
+export default withRouter(Dashboard);

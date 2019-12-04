@@ -7,7 +7,8 @@
 import React from 'react';
 import { login } from '../controller/userController'
 import { Card, TextField, Button, Snackbar, IconButton, Toolbar, AppBar, Typography } from '@material-ui/core';
-export default class Login extends React.Component {
+import {withRouter } from "react-router-dom";
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +73,7 @@ export default class Login extends React.Component {
   handleForgotClick = () => {
     this.props.history.push('/forgot');
   }
-  //function to store values
+  //function to store valueshistory
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -154,3 +155,4 @@ export default class Login extends React.Component {
     );
   }
 }
+export default withRouter(Login)

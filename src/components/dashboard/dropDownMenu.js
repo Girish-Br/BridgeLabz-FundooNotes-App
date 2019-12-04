@@ -6,13 +6,15 @@
  *  @since          : 4-12-2019
  *****************************************************************************************/
 import React from 'react';
+import {withRouter } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {logout} from '../../controller/userController'
 //import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 //import SettingsIcon from '@material-ui/icons/Settings';
-export default class LongMenu extends React.Component {
+class LongMenu extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -27,6 +29,7 @@ export default class LongMenu extends React.Component {
         this.setState({ "anchorEl": null });
     };
     onSignOutClick=()=>{
+        logout();
         this.props.history.push("/login");
       };
     options = [
@@ -68,3 +71,4 @@ export default class LongMenu extends React.Component {
         );
     }
 }
+export default withRouter(LongMenu);
