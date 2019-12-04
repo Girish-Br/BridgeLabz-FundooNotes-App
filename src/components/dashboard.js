@@ -1,6 +1,5 @@
 /****************************************************************************************
- *  @Purpose        : To create a dashboard page with side navigation bar and Dropdown menus
-                      using mail.
+ *  @Purpose        : To create a dashboard page with side navigation bar and Dropdown menu.
  *  @file           : dashboard.js      
  *  @author         : Girish B R
  *  @version        : v0.1
@@ -37,13 +36,40 @@ class dashboard extends React.Component {
     })
   }
   handleDrawerToggle = () => {
-    this.setState({ "mobileOpen": this.state.mobileOpen });
+    this.setState({ "mobileOpen": ! this.state.mobileOpen });
   };
   onSubmit(e) {
     e.preventDefault();
     this.props.history.push(`/login`)
   }
-
+   list=(
+  <List>
+                  <ListItem button key="Add Notes">
+                    <ListItemIcon> <AddIcon /></ListItemIcon>
+                    <ListItemText primary="Add Notes" />
+                  </ListItem>
+                  <ListItem button key="Remove">
+                    <ListItemIcon> <RemoveIcon /></ListItemIcon>
+                    <ListItemText primary="Remove" />
+                  </ListItem>
+                  <ListItem button key="Edit">
+                    <ListItemIcon> <EditIcon /></ListItemIcon>
+                    <ListItemText primary="Edit" />
+                  </ListItem>
+                  <ListItem button key="Archive">
+                    <ListItemIcon> <ArchiveIcon /></ListItemIcon>
+                    <ListItemText primary="Archive" />
+                  </ListItem>
+                  <ListItem button key="Pin">
+                    <ListItemIcon> <PinDropIcon /></ListItemIcon>
+                    <ListItemText primary="Pin" />
+                  </ListItem>
+                  <ListItem button key="Label">
+                    <ListItemIcon> <LabelIcon /></ListItemIcon>
+                    <ListItemText primary="Label" />
+                  </ListItem>
+                </List>
+   )
   render() {
     return (
       <div className="root">
@@ -65,7 +91,7 @@ class dashboard extends React.Component {
           </Toolbar>
         </AppBar>
         <nav className="drawer" aria-label="mailbox folders">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          {/* The implementation will be hidden if screen sixe is greater than 600px. */}
           <Hidden smUp implementation="css">
             <Drawer
               container={this.container}
@@ -81,72 +107,19 @@ class dashboard extends React.Component {
               <div>
                 <div className="toolbar" />
                 <Divider />
-                <List>
-                  <ListItem button key="Add Notes">
-                    <ListItemIcon> <AddIcon /></ListItemIcon>
-                    <ListItemText primary="Add Notes" />
-                  </ListItem>
-                  <ListItem button key="Remove">
-                    <ListItemIcon> <RemoveIcon /></ListItemIcon>
-                    <ListItemText primary="Remove" />
-                  </ListItem>
-                  <ListItem button key="Edit">
-                    <ListItemIcon> <EditIcon /></ListItemIcon>
-                    <ListItemText primary="Edit" />
-                  </ListItem>
-                  <ListItem button key="Archive">
-                    <ListItemIcon> <ArchiveIcon /></ListItemIcon>
-                    <ListItemText primary="Archive" />
-                  </ListItem>
-                  <ListItem button key="Pin">
-                    <ListItemIcon> <PinDropIcon /></ListItemIcon>
-                    <ListItemText primary="Pin" />
-                  </ListItem>
-                  <ListItem button key="Label">
-                    <ListItemIcon> <LabelIcon /></ListItemIcon>
-                    <ListItemText primary="Label" />
-                  </ListItem>
-                </List>
+                {this.list}
                 <Divider />
               </div>
             </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
+            </Hidden>
+                <Hidden xsDown implementation="css">
             <Drawer
-              classes={{
-                paper: "drawerPaper"
-              }}
               variant="permanent"
               open>
               <div>
                 <div className="toolbar" />
                 <Divider />
-                <List>
-                  <ListItem button key="Add Notes">
-                    <ListItemIcon> <AddIcon /></ListItemIcon>
-                    <ListItemText primary="Add Notes" />
-                  </ListItem>
-                  <ListItem button key="Remove">
-                    <ListItemIcon> <RemoveIcon /></ListItemIcon>
-                    <ListItemText primary="Remove" />
-                  </ListItem>
-                  <ListItem button key="Edit">
-                    <ListItemIcon> <EditIcon /></ListItemIcon>
-                    <ListItemText primary="Edit" />
-                  </ListItem>
-                  <ListItem button key="Archive">
-                    <ListItemIcon> <ArchiveIcon /></ListItemIcon>
-                    <ListItemText primary="Archive" />
-                  </ListItem>
-                  <ListItem button key="Pin">
-                    <ListItemIcon> <PinDropIcon /></ListItemIcon>
-                    <ListItemText primary="Pin" />
-                  </ListItem>
-                  <ListItem button key="Label">
-                    <ListItemIcon> <LabelIcon /></ListItemIcon>
-                    <ListItemText primary="Label" />
-                  </ListItem>
-                </List>
+                {this.list}
               </div>
             </Drawer>
           </Hidden>
