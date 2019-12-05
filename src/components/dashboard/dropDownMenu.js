@@ -12,8 +12,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {logout} from '../../controller/userController'
-//import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-//import SettingsIcon from '@material-ui/icons/Settings';
 class LongMenu extends React.Component {
     constructor(props) {
         super(props)
