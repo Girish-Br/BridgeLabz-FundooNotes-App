@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    shallow
-} from 'enzyme';
+import { shallow} from 'enzyme';
 import Login from '../components/login';
 import '../setUpTest'
 describe('Login Component', () => {

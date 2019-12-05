@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    shallow
-} from 'enzyme';
+import {shallow} from 'enzyme';
 import Registration from '../components/registration';
 import '../setUpTest'
 describe('Registration Component', () => {
