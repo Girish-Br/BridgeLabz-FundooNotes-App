@@ -4,9 +4,6 @@ import {
 } from 'enzyme';
 import Login from '../components/login';
 import '../setUpTest'
-/**
- * describe what we are testing
- **/
 describe('Login Component', () => {
     /**
      * make our assertion and what we expect to happen 
