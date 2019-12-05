@@ -66,6 +66,11 @@ export async function forgotpassword(email) {
   }
 }
 export async function logout(){
+  try{
   await servicesConstant.firebaseAuthorization.signOut();
   localStorage.removeItem('usertoken')
+  }
+  catch(err){
+    console.log(err);
+  }
 }
