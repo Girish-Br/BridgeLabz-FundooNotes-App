@@ -15,8 +15,7 @@ describe('Register', () => {
 });
 describe('Login', () => {
   let wrapper;
-
-  beforeEach(() => wrapper = shallow(<Login />));
+   beforeEach(() => wrapper = shallow(<Login />));
   it('should render correctly', () => 
   expect(wrapper).toMatchSnapshot());
   

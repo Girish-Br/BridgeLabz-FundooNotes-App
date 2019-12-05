@@ -7,7 +7,7 @@
  *****************************************************************************************/
 import React from 'react'
 import jwt_decode from 'jwt-decode'
-import {withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Container, Card, Grid, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
         <CssBaseline />
         <AppBar position="fixed" className="appBar" >
           <Toolbar>
-            <div><LongMenu/></div>
+            <div><LongMenu /></div>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -122,29 +122,28 @@ class Dashboard extends React.Component {
         </nav>
         <main className="content">
           <div className="toolbar" />
-            <Card class="profileCard">
-              <Container component="main" maxWidth="xs">
-                <div>
-                  <Typography component="h1" variant="h5">
-                    Profile
+          <Card class="profileCard">
+            <Container component="main" maxWidth="xs">
+              <div>
+                <Typography component="h1" variant="h5">
+                  Profile
                 </Typography>
-                  <div>
-                    First Name:{this.state.firstName}
-                  </div>
-                  <div>
-                    last Name:{this.state.lastName}
-                  </div>
-                  <div>
-                    Email : {this.state.email}
-                  </div>
-                  <Grid container>
-                    <Grid item>
-                    </Grid>
-                  </Grid>
+                <div>
+                  First Name:{this.state.firstName}
                 </div>
-              </Container>
-            </Card>
-       
+                <div>
+                  last Name:{this.state.lastName}
+                </div>
+                <div>
+                  Email : {this.state.email}
+                </div>
+                <Grid container>
+                  <Grid item>
+                  </Grid>
+                </Grid>
+              </div>
+            </Container>
+          </Card>
         </main>
       </div>
     )

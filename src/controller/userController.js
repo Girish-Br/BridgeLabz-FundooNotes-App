@@ -57,7 +57,6 @@ export async function login(req) {
 }
 export async function forgotpassword(email) {
   try {
-    console.log(email)
     await serviceConstant.firebaseAuthorization.sendPasswordResetEmail(email)
     return 'success';
   }
