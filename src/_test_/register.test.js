@@ -4,9 +4,6 @@ import {
 } from 'enzyme';
 import Registration from '../components/registration';
 import '../setUpTest'
-/**
- * describe what we are testing
- **/
 describe('Registration Component', () => {
     /**
      * make our assertion and what we expect to happen 

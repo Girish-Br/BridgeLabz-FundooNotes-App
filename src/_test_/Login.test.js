@@ -40,6 +40,6 @@ describe('Email input', () => {
             value: 'giri141519'
           }
         });
-      expect(wrapper.state('password')).toEqual('rockz');
+      expect(wrapper.state('password')).toEqual('giri141519');
     })
   })
