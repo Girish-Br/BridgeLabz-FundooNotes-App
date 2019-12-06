@@ -46,25 +46,28 @@ class Login extends React.Component {
         email: this.state.email,
         password: this.state.password
       }
-      login(user).then(res => {
-        if (res === 'success') {
+      login(user,(err,data)=>{
+        if(err){
           this.setState({
             snackbarOpen: true,
-            snackbarMessage: 'login successful'
-          })
-          this.props.history.push('/dashboard');
-        }
-        else {
-          this.setState({
-            snackbarOpen: true,
-            snackbarMsg: res,
+            snackbarMsg: err,
             email: '',
             password: ''
           })
         }
+        else{
+          if (data === 'success') {
+            this.setState({
+              snackbarOpen: true,
+              snackbarMsg: 'login successful'
+            })
+          }
+          setTimeout(()=>{
+          this.props.history.push('/dashboard')
+          },6000)
+        }
       })
-    }
-  }
+    }}
   //function to handle when we click register button 
   handleRegisterClick = () => {
     this.props.history.push('/register');
@@ -75,7 +78,7 @@ class Login extends React.Component {
   }
   //function to store valueshistory
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value });
   }
   //to display
   render() {
@@ -96,7 +99,7 @@ class Login extends React.Component {
         </AppBar>
         <div>
           <Card class="lcard">
-            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
               open={this.state.snackbarOpen}
               autoHideDuration={6000}
               onClose={this.snackbarClose}
