@@ -50,8 +50,7 @@ handleSubmit = () => {
   }
   //if the validation is correct we will proceed the details to controller
   else {
-    
-     eventEmitter.on('validation',emailValidation=>{
+        eventEmitter.on('validation',emailValidation=>{
       if(!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)){
         this.setState({snackbarOpen:true,snackbarMsg:"invalid email address"})
         return 'error';

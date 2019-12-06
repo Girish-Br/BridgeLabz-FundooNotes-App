@@ -8,7 +8,6 @@ import serviceConstant from '../const.js'
 import jwt from 'jsonwebtoken';
 import { EventEmitter } from 'events';
 import servicesConstant from '../const.js';
-import bcrypt from 'bcryptjs'
 /*
 * @Purpose :Register the validated user details
 */
@@ -20,9 +19,6 @@ export async function register(req) {
       firstname: req.firstname,
       lastname: req.lastname
     }
-    await bcrypt.hash(req.password,10,(err,hash)=>{
-      data.password=hash
-    })
     await serviceConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password)
     serviceConstant.firestore.collection('user').doc(serviceConstant.firebaseAuthorization.currentUser.uid).set(data)
     const emitter = new EventEmitter();
@@ -38,17 +34,11 @@ export async function register(req) {
     return error.message
   }
 }
-export async function login(req,cb)
-{
+export async function login(req,cb){
   try {
-    await bcrypt.hash(req.password,10,(err,hash)=>{
-      req.password=hash
-    })
     await serviceConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
     var userData = serviceConstant.firestore.collection("user").doc(serviceConstant.firebaseAuthorization.currentUser.uid)
     await userData.get().then(function (doc) {
-      console.log("doc data",doc);
-          console.log(doc.data())
       const payload = {
         email: serviceConstant.firebaseAuthorization.currentUser.email,
         firstname: doc.data().firstname,
@@ -59,7 +49,6 @@ export async function login(req,cb)
       })
       localStorage.setItem('usertoken', token)
       cb(null,"success")
-
     })
   }
   catch (error) {

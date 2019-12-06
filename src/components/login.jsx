@@ -19,7 +19,7 @@ class Login extends React.Component {
     }
   }
   //used to display brief message
-  snackbarClose = (e) => {
+  snackbarClose = () => {
     this.setState({ snackbarOpen: false });
   }
   //function to handle when we click login button

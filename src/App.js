@@ -9,7 +9,7 @@ import { BrowserRouter as Router,Route } from "react-router-dom";
 import Login from './components/login.jsx';
 import  Dashboard from './components/dashboard/dashboard.jsx'
 import './App.css';
-import Register from './components/registration.js';
+import Register from './components/registration.jsx';
 import forgot from './components/forgotpassword.jsx'
 
 //helps to use properties of component
