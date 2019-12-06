@@ -17,6 +17,16 @@ export default class ForgotPwd extends React.Component {
     }
   }
   handleClick = () => {
+    if (this.state.email === "") {
+      this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
+    }
+    else if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.state.email)) {
+      this.setState({
+        snackbarOpen: true,
+        snackbarMsg: "Invalid email..!"
+      });
+    }
+    else{
     forgotpassword(this.state.email).then(res => {
       if (res === 'success') {
         this.setState({
@@ -33,6 +43,7 @@ export default class ForgotPwd extends React.Component {
       }
     })
   }
+}
   onChangeEmail = (e) => {
     this.setState({[e.target.name]:e.target.value})
   }
