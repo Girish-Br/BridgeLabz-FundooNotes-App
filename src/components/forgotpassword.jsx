@@ -1,5 +1,5 @@
 /****************************************************************************************
- *  @Purpose        : To create a forgot password page for recover the password
+ *  @Purpose        : To create a forgot password page to recover the password
                       using mail.
  *  @file           : forgotPassword.jsx       
  *  @author         : Girish B R
@@ -54,8 +54,8 @@ export default class ForgotPwd extends React.Component {
   }
   render() {
     return (
-      <form>
-        <Card className="fcard">
+
+        <Card className="fCard">
           <h1 className="forgotpwd_head">Enter email</h1>
           <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
             open={this.state.snackbarOpen}
@@ -65,6 +65,7 @@ export default class ForgotPwd extends React.Component {
             action={
               <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
               </IconButton>} />
+              <form>
           <div className="fTextfield">
             <TextField
               id="email"
@@ -83,8 +84,9 @@ export default class ForgotPwd extends React.Component {
               Submit
             </Button>
           </div>
+          </form >
         </Card>
-      </form >
+     
     );
   }
 }

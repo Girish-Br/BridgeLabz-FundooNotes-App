@@ -1,6 +1,6 @@
 /******************************************************************************
- *  @Purpose        : to build complete fundooNotes App
- *  @file           : index.js
+ *  @Purpose        : to build login page for fundoo Notes
+ *  @file           : login.jsx
  *  @author         : GIRISH B R
  *  @since          : 26-11-2019
  *******************************************************************************/
@@ -81,7 +81,7 @@ class Login extends React.Component {
   render() {
     return (<div>
       <div className="loginComp">
-      <AppBar position="relative" color="primary">
+      <AppBar color="primary" position="fixed" className="lAppbar">
         <Toolbar>
           <IconButton
             edge="start"
@@ -89,11 +89,9 @@ class Login extends React.Component {
             aria-label="menu"
           >
           </IconButton>
-          <div className="typo">
-            <Typography variant="h6" color="inherit" position="center">
+            <Typography variant="h6" color="inherit"  className="typo">
               WELCOME TO LOGIN PAGE
     </Typography>
-          </div>
         </Toolbar>
       </AppBar>
       <div>

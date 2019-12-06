@@ -1,18 +1,16 @@
 body {
-  background-color: rgb(241, 241, 247);
+  background-color: rgb(232, 232, 241);
 }
 .lcard {
   margin:auto;
   position: relative;
-  border: 2px solid rgb(176, 176, 196);
+  border: 2px solid rgb(184, 178, 218);
   align-items: center;
-  width: 500px;
-  margin-top: 20px;
+  margin-top: 68px;
+  background-color: white;
 }
 .login {
   margin-top: 50px;
-  padding-left: 100;
-  margin-left: 200;
   text-align: center;
   color:#3f51b5;
 }
@@ -33,20 +31,16 @@ body {
   text-align: center
 }
 .rcard {
-  width: 375px;
+  width: 300px;
   padding: 0;
-  margin-left: 480px;
+  margin: auto;
   border: 2px solid aliceblue;
   text-align: center
 }
 .typo{
   color:white;
   background-color: #3f51b5;
-  height:50px;
-  align-items: center;
-  align-content: center;
-  margin-left: 500px;
-  margin-top:15px
+
 }
 .button {
   display: flex;
@@ -81,11 +75,12 @@ color:#3f51b5;
 .fCard {
   position: relative;
   margin: auto;
+  color: blue;
   margin-top: 20px;
   border: 2px solid rgb(176, 176, 196);
   align-items: center;
   text-align: center;
-  width: 400px;
+  width: 400px
 }
 .fsButton{
   color: #3f51b5;
@@ -101,9 +96,12 @@ color:#3f51b5;
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .lcard{
-    width: 600px;
+    width: 500px;
   }
   .fCard{
+    width: 400px;
+  }
+  .rCard{
     width: 400px;
   }
 }
@@ -113,6 +111,9 @@ color:#3f51b5;
     width: 500px;
   }
   .fCard{
+    width: 400px;
+  }
+  .rCard{
     width: 400px;
   }
 }
@@ -162,6 +163,9 @@ color:#3f51b5;
   position: absolute;
   right:20px;
   bottom: 17px;
+}
+.lAppbar{
+  align-items: center;
 }
 
 

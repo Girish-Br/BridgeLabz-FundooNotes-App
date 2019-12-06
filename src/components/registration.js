@@ -1,5 +1,5 @@
 /******************************************************************************
- *  @Purpose        : to build complete fundooNotes App
+ *  @Purpose        : to build Registration page for fundooNotes App
  *  @file           : registration.js
  *  @author         : GIRISH B R
  *  @since          : 26-11-2019
