@@ -1,29 +1,29 @@
+/******************************************************************************
+ *  @Purpose        : to test Registration component with jest and enzyme
+ *  @file           : register.test.js.js
+ *  @author         : GIRISH B R
+ *  @since          : 05-12-2019
+ *******************************************************************************/
 import React from 'react';
 import {shallow} from 'enzyme';
 import Registration from '../components/registration';
 import '../setUpTest'
 describe('Registration Component', () => {
-    /**
-     * make our assertion and what we expect to happen 
-     **/
+  //testing rendering of registration component
     it('should render without throwing an error', () => {
         expect(shallow( < Registration /> )
                 .exists())
             .toBe(true)
     })
-    /**
-     * within the Registration components describe function
-     **/
+//testing existence of firstname and lastname
     it('renders a firstName input', () => {
         expect(shallow( < Registration /> ).find('#firstName').length).toEqual(1)
     })
     it('renders a lastName input', () => {
         expect(shallow( < Registration /> ).find('#lastName').length).toEqual(1)
     })
-    /**
-     * within the Registration components describe function
-     **/
     describe('firstName input', () => {
+        //testing given input
         it('should respond to change event and change the state of the Registration Component', () => {
             const wrapper = shallow( < Registration /> );
             wrapper.find('#firstName').simulate('change', {
@@ -36,6 +36,7 @@ describe('Registration Component', () => {
         })
     })
     describe('lastName input', () => {
+        //testing given input
         it('should respond to change event and change the state of the Registration Component', () => {
             const wrapper = shallow( < Registration /> );
             wrapper.find('#lastName').simulate('change', {

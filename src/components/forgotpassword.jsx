@@ -18,7 +18,9 @@ export default class ForgotPwd extends React.Component {
       snackbarMsg: ''
     }
   }
+  //function to handle when we click submit button
   handleClick = () => {
+    //validating inputs
     if (this.state.email === "") {
       this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
     }
@@ -55,17 +57,17 @@ export default class ForgotPwd extends React.Component {
   render() {
     return (
 
-        <Card className="fCard">
-          <h1 className="forgotpwd_head">Enter email</h1>
-          <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
-            open={this.state.snackbarOpen}
-            autoHideDuration={6000}
-            onClose={this.snackbarClose}
-            message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-            action={
-              <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
-              </IconButton>} />
-              <form>
+      <Card className="fCard">
+        <h1 className="forgotpwd_head">Enter email</h1>
+        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
+          open={this.state.snackbarOpen}
+          autoHideDuration={6000}
+          onClose={this.snackbarClose}
+          message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+          action={
+            <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
+            </IconButton>} />
+        <form>
           <div className="fTextfield">
             <TextField
               id="email"
@@ -84,9 +86,8 @@ export default class ForgotPwd extends React.Component {
               Submit
             </Button>
           </div>
-          </form >
-        </Card>
-     
+        </form >
+      </Card>
     );
   }
 }

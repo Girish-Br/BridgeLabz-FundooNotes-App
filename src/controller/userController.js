@@ -8,7 +8,9 @@ import serviceConstant from '../const.js'
 import jwt from 'jsonwebtoken';
 import { EventEmitter } from 'events';
 import servicesConstant from '../const.js';
-//async function
+/*
+* @Purpose :Register the validated user details
+*/
 export async function register(req) {
   try {
     const data = {
@@ -32,6 +34,9 @@ export async function register(req) {
     return error.message
   }
 }
+/*
+* @Purpose :Log in the registered users
+*/
 export async function login(req) {
   try {
     await serviceConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
@@ -55,6 +60,9 @@ export async function login(req) {
     return error.message;
   }
 }
+/*
+* @Purpose :Sending the reset password link to the mail
+*/
 export async function forgotpassword(email) {
   try {
     await serviceConstant.firebaseAuthorization.sendPasswordResetEmail(email)
@@ -65,6 +73,9 @@ export async function forgotpassword(email) {
     return error.message;
   }
 }
+/*
+* @Purpose :Sign out of the user
+*/
 export async function logout(){
   try{
   await servicesConstant.firebaseAuthorization.signOut();

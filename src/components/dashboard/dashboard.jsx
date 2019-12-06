@@ -1,6 +1,6 @@
 /****************************************************************************************
  *  @Purpose        : To create a dashboard page with side navigation bar and Dropdown menu.
- *  @file           : dashboard.js      
+ *  @file           : dashboard.jsx      
  *  @author         : Girish B R
  *  @version        : v0.1
  *  @since          : 3-12-2019
