@@ -55,7 +55,7 @@ export default class ForgotPwd extends React.Component {
   render() {
     return (
       <form className="forgotpwd">
-        <Card className="card">
+        <Card className="fcard">
           <h1 className="forgotpwd_head">Enter email</h1>
           <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
             open={this.state.snackbarOpen}
@@ -65,7 +65,7 @@ export default class ForgotPwd extends React.Component {
             action={
               <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
               </IconButton>} />
-          <div>
+          <div className="fTextfield">
             <TextField
               id="email"
               label="Email"
@@ -78,7 +78,7 @@ export default class ForgotPwd extends React.Component {
               onChange={this.onChangeEmail}
             />
           </div>
-          <div>
+          <div className="fsButton">
             <Button onClick={this.handleClick} variant="contained" style={{ color: "#212121", backgroundColor: "#9fa8da" }}>
               Submit
             </Button>
