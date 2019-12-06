@@ -7,7 +7,7 @@
 import React from 'react';
 import { login } from '../controller/userController'
 import { Card, TextField, Button, Snackbar, IconButton, Toolbar, AppBar, Typography } from '@material-ui/core';
-import {withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -80,6 +80,7 @@ class Login extends React.Component {
   //to display
   render() {
     return (<div>
+      <div className="loginComp">
       <AppBar position="relative" color="primary">
         <Toolbar>
           <IconButton
@@ -88,15 +89,15 @@ class Login extends React.Component {
             aria-label="menu"
           >
           </IconButton>
-          <div  className="typo">
-          <Typography variant="h6" color="inherit" position="center">
-            WELCOME TO LOGIN PAGE
+          <div className="typo">
+            <Typography variant="h6" color="inherit" position="center">
+              WELCOME TO LOGIN PAGE
     </Typography>
-    </div>
+          </div>
         </Toolbar>
       </AppBar>
       <div>
-        <Card className="lcard">
+        <Card class="lcard">
           <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}
             open={this.state.snackbarOpen}
             autoHideDuration={6000}
@@ -150,6 +151,7 @@ class Login extends React.Component {
             </div>
           </form >
         </Card>
+      </div>
       </div>
     </div>
     );

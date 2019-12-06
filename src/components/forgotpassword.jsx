@@ -54,7 +54,7 @@ export default class ForgotPwd extends React.Component {
   }
   render() {
     return (
-      <form className="forgotpwd">
+      <form>
         <Card className="fcard">
           <h1 className="forgotpwd_head">Enter email</h1>
           <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center', }}

@@ -2,9 +2,8 @@ body {
   background-color: rgb(241, 241, 247);
 }
 .lcard {
-  /*position: relative;
-  margin-left:350px;*/
   margin:auto;
+  position: relative;
   border: 2px solid rgb(176, 176, 196);
   align-items: center;
   width: 500px;
@@ -33,6 +32,13 @@ body {
   border-color: 20ch, black;
   text-align: center
 }
+.rcard {
+  width: 375px;
+  padding: 0;
+  margin-left: 480px;
+  border: 2px solid aliceblue;
+  text-align: center
+}
 .typo{
   color:white;
   background-color: #3f51b5;
@@ -50,13 +56,7 @@ body {
   padding-top: 4;
   margin-top: 12px;
 }
-.rcard {
-  width: 375px;
-  padding: 0;
-  margin-left: 480px;
-  border: 2px solid aliceblue;
-  text-align: center
-}
+
 .rname{
 color:#3f51b5;
 }
@@ -72,21 +72,20 @@ color:#3f51b5;
   margin-top:5px;
 }
 .forgotpwd {
-  margin-top: 200px;
-  text-align: center;
+  margin-top: 50px;
 }
-
 .forgotpwd_head {
   color: #3f51b5;
   background-color: rgb(206, 206, 223);
 }
-.fcard {
+.fCard {
   position: relative;
-  margin-top: 60px;
-  margin-left:430px;
-  width: 400px;
+  margin: auto;
+  margin-top: 20px;
   border: 2px solid rgb(176, 176, 196);
   align-items: center;
+  text-align: center;
+  width: 400px;
 }
 .fsButton{
   color: #3f51b5;
@@ -101,16 +100,23 @@ color:#3f51b5;
 }
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .lCard{
+  .lcard{
     width: 600px;
+  }
+  .fCard{
+    width: 400px;
   }
 }
 /* For tablets: */
 @media only screen and (min-width: 600px) {
-  .lCard{
+  .lcard{
     width: 500px;
   }
+  .fCard{
+    width: 400px;
+  }
 }
+
 
 /* Dasboard css*/
 .root{

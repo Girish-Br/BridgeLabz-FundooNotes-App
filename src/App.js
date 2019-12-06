@@ -6,11 +6,11 @@
  *******************************************************************************/
 import React, { Component } from 'react';
 import { BrowserRouter as Router,Route } from "react-router-dom";
-import Login from './components/login';
-import  Dashboard from '../src/components/dashboard/dashboard'
+import Login from './components/login.jsx';
+import  Dashboard from './components/dashboard/dashboard.jsx'
 import './App.css';
-import Register from './components/registration';
-import forgot from './components/forgotpassword'
+import Register from './components/registration.js';
+import forgot from './components/forgotpassword.jsx'
 
 //helps to use properties of component
 class App extends Component {
