@@ -11,6 +11,7 @@ import servicesConstant from '../const.js';
 /*
 * @Purpose :Register the validated user details
 */
+
 export async function register(req) {
   try {
     const data = {
