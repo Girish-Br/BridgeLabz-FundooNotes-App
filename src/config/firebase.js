@@ -1,5 +1,15 @@
 import firebase from 'firebase'
-const config = {
+/*const config = {
+    apiKey: process.env.React_App_Firebase_apiKey,
+    authDomain: process.env.React_App_Firebase_authDomain,
+    databaseURL: process.env.React_App_Firebase_databaseURL,
+    projectId:process.env.React_App_Firebase_projectId,
+    storageBucket: process.env.React_App_Firebase_storageBucket,
+    messagingSenderId: process.env.React_App_Firebase_messagingSenderId,
+    appId: process.env.React_App_Firebase_appId,
+    measurementId: process.env.React_App_Firebase_measurementId
+  };*/
+  const config = {
     apiKey: "AIzaSyDn0dCL3Ey1r4GFEJaTB0eT0wdR6Rcna1U",
     authDomain: "fundoonotes-c21bb.firebaseapp.com",
     databaseURL: "https://fundoonotes-c21bb.firebaseio.com",
@@ -11,4 +21,3 @@ const config = {
   };
   const fire=firebase.initializeApp(config);
   export default fire;
-

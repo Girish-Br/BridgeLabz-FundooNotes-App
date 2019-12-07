@@ -64,7 +64,7 @@ class Login extends React.Component {
           }
           setTimeout(()=>{
           this.props.history.push('/dashboard')
-          },6000)
+          },2000)
         }
       })
     }}

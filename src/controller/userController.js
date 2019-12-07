@@ -62,8 +62,6 @@ export async function login(req,cb){
 export async function forgotpassword(email) {
   try {
     await serviceConstant.firebaseAuthorization.sendPasswordResetEmail(email)
-    var userData = serviceConstant.firestore.collection("user").doc(serviceConstant.firebaseAuthorization.currentUser.uid)
-    await userData.get().password
     return 'success';
   }
   catch (error) {

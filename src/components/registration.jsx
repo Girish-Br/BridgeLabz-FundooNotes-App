@@ -42,11 +42,11 @@ handleSubmit = () => {
   } else if (this.state.lastName === null || this.state.lastName.length < 1) {
     this.setState({ snackbarOpen: true, snackbarMsg: "lastname cannot be empty" })
   }
-  else if (this.state.email === null || this.state.email.length < 1) {
-    this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
-  }
   else if (this.state.password === null || this.state.password.length < 8) {
     this.setState({ snackbarOpen: true, snackbarMsg: "password should be min 8" })
+  }
+  else if (this.state.email === null || this.state.email.length < 1) {
+    this.setState({ snackbarOpen: true, snackbarMsg: "email cannot be empty" })
   }
   //if the validation is correct we will proceed the details to controller
   else {
@@ -55,7 +55,7 @@ handleSubmit = () => {
         this.setState({snackbarOpen:true,snackbarMsg:"invalid email address"})
         return 'error';
       }
-    });
+      });
     eventEmitter.emit('validation').then(result=>{
       if(result[0]!=='error'){
         const user = {

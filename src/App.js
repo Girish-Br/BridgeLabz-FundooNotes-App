@@ -11,7 +11,7 @@ import  Dashboard from './components/dashboard/dashboard.jsx'
 import './App.css';
 import Register from './components/registration.jsx';
 import forgot from './components/forgotpassword.jsx'
-
+require('dotenv').config()
 //helps to use properties of component
 class App extends Component {
   //returns the display contains
