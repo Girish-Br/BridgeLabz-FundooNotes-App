@@ -93,6 +93,12 @@ color:#3f51b5;
 .forgotpwd{
   background-color: #eeeff7;
 }
+.morevertIcon{
+  margin-right: 40px;
+}
+.fundoonote{
+  margin-left: 500px;
+}
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .lcard{
@@ -120,10 +126,9 @@ color:#3f51b5;
 
 
 /* Dasboard css*/
-.root{
+.dashboardMainDiv{
   display: flex;
 }
-
 @media only screen and (min-width: 600px) {
     .drawer{
       width: 240px;
@@ -132,11 +137,12 @@ color:#3f51b5;
     .appBar{
       width:100%;
       margin-left: 240px;
-      color:rgb(128,0,128)
-
-    }
+      color:rgb(128,0,128);
+      align-items: center;
+      }
     .menuButton{
       display:none;
+      margin-left: 20px;
     }
   }
 .toolbar{
@@ -150,14 +156,7 @@ color:#3f51b5;
   flex-grow: 1;
   padding: 3;
 }
-.profileCard{
-  position: relative;
-  margin: auto;
-  margin-top: 70px;
-  border: 2px solid rgb(180, 198, 216);
-  align-items: center;
-  width: 500px;
-  }
+
 /* dashboard css end*/
 .dropdown{
   position: absolute;
@@ -167,6 +166,16 @@ color:#3f51b5;
 .lAppbar{
   align-items: center;
 }
-
-
+.content{
+align-content: center;
+padding-top: 80px;
+}
+.create-note-card{
+  margin: auto;
+  border: 1px solid #80868b;
+  width:350px;
+}
+.create-note-card-icons{
+  margin:0px 8px 0px 8px;
+}
 

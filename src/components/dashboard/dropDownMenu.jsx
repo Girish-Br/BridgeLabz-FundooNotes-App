@@ -38,7 +38,7 @@ class LongMenu extends React.Component {
     ITEM_HEIGHT = 50;
     render() {
         return (
-            <div>
+            <div class="morevertIcon">
                 <IconButton
                     aria-label="more"
                     aria-controls="long-menu"

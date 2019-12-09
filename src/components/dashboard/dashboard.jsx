@@ -8,7 +8,7 @@
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { withRouter } from "react-router-dom";
-import { Container, Card, Grid, AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -17,6 +17,7 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import PinDropIcon from '@material-ui/icons/PinDrop';
 import LabelIcon from '@material-ui/icons/Label';
 import LongMenu from './dropDownMenu';
+import CreateNote from './createNote';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
@@ -69,28 +70,31 @@ class Dashboard extends React.Component {
   )
   render() {
     return (
-      <div className="root">
+      <div className="dashboardMainDiv">
         <CssBaseline />
-        <AppBar position="fixed" className="appBar" >
-          <Toolbar>
-            <div><LongMenu /></div>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={this.handleDrawerToggle}
-              className="menuButton"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" >
-              Fundoonote
+        <div>
+          <AppBar className="appBar" >
+            <Toolbar className="longMenu">
+              <LongMenu />
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="left"
+                onClick={this.handleDrawerToggle}
+                class="menuButton"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" className="fundoonote">
+                Fundoonote
           </Typography>
-          </Toolbar>
-        </AppBar>
+            </Toolbar>
+          </AppBar>
+        </div>
         <nav className="drawer" aria-label="mailbox folders">
           {/* The implementation will be hidden if screen sixe is greater than 600px. */}
           <Hidden smUp implementation="css">
+
             <Drawer
               variant="temporary"
               anchor="left"
@@ -100,50 +104,22 @@ class Dashboard extends React.Component {
                 keepMounted: true, // Better open performance on mobile.
               }}
             >
-              <div>
-                <div className="toolbar" />
-                <Divider />
-                {this.list}
-                <Divider />
-              </div>
+              <Divider />
+              {this.list}
+              <Divider />
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation="css">
             <Drawer
               variant="permanent"
               open>
-              <div>
-                <div className="toolbar" />
-                <Divider />
-                {this.list}
-              </div>
+              <Divider />
+              {this.list}
             </Drawer>
           </Hidden>
         </nav>
         <main className="content">
-          <div className="toolbar" />
-          <Card class="profileCard">
-            <Container component="main" maxWidth="xs">
-              <div>
-                <Typography component="h1" variant="h5">
-                  Profile
-                </Typography>
-                <div>
-                  First Name:{this.state.firstName}
-                </div>
-                <div>
-                  last Name:{this.state.lastName}
-                </div>
-                <div>
-                  Email : {this.state.email}
-                </div>
-                <Grid container>
-                  <Grid item>
-                  </Grid>
-                </Grid>
-              </div>
-            </Container>
-          </Card>
+          <CreateNote />
         </main>
       </div>
     )
