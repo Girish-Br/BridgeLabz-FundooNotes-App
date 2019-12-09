@@ -73,19 +73,19 @@ class Dashboard extends React.Component {
       <div className="dashboardMainDiv">
         <CssBaseline />
         <div>
-          <AppBar className="appBar" >
-            <Toolbar className="longMenu">
-              <LongMenu />
+          <AppBar>
+            <Toolbar>
+              <LongMenu/>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                edge="left"
+                edge="start"
                 onClick={this.handleDrawerToggle}
-                class="menuButton"
+                class="moreverticon"
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" className="fundoonote">
+              <Typography variant="h6"className="fundoonote" >
                 Fundoonote
           </Typography>
             </Toolbar>
@@ -94,7 +94,6 @@ class Dashboard extends React.Component {
         <nav className="drawer" aria-label="mailbox folders">
           {/* The implementation will be hidden if screen sixe is greater than 600px. */}
           <Hidden smUp implementation="css">
-
             <Drawer
               variant="temporary"
               anchor="left"

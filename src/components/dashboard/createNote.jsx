@@ -5,19 +5,30 @@
  *  @version        : v0.1
  *  @since          : 9-12-2019
  *****************************************************************************************/
-import React from 'react';
-import { TextField, Card, Hidden, Tooltip,CardContent } from '@material-ui/core';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import BrushIcon from '@material-ui/icons/Brush';
+import React, { Component } from 'react'
+import { Card, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
+import BrushIcon from '@material-ui/icons/Brush';
+import AddBoxIcon from '@material-ui/icons/Add';
+import PinDropIcon from '@material-ui/icons/PinDrop';
+import AddAlertIcon from '@material-ui/icons/AddAlert';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 class CreateNote extends React.Component {
     constructor(props) {
         super(props)
-   }
+        this.state = {
+            openCard: false
+        }
+    }
+    createNote = () => {
+        this.setState({ "openCard": true })
+    }
     render() {
         return (
-            <div>
-
+            this.state.openCard ?
                 <div>
                     <Card className="create-note-card">
                         <CardContent>
@@ -52,7 +63,53 @@ class CreateNote extends React.Component {
                         </CardContent>
                     </Card>
                 </div>
-            </div>
+                :
+                <div>   <Card className="create-note-card1" >
+                    <CardContent disableSpacing>
+                        <div>
+                            <TextField
+                                multiline
+                                InputProps={{ disableUnderline: true }}
+                                placeholder="Title..."
+                            >
+                            </TextField>
+                            <IconButton>
+                                <PinDropIcon />
+                            </IconButton>
+                        </div>
+                        <div>
+                            <TextField
+                                multiline
+                                InputProps={{ disableUnderline: true }}
+                                placeholder="Take a Note"
+                            >
+                            </TextField>
+                        </div>
+                        <div>
+                            <CardActions disableSpacing>
+                                <IconButton>
+                                    <AddAlertIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <PersonAddIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ColorLensIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ImageIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ArchiveIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <MoreVertIcon />
+                                </IconButton>
+                                <Button>Close</Button>
+                            </CardActions>
+                        </div>
+                    </CardContent>
+                </Card></div>
         )
     }
 }
