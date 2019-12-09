@@ -4,7 +4,6 @@
  *  @author         : GIRISH B R
  *  @since          : 27-11-2019
  *******************************************************************************/
-import serviceConstant from '../const.js'
 import jwt from 'jsonwebtoken';
 import { EventEmitter } from 'events';
 import servicesConstant from '../const.js';
@@ -20,11 +19,11 @@ export async function register(req) {
       firstname: req.firstname,
       lastname: req.lastname
     }
-    await serviceConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password)
-    serviceConstant.firestore.collection('user').doc(serviceConstant.firebaseAuthorization.currentUser.uid).set(data)
+    await servicesConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password)
+    servicesConstant.firestore.collection('user').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(data)
     const emitter = new EventEmitter();
     function emailVerification() {
-      serviceConstant.firebaseAuthorization.currentUser.sendEmailVerification()
+      servicesConstant.firebaseAuthorization.currentUser.sendEmailVerification()
     }
     emitter.on('email verification', emailVerification);
     emitter.emit('email verification');
@@ -37,15 +36,15 @@ export async function register(req) {
 }
 export async function login(req,cb){
   try {
-    await serviceConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
-    var userData = serviceConstant.firestore.collection("user").doc(serviceConstant.firebaseAuthorization.currentUser.uid)
+    await servicesConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
+    var userData = servicesConstant.firestore.collection("user").doc(servicesConstant.firebaseAuthorization.currentUser.uid)
     await userData.get().then(function (doc) {
       const payload = {
-        email: serviceConstant.firebaseAuthorization.currentUser.email,
+        email: servicesConstant.firebaseAuthorization.currentUser.email,
         firstname: doc.data().firstname,
         lastname: doc.data().lastname
       }
-      let token = jwt.sign(payload, serviceConstant.firebaseAuthorization.currentUser.uid, {
+      let token = jwt.sign(payload, servicesConstant.firebaseAuthorization.currentUser.uid, {
         expiresIn: 1440
       })
       localStorage.setItem('usertoken', token)
@@ -62,7 +61,7 @@ export async function login(req,cb){
 */
 export async function forgotpassword(email) {
   try {
-    await serviceConstant.firebaseAuthorization.sendPasswordResetEmail(email)
+    await servicesConstant.firebaseAuthorization.sendPasswordResetEmail(email)
     return 'success';
   }
   catch (error) {
@@ -74,7 +73,7 @@ export async function forgotpassword(email) {
 * @Purpose :Sign out of the user
 */
 export async function logout(){
-  try{
+ try{
   await servicesConstant.firebaseAuthorization.signOut();
   localStorage.removeItem('usertoken')
   }

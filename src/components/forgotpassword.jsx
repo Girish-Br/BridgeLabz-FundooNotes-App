@@ -31,7 +31,20 @@ export default class ForgotPwd extends React.Component {
       });
     }
     else {
-      forgotpassword(this.state.email).then(res => {
+      forgotpassword(this.state.email)
+      .then((data)=>{
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: "rest password link sent to your email"
+        })
+      })
+      .catch((error)=>{
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: error
+        })
+      })
+      /*.then(res => {
         if (res === 'success') {
           this.setState({
             snackbarOpen: true,
@@ -44,7 +57,7 @@ export default class ForgotPwd extends React.Component {
             snackbarMsg: res
           })
         }
-      })
+      })*/
     }
   }
   //used to display brief message
