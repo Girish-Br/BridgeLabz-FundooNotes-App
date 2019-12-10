@@ -81,7 +81,6 @@ class Dashboard extends React.Component {
                 aria-label="open drawer"
                 edge="start"
                 onClick={this.handleDrawerToggle}
-                class="moreverticon"
               >
                 <MenuIcon />
               </IconButton>

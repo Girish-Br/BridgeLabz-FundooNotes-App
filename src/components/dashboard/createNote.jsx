@@ -24,11 +24,11 @@ class CreateNote extends React.Component {
         }
     }
     createNote = () => {
-        this.setState({ "openCard": true })
+        this.setState({ "openCard": !this.state.openCard })
     }
     render() {
         return (
-            this.state.openCard ?
+            !this.state.openCard ?
                 <div>
                     <Card className="create-note-card">
                         <CardContent>
@@ -37,7 +37,7 @@ class CreateNote extends React.Component {
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Take a note ...."
                                 readOnly={true}
-                                onClick={this.takeNote}
+                                onClick={this.createNote}
                                 className="text-area"
                                 value=""
                             >
@@ -105,7 +105,7 @@ class CreateNote extends React.Component {
                                 <IconButton>
                                     <MoreVertIcon />
                                 </IconButton>
-                                <Button>Close</Button>
+                                <Button onClick={this.createNote} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
                     </CardContent>
