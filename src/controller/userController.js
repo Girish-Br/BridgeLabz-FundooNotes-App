@@ -18,9 +18,14 @@ export async function register(req) {
       firstname: req.firstname,
       lastname: req.lastname
     }
-    await servicesConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password)
-    servicesConstant.firestore.collection('user').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(data)
-    const emitter = new EventEmitter();
+await servicesConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password).then((res)=>{
+ console.log(JSON.stringify(res)+"sbdbjhasdjkas")  
+
+})
+  let response=  servicesConstant.firestore.collection('user').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(data)
+  console.log(JSON.stringify(response)+"response")  
+
+  const emitter = new EventEmitter();
     function emailVerification() {
       servicesConstant.firebaseAuthorization.currentUser.sendEmailVerification()
     }
@@ -80,9 +85,7 @@ export async function logout(){
     console.log(err);
   }
 }
-
-
-export async function CreateNote(notes) {
+export function CreateNote(notes) {
   try {
     servicesConstant.firestore.collection('notes').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(notes)
     return 'success';
