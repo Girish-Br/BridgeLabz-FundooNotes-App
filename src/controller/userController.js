@@ -80,3 +80,15 @@ export async function logout(){
     console.log(err);
   }
 }
+
+
+export async function CreateNote(notes) {
+  try {
+    servicesConstant.firestore.collection('notes').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(notes)
+    return 'success';
+  }
+  catch (error) {
+    console.log(error)
+    return error.message;
+  }
+}

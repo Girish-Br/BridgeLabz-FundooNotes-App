@@ -5,9 +5,12 @@
  *  @version        : v0.1
  *  @since          : 9-12-2019
  *****************************************************************************************/
-import React, { Component } from 'react'
-import { Card, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
+import React from 'react';
+import { CreateNote } from '../../controller/userController';
+import { Card,Snackbar, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import BrushIcon from '@material-ui/icons/Brush';
 import AddBoxIcon from '@material-ui/icons/Add';
 import PinDropIcon from '@material-ui/icons/PinDrop';
@@ -16,28 +19,73 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-class CreateNote extends React.Component {
+class CreateNoteDashboard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            openCard: false
+            openCard: false,
+            title: "",
+            takeNote: "",
+            anchorEl: null,
+            snackbarMsg:"",
+            snackbarOpen:false,
+            image: ""
         }
     }
-    createNote = () => {
-        this.setState({ "openCard": !this.state.openCard })
+    snackbarClose = () => {
+        this.setState({ snackbarOpen: false });
+      }
+    handleRemainderClick = (e) => {
+        this.setState({ "anchorEl": e.currentTarget });
+    };
+    handleCloseRemainder = () => {
+        this.setState({ "anchorEl": null });
+    };
+    onChange = (e) => {
+        e.preventDefault();
+        this.setState({ [e.target.name]: e.target.value });
     }
+closeCard = () => {
+        this.setState({ "openCard": !this.state.openCard });
+        const notes = {
+            title: this.state.title,
+            takeNote: this.state.takeNote
+        }
+        CreateNote(notes).then(res=>{
+            if (res === 'success') {
+                this.setState({
+                  snackbarMsg: 'Notes added' + res,
+                  snackbarOpen: true
+                })
+              }
+              else {
+                this.setState({
+                  snackbarMsg: res,
+                  snackbarOpen: true
+                })
+              }
+        })
+     }
     render() {
         return (
             !this.state.openCard ?
                 <div>
                     <Card className="create-note-card">
+                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+              open={this.state.snackbarOpen}
+              autoHideDuration={6000}
+              onClose={this.snackbarClose}
+              message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+              action={
+                <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
+                </IconButton>} />
                         <CardContent>
                             <TextField
                                 multiline
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Take a note ...."
                                 readOnly={true}
-                                onClick={this.createNote}
+                                onClick={this.closeCard}
                                 className="text-area"
                                 value=""
                             >
@@ -71,6 +119,9 @@ class CreateNote extends React.Component {
                                 multiline
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Title..."
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.onChange}
                             >
                             </TextField>
                             <IconButton>
@@ -82,14 +133,32 @@ class CreateNote extends React.Component {
                                 multiline
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Take a Note"
+                                name="takeNote"
+                                value={this.state.takeNote}
+                                onChange={this.onChange}
+
                             >
                             </TextField>
                         </div>
                         <div>
                             <CardActions disableSpacing>
-                                <IconButton>
+                                <IconButton 
+                                     aria-label="more"
+                                     aria-controls="remainder-menu"
+                                     aria-haspopup="true"                   
+                                     onClick={this.handleRemainderClick}>
                                     <AddAlertIcon />
                                 </IconButton>
+                                <div><Menu
+                                  id="remainder-menu"
+                            anchorEl={this.state.anchorEl}
+                            open={Boolean(this.state.anchorEl)}
+                            onClose={this.handleCloseRemainder}>
+                            <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
+                            <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
+                            <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
+                            <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
+                        </Menu></div>
                                 <IconButton>
                                     <PersonAddIcon />
                                 </IconButton>
@@ -105,12 +174,13 @@ class CreateNote extends React.Component {
                                 <IconButton>
                                     <MoreVertIcon />
                                 </IconButton>
-                                <Button onClick={this.createNote} class="closeButton">Close</Button>
+                                <Button onClick={this.closeCard} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
+                        
                     </CardContent>
                 </Card></div>
         )
     }
 }
-export default CreateNote
+export default CreateNoteDashboard

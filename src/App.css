@@ -101,13 +101,11 @@ color:#3f51b5;
   width: 240px;
   flex-shrink: 0;
 }
-
 /* Dasboard css*/
 .dashboardMainDiv{
   display: flex;
 }
- 
-.drawerPaper{
+ .drawerPaper{
   width: 240px;
 }
 /* dashboard css end*/
@@ -164,6 +162,9 @@ color:#3f51b5;
       width:300px;
     }
 }
+
+
+
 /* For tablets: */
 @media only screen and (min-width: 600px) {
   .lcard{
