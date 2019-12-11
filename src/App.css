@@ -162,6 +162,11 @@ color:#3f51b5;
     .drawer{
       top: 65px;
     }
+    .addedNoteCards{
+      display: inline-block;
+      margin:20px;
+      border-block-end-style: outset;
+    }
 }
 
 
@@ -199,6 +204,11 @@ color:#3f51b5;
     }
     .drawer{
       top: 65px;
+    }
+    .addedNoteCards{
+      display: inline-block;
+      margin:20px;
+      border-block-end-style: outset;
     }
   }
 

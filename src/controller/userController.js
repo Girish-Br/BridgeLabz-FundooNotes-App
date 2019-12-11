@@ -5,6 +5,7 @@
  *  @since          : 27-11-2019
  *******************************************************************************/
 import jwt from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode'
 import { EventEmitter } from 'events';
 import servicesConstant from '../const.js';
 /*
@@ -43,7 +44,8 @@ export async function login(req){
       const payload = {
         email: servicesConstant.firebaseAuthorization.currentUser.email,
         firstname: doc.data().firstname,
-        lastname: doc.data().lastname
+        lastname: doc.data().lastname,
+        user_id:loginDetails.user.uid
       }
       let token = jwt.sign(payload, servicesConstant.firebaseAuthorization.currentUser.uid, {
         expiresIn: 1440
@@ -86,11 +88,35 @@ export async function logout(){
 }
 export async function CreateNote(notes) {
   try {
-   await servicesConstant.firestore.collection('notes').doc().set(notes)
+    console.log(notes)
+    const Notesdetails={
+      title:notes.title,
+      description:notes.description,
+      user_id:servicesConstant.firebaseAuthorization.currentUser.uid
+    }
+   await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
     return 'success';
   }
   catch (error) {
     console.log(error)
     return error.message;
+  }
+}
+export async function GetNote(){
+  try{
+    const token=localStorage.usertoken
+    const decodedJwt=jwt_decode(token)
+    var notes=[];
+    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id)
+    .get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        notes.push(doc.data())
+      });
+      })
+console.log(notes);
+return(notes)
+  }
+  catch(error){
+    return error.message
   }
 }

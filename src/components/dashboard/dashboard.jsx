@@ -6,8 +6,8 @@
  *  @since          : 3-12-2019
  *****************************************************************************************/
 import React from 'react'
-import jwt_decode from 'jwt-decode'
 import { withRouter } from "react-router-dom";
+import GetCards from './getNote.jsx'
 import { AppBar, Toolbar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,24 +18,19 @@ import PinDropIcon from '@material-ui/icons/PinDrop';
 import LabelIcon from '@material-ui/icons/Label';
 import LongMenu from './dropDownMenu';
 import CreateNote from './createNote';
+import { GetNote } from '../../controller/userController.js'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
-      firstName: '',
-      lastName: '',
       mobileOpen: false,
-
+      notes: []
     }
   }
   componentDidMount() {
-    const token = localStorage.usertoken
-    const decoded = jwt_decode(token)
-    this.setState({
-      email: decoded.email,
-      firstName: decoded.firstname,
-      lastName: decoded.lastname
+    GetNote().then(res => {
+      this.setState({ notes: res })
+      console.log(res)
     })
   }
   handleDrawerToggle = () => {
@@ -70,6 +65,11 @@ class Dashboard extends React.Component {
     </List>
   )
   render() {
+    let notesCard = this.state.notes.map(item => {
+      return (
+        <GetCards title={item.title} description={item.description}/>
+      )
+    })
     return (
       <div className="dashboardMainDiv">
         <CssBaseline />
@@ -113,6 +113,7 @@ class Dashboard extends React.Component {
           <main >
             <CreateNote />
           </main>
+          {notesCard}
         </div>
       </div>
     )

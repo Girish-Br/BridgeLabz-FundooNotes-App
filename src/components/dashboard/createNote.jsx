@@ -6,7 +6,7 @@
  *  @since          : 9-12-2019
  *****************************************************************************************/
 import React from 'react';
-import  {CreateNote}  from '../../controller/userController';
+import { CreateNote } from '../../controller/userController';
 import { Card, Snackbar, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import Menu from '@material-ui/core/Menu';
@@ -24,12 +24,11 @@ class CreateNoteDashboard extends React.Component {
         super(props)
         this.state = {
             openCard: false,
-            title: "",
-            takeNote: "",
+            title: '',
+            description: '',
             anchorEl: null,
-            snackbarMsg: "",
+            snackbarMsg: '',
             snackbarOpen: false,
-            image: ""
         }
     }
     snackbarClose = () => {
@@ -45,27 +44,33 @@ class CreateNoteDashboard extends React.Component {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
     }
+    cardOpen=()=>{
+        this.setState({openCard:true})
+    }
     closeCard = () => {
-        this.setState({ "openCard": !this.state.openCard });
+        this.setState({openCard:false})
         const notes = {
             title: this.state.title,
-            takeNote: this.state.takeNote
+            description: this.state.description
         }
-        CreateNote(notes)
-            .then(res => {
-                if (res==='success') {
-                    this.setState({
-                        snackbarMsg: 'Notes added' +  res,
-                        snackbarOpen: true
-                    })
-                }
-                else {
-                    this.setState({
-                        snackbarMsg: res,
-                        snackbarOpen: true
-                    })
-                }
-            })
+        if (!(notes.title == null && notes.description == null)) {
+            CreateNote(notes)
+                .then(res => {
+                    if (res === 'success') {
+                        this.setState({
+                            snackbarMsg: 'Notes added' + res,
+                            snackbarOpen: true
+                        })
+                    }
+                    else {
+                        this.setState({
+                            snackbarMsg: res,
+                            snackbarOpen: true
+                        })
+                    }
+                })
+        }
+
     }
     render() {
         return (
@@ -86,7 +91,7 @@ class CreateNoteDashboard extends React.Component {
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Take a note ...."
                                 readOnly={true}
-                                onClick={this.closeCard}
+                                onClick={this.cardOpen}
                                 className="text-area"
                                 value=""
                             >
@@ -107,7 +112,7 @@ class CreateNoteDashboard extends React.Component {
                                 <ImageIcon
                                     aria-label="Image"
                                     className="create-note-card-icons"
-                                /> 
+                                />
                             </Tooltip>
                         </CardContent>
                     </Card>
@@ -134,8 +139,8 @@ class CreateNoteDashboard extends React.Component {
                                 multiline
                                 InputProps={{ disableUnderline: true }}
                                 placeholder="Take a Note"
-                                name="takeNote"
-                                value={this.state.takeNote}
+                                name="description"
+                                value={this.state.description}
                                 onChange={this.onChange}
 
                             >
@@ -178,7 +183,6 @@ class CreateNoteDashboard extends React.Component {
                                 <Button onClick={this.closeCard} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
-
                     </CardContent>
                 </Card></div>
         )
