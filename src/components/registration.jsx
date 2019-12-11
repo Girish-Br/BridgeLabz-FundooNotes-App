@@ -66,7 +66,7 @@ handleSubmit = () => {
         }
         register(user)
           .then(res => {
-            if (res === 'success') {
+            if (res ===true) {
               this.setState({
                 snackbarMsg: 'Registration Successs' + res,
                 snackbarOpen: true
@@ -79,10 +79,8 @@ handleSubmit = () => {
                 snackbarOpen: true
               })
               this.setState({
-                firstName: '',
-                lastName: '',
                 email: '',
-                password: '',
+                password: ''
               });
             }
           })

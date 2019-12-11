@@ -46,25 +46,26 @@ class Login extends React.Component {
         email: this.state.email,
         password: this.state.password
       }
-      login(user,(err,data)=>{
-        if(err){
-          this.setState({
-            snackbarOpen: true,
-            snackbarMsg: err,
-            email: '',
-            password: ''
-          })
-        }
-        else{
-          if (data === 'success') {
+      login(user)
+      .then(res => {
+        if (res.user) {
+          setTimeout(()=>{
             this.setState({
               snackbarOpen: true,
-              snackbarMsg: 'login successful'
-            })
-          }
-          setTimeout(()=>{
-          this.props.history.push('/dashboard')
-          },2000)
+              snackbarMsg: 'login Successs'
+              })
+          },2000);
+          this.props.history.push(`/dashboard`)
+        }
+        else {
+          this.setState({
+            snackbarMsg: res,
+            snackbarOpen: true
+          })
+          this.setState({
+            email: '',
+            password: ''
+          });
         }
       })
     }}
@@ -115,7 +116,7 @@ class Login extends React.Component {
                   label="Email"
                   type="email"
                   name="email"
-                  autoComplete="off"
+                  autoComplete="on"
                   margin="normal"
                   variant="outlined"
                   value={this.state.email}

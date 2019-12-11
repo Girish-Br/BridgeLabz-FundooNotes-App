@@ -97,10 +97,6 @@ color:#3f51b5;
   color: #3f51b5;
   margin-bottom: 10px;
 }
-.drawer{
-  width: 240px;
-  flex-shrink: 0;
-}
 /* Dasboard css*/
 .dashboardMainDiv{
   display: flex;
@@ -117,8 +113,10 @@ color:#3f51b5;
 .lAppbar{
   align-items: center;
 }
-
-
+.content{
+  margin-top:80px;
+  margin-left:40px;
+}
 
 
 /* For mobile phones: */
@@ -130,8 +128,8 @@ color:#3f51b5;
 }
 
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+/* Large devices (laptops/desktops, 900px and up) */
+@media only screen and (min-width: 900px) {
   .lcard{
     width: 500px;
   }
@@ -142,12 +140,12 @@ color:#3f51b5;
     width: 400px;
   }
   .fundoonote{
-    padding-left: 200px;
+    margin-left: 700px;
   }
   .content{
     align-content: center;
-    padding-top: 80px;
-    margin-right: 250px;
+    margin-top: 80px;
+    margin-left:500px;
     }
     .create-note-card-icons{
       margin: 0px 8px 0px 8px;
@@ -160,6 +158,9 @@ color:#3f51b5;
     }
     .create-note-textarea{
       width:300px;
+    }
+    .drawer{
+      top: 65px;
     }
 }
 
@@ -174,15 +175,15 @@ color:#3f51b5;
     width: 400px;
   }
   .rCard{
-    width: 400px;
+    width: 300px;
   }
   .fundoonote{
-    padding-left: 200px;
+   padding-left: 250px;
   }
   .content{
     align-content: center;
-    padding-top: 80px;
-    margin-right: 250px;
+    margin-top: 100px;
+    margin-left: 250px;
     }
     .create-note-card{
       width:400px;
@@ -195,6 +196,9 @@ color:#3f51b5;
     }
     .create-note-card-icons{
       margin: 0px 8px 0px 8px;
+    }
+    .drawer{
+      top: 65px;
     }
   }
 

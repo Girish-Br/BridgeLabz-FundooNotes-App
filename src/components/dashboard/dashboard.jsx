@@ -8,7 +8,7 @@
 import React from 'react'
 import jwt_decode from 'jwt-decode'
 import { withRouter } from "react-router-dom";
-import { AppBar, Toolbar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -25,7 +25,8 @@ class Dashboard extends React.Component {
       email: '',
       firstName: '',
       lastName: '',
-      mobileOpen: false
+      mobileOpen: false,
+
     }
   }
   componentDidMount() {
@@ -75,7 +76,7 @@ class Dashboard extends React.Component {
         <div>
           <AppBar>
             <Toolbar>
-              <LongMenu/>
+              <LongMenu />
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -84,15 +85,15 @@ class Dashboard extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6"className="fundoonote" >
+              <Typography variant="h6" className="fundoonote">
                 Fundoonote
           </Typography>
+
             </Toolbar>
           </AppBar>
         </div>
-        <nav className="drawer" aria-label="mailbox folders">
-          {/* The implementation will be hidden if screen sixe is greater than 600px. */}
-          <Hidden smUp implementation="css">
+        <div className="drawer">
+          <nav aria-label="mailbox folders">
             <Drawer
               variant="temporary"
               anchor="left"
@@ -106,19 +107,13 @@ class Dashboard extends React.Component {
               {this.list}
               <Divider />
             </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              variant="permanent"
-              open>
-              <Divider />
-              {this.list}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className="content">
-          <CreateNote />
-        </main>
+          </nav>
+        </div>
+        <div className="content">
+          <main >
+            <CreateNote />
+          </main>
+        </div>
       </div>
     )
   }

@@ -6,8 +6,8 @@
  *  @since          : 9-12-2019
  *****************************************************************************************/
 import React from 'react';
-import { CreateNote } from '../../controller/userController';
-import { Card,Snackbar, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
+import  {CreateNote}  from '../../controller/userController';
+import { Card, Snackbar, TextField, Tooltip, CardContent, CardActions, IconButton, Button } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -27,14 +27,14 @@ class CreateNoteDashboard extends React.Component {
             title: "",
             takeNote: "",
             anchorEl: null,
-            snackbarMsg:"",
-            snackbarOpen:false,
+            snackbarMsg: "",
+            snackbarOpen: false,
             image: ""
         }
     }
     snackbarClose = () => {
         this.setState({ snackbarOpen: false });
-      }
+    }
     handleRemainderClick = (e) => {
         this.setState({ "anchorEl": e.currentTarget });
     };
@@ -45,40 +45,41 @@ class CreateNoteDashboard extends React.Component {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
     }
-closeCard = () => {
+    closeCard = () => {
         this.setState({ "openCard": !this.state.openCard });
         const notes = {
             title: this.state.title,
             takeNote: this.state.takeNote
         }
-        CreateNote(notes).then(res=>{
-            if (res === 'success') {
-                this.setState({
-                  snackbarMsg: 'Notes added' + res,
-                  snackbarOpen: true
-                })
-              }
-              else {
-                this.setState({
-                  snackbarMsg: res,
-                  snackbarOpen: true
-                })
-              }
-        })
-     }
+        CreateNote(notes)
+            .then(res => {
+                if (res==='success') {
+                    this.setState({
+                        snackbarMsg: 'Notes added' +  res,
+                        snackbarOpen: true
+                    })
+                }
+                else {
+                    this.setState({
+                        snackbarMsg: res,
+                        snackbarOpen: true
+                    })
+                }
+            })
+    }
     render() {
         return (
             !this.state.openCard ?
                 <div>
                     <Card className="create-note-card">
-                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
-              open={this.state.snackbarOpen}
-              autoHideDuration={6000}
-              onClose={this.snackbarClose}
-              message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-              action={
-                <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
-                </IconButton>} />
+                        <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+                            open={this.state.snackbarOpen}
+                            autoHideDuration={6000}
+                            onClose={this.snackbarClose}
+                            message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+                            action={
+                                <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
+                                </IconButton>} />
                         <CardContent>
                             <TextField
                                 multiline
@@ -106,7 +107,7 @@ closeCard = () => {
                                 <ImageIcon
                                     aria-label="Image"
                                     className="create-note-card-icons"
-                                />
+                                /> 
                             </Tooltip>
                         </CardContent>
                     </Card>
@@ -142,23 +143,23 @@ closeCard = () => {
                         </div>
                         <div>
                             <CardActions disableSpacing>
-                                <IconButton 
-                                     aria-label="more"
-                                     aria-controls="remainder-menu"
-                                     aria-haspopup="true"                   
-                                     onClick={this.handleRemainderClick}>
+                                <IconButton
+                                    aria-label="more"
+                                    aria-controls="remainder-menu"
+                                    aria-haspopup="true"
+                                    onClick={this.handleRemainderClick}>
                                     <AddAlertIcon />
                                 </IconButton>
                                 <div><Menu
-                                  id="remainder-menu"
-                            anchorEl={this.state.anchorEl}
-                            open={Boolean(this.state.anchorEl)}
-                            onClose={this.handleCloseRemainder}>
-                            <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
-                            <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
-                            <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
-                            <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
-                        </Menu></div>
+                                    id="remainder-menu"
+                                    anchorEl={this.state.anchorEl}
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleCloseRemainder}>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
+                                </Menu></div>
                                 <IconButton>
                                     <PersonAddIcon />
                                 </IconButton>
@@ -177,7 +178,7 @@ closeCard = () => {
                                 <Button onClick={this.closeCard} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
-                        
+
                     </CardContent>
                 </Card></div>
         )

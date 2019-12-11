@@ -18,31 +18,28 @@ export async function register(req) {
       firstname: req.firstname,
       lastname: req.lastname
     }
-await servicesConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password).then((res)=>{
- console.log(JSON.stringify(res)+"sbdbjhasdjkas")  
-
-})
-  let response=  servicesConstant.firestore.collection('user').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(data)
-  console.log(JSON.stringify(response)+"response")  
-
-  const emitter = new EventEmitter();
+const details=await servicesConstant.firebaseAuthorization.createUserWithEmailAndPassword(req.email, data.password)
+ servicesConstant.firestore.collection('user').doc(details.user.uid).set(data)
+ const emitter = new EventEmitter();
     function emailVerification() {
       servicesConstant.firebaseAuthorization.currentUser.sendEmailVerification()
     }
     emitter.on('email verification', emailVerification);
-    emitter.emit('email verification');
-    return 'success';
+    const result=emitter.emit('email verification');
+    return result;
   }
   catch (error) {
     console.log(error)
     return error.message
   }
 }
-export async function login(req,cb){
+export async function login(req){
   try {
-    await servicesConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password)
-    var userData = servicesConstant.firestore.collection("user").doc(servicesConstant.firebaseAuthorization.currentUser.uid)
-    await userData.get().then(function (doc) {
+    let loginDetails = await servicesConstant.firebaseAuthorization.signInWithEmailAndPassword(req.email, req.password);
+   
+    let data = await servicesConstant.firestore.collection("user").doc(loginDetails.user.uid)
+   console.log(data)
+  await data.get().then(function (doc) {
       const payload = {
         email: servicesConstant.firebaseAuthorization.currentUser.email,
         firstname: doc.data().firstname,
@@ -52,12 +49,14 @@ export async function login(req,cb){
         expiresIn: 1440
       })
       localStorage.setItem('usertoken', token)
-      cb(null,"success")
+      //console.log(JSON.stringify(userData))
+     
     })
+    return loginDetails
   }
   catch (error) {
     console.log(error);
-    cb(error.message)
+    return error.message;
   }
 }
 /*
@@ -85,9 +84,9 @@ export async function logout(){
     console.log(err);
   }
 }
-export function CreateNote(notes) {
+export async function CreateNote(notes) {
   try {
-    servicesConstant.firestore.collection('notes').doc(servicesConstant.firebaseAuthorization.currentUser.uid).set(notes)
+   await servicesConstant.firestore.collection('notes').doc().set(notes)
     return 'success';
   }
   catch (error) {
