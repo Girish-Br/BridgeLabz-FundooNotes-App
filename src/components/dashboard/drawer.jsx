@@ -7,13 +7,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 class DrawerNav extends React.Component {
     render() {
         return (
-
             <div>
                 <Drawer
-                    className="drawer"
                     variant="persistent"
                     overflow="auto"
-                    open={this.props.drawerOpen}
+                    open={this.props.open}
                     width={250}
                 >
                     <List>

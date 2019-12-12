@@ -44,8 +44,7 @@ export default class DialogBox extends Component {
             })
         }
     }
-
-    closeDialogPopper (e) {
+closeDialogPopper (e) {
         this.props.closeEditBox(e);
     }
 

@@ -1,9 +1,8 @@
 import React from 'react'
 import DrawerNav from './drawer.jsx'
-import { Dialog, Input, Button, Chip, AppBar, Toolbar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import InputBase from '@material-ui/core/InputBase';
-import { Tooltip, MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import LongMenu from './dropDownMenu.jsx';
 const theme = createMuiTheme({
     overrides: {
@@ -71,25 +70,23 @@ class Appbar extends React.Component {
         return (
             <div className="root">
                 <MuiThemeProvider theme={theme}>
-                    <AppBar position="fixed" color="inherit">
+                    <AppBar color="inherit">
                         <Toolbar>
-                            <LongMenu />
-                            <div className="drawerButton">
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    edge="start"
-                                    onClick={this.handleDrawerToggle}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                            </div>
-                            <div className="fundoonote">
-                                <Typography variant="h6" className="fundoonote">
+                                <div className="drawerButton">
+                                    <IconButton
+                                        color="inherit"
+                                        aria-label="open drawer"
+                                        edge="start"
+                                        onClick={this.handleDrawerToggle}>
+                                        <MenuIcon />
+                                    </IconButton>
+                                </div>
+                                <div  className="fundoonote">
+                                <Typography variant="h6">
                                     Fundoonote
-                        </Typography>
-                            </div>
-                            <div className="searchbar">
+                                </Typography>
+                             </div>
+                               <div class="searchbar">
                                 <InputBase
                                     // id="searchInputBase"
                                     value={this.state.searchNote}
@@ -97,13 +94,15 @@ class Appbar extends React.Component {
                                     placeholder="Search"
                                     id="inputRoot"
                                 />
+                              </div>
+                              <div className="Avatar">
+                            <LongMenu />
                             </div>
                         </Toolbar>
-
-                        <DrawerNav open={this.state.drawerOpen} />
-
+                <DrawerNav open={this.state.drawerOpen} />
                     </AppBar>
                 </MuiThemeProvider>
+              
             </div>
         )
     }

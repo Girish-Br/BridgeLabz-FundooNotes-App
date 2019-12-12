@@ -44,13 +44,9 @@ class Dashboard extends React.Component {
     })
     return (
       <div className="dashboardMainDiv">
-        <div>
-          <Appbar />
-        </div>
+        <Appbar />
         <div className="content">
-          <main >
-            <CreateNote />
-          </main>
+          <CreateNote />
           {notesCard}
         </div>
       </div>

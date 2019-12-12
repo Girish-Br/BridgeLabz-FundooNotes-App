@@ -89,7 +89,7 @@ class CreateNoteDashboard extends React.Component {
                             <TextField
                                 multiline
                                 InputProps={{ disableUnderline: true }}
-                                placeholder="Take a note ...."
+                                placeholder="Note.."
                                 readOnly={true}
                                 onClick={this.cardOpen}
                                 className="text-area"

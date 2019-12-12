@@ -6,12 +6,12 @@
  *  @since          : 4-12-2019
  *****************************************************************************************/
 import React from 'react';
-import {withRouter } from "react-router-dom";
-import IconButton from '@material-ui/core/IconButton';
+import { withRouter } from "react-router-dom";
+import { Avatar } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {logout} from '../../controller/userController'
+import { logout } from '../../controller/userController'
 class LongMenu extends React.Component {
     constructor(props) {
         super(props)
@@ -26,10 +26,10 @@ class LongMenu extends React.Component {
     handleClose = () => {
         this.setState({ "anchorEl": null });
     };
-    onSignOutClick=()=>{
+    onSignOutClick = () => {
         logout();
         this.props.history.push("/login");
-      };
+    };
     options = [
         'Profile',
         'Settings',
@@ -38,16 +38,19 @@ class LongMenu extends React.Component {
     ITEM_HEIGHT = 50;
     render() {
         return (
-            <div>
-                <IconButton
+            <div className="profile">
+                {/* <IconButton
                     aria-label="more"
                     aria-controls="long-menu"
                     aria-haspopup="true"
                     class="dropdown"
-                    onClick={this.handleClick}
-                >
+                    onClick={this.handleClick}>
                     <MoreVertIcon />
-                </IconButton>
+                </IconButton> */}
+             <Avatar aria-label="more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+               onClick={this.handleClick}>G</Avatar>
                 <Menu
                     id="long-menu"
                     anchorEl={this.state.anchorEl}
@@ -59,8 +62,7 @@ class LongMenu extends React.Component {
                             maxHeight: this.ITEM_HEIGHT * 4.5,
                             width: 200,
                         },
-                    }}
-                >
+                    }}>
                     <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                     <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                     <MenuItem onClick={this.onSignOutClick}>Signout</MenuItem>
