@@ -53,12 +53,12 @@ class CreateNoteDashboard extends React.Component {
             title: this.state.title,
             description: this.state.description
         }
-        if (!(notes.title == null && notes.description == null)) {
+        if (!(notes.title ==='' && notes.description ==='')) {
             CreateNote(notes)
                 .then(res => {
                     if (res === 'success') {
                         this.setState({
-                            snackbarMsg: 'Notes added' + res,
+                            snackbarMsg: 'Notes added',
                             snackbarOpen: true
                         })
                     }
@@ -118,7 +118,7 @@ class CreateNoteDashboard extends React.Component {
                     </Card>
                 </div>
                 :
-                <div>   <Card className="create-note-card1" >
+                <div>  <Card className="create-note-card1" >
                     <CardContent disableSpacing>
                         <div>
                             <TextField

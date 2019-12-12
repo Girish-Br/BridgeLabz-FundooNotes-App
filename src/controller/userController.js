@@ -95,7 +95,7 @@ export async function CreateNote(notes) {
       user_id:servicesConstant.firebaseAuthorization.currentUser.uid
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
-    return ;
+    return 'success';
   }
   catch (error) {
     console.log(error)
