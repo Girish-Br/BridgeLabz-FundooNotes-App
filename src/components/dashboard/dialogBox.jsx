@@ -7,8 +7,16 @@
  *********************************************************************************/
 import React, { Component } from 'react'
 import Dialog from '@material-ui/core/Dialog';
-import { Button,InputBase } from '@material-ui/core';
+import { Button,InputBase,IconButton } from '@material-ui/core';
 import {noteUpdate} from '../../controller/userController'
+import ImageIcon from '@material-ui/icons/Image';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AddAlertIcon from '@material-ui/icons/AddAlert';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 class DailogBox extends Component {
     constructor(props) {
         super(props)
@@ -53,6 +61,38 @@ this.props.closeDialog()
                         />
                     </div>
                     <div>
+                    <IconButton
+                                    aria-label="more"
+                                    aria-controls="remainder-menu"
+                                    aria-haspopup="true"
+                                    onClick={this.handleRemainderClick}>
+                                    <AddAlertIcon />
+                                </IconButton>
+                                <Menu
+                                    id="remainder-menu"
+                                    anchorEl={this.state.anchorEl}
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleCloseRemainder}>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
+                                    <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
+                                </Menu>
+                                <IconButton>
+                                    <PersonAddIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ColorLensIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ImageIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <ArchiveIcon />
+                                </IconButton>
+                                <IconButton>
+                                    <MoreVertIcon />
+                                </IconButton>
                         <Button onClick={this.updateNote}>Update</Button>
                     </div>
                 </div>

@@ -44,16 +44,16 @@ class CreateNoteDashboard extends React.Component {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
     }
-    cardOpen=()=>{
-        this.setState({openCard:true})
+    cardOpen = () => {
+        this.setState({ openCard: true })
     }
     closeCard = () => {
-        this.setState({openCard:false})
+        this.setState({ openCard: false })
         const notes = {
             title: this.state.title,
             description: this.state.description
         }
-        if (!(notes.title ==='' && notes.description ==='')) {
+        if (!(notes.title === '' && notes.description === '')) {
             CreateNote(notes)
                 .then(res => {
                     if (res === 'success') {
@@ -85,17 +85,18 @@ class CreateNoteDashboard extends React.Component {
                             action={
                                 <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
                                 </IconButton>} />
-                        <CardContent>
-                            <TextField
-                                multiline
-                                InputProps={{ disableUnderline: true }}
-                                placeholder="Note.."
-                                readOnly={true}
-                                onClick={this.cardOpen}
-                                className="text-area"
-                                value=""
-                            >
-                            </TextField>
+
+                         <TextField
+                            multiline
+                            InputProps={{ disableUnderline: true }}
+                            placeholder="Note.."
+                            readOnly={true}
+                            onClick={this.cardOpen}
+                            className="text-area"
+                            value=""
+                        >
+                        </TextField>
+            
                             <Tooltip title="New List">
                                 <AddBoxIcon
                                     aria-label="New List"
@@ -114,7 +115,8 @@ class CreateNoteDashboard extends React.Component {
                                     className="create-note-card-icons"
                                 />
                             </Tooltip>
-                        </CardContent>
+            
+
                     </Card>
                 </div>
                 :

@@ -21,7 +21,7 @@ class GetCards extends React.Component {
         super(props)
         this.state = {
             noteOpen: false,
-            anchorEl:null
+            anchorEl: null
         }
         this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this)
     }
@@ -33,11 +33,14 @@ class GetCards extends React.Component {
             <div>
                 <Card className="addedNoteCards">
                     <div onClick={this.NoteOpenForEdit}>
-                        <div>{this.props.data.data().title}
+                        <div className="spaceBetweenContentsInCards">
+                            <Typography>{this.props.data.data().title}</Typography>
                         </div>
-                        <Typography variant="body2" component="q">
+                        <div><Typography>
                             {this.props.data.data().description}
-                        </Typography>
+                            </Typography>
+                        </div>
+                        <div>
                         <IconButton
                             aria-label="more"
                             aria-controls="remainder-menu"
@@ -45,7 +48,7 @@ class GetCards extends React.Component {
                             onClick={this.handleRemainderClick}>
                             <AddAlertIcon />
                         </IconButton>
-                        <div><Menu
+                        <Menu
                             id="remainder-menu"
                             anchorEl={this.state.anchorEl}
                             open={Boolean(this.state.anchorEl)}
@@ -54,7 +57,7 @@ class GetCards extends React.Component {
                             <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
                             <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
                             <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
-                        </Menu></div>
+                        </Menu>
                         <IconButton>
                             <PersonAddIcon />
                         </IconButton>
@@ -70,6 +73,7 @@ class GetCards extends React.Component {
                         <IconButton>
                             <MoreVertIcon />
                         </IconButton>
+                        </div>
                     </div>
                 </Card>
                 <DailogBox open={this.state.noteOpen} data={this.props.data} closeDialog={this.NoteOpenForEdit} />
