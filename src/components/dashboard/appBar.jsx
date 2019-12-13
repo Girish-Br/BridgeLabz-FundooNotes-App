@@ -1,5 +1,5 @@
 /********************************************************************************
- *  @Purpose        : to design appbar fro dashboard
+ *  @Purpose        : to design appbar for dashboard
  *  @file           : appBar.jsx    
  *  @author         : Girish B R
  *  @version        : v0.1

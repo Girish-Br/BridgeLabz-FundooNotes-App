@@ -1,5 +1,5 @@
 /********************************************************************************
- *  @Purpose        : to design dialog box fro dashboard
+ *  @Purpose        : to design dialog box for dashboard
  *  @file           :  dialogBox.jsx    
  *  @author         : Girish B R
  *  @version        : v0.1

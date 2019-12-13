@@ -107,7 +107,8 @@ class Login extends React.Component {
               action={
                 <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
                 </IconButton>} />
-            <form className="login">
+                <div className="login">
+            <form>
               <h3><u>Login Page</u></h3>
               <div clasName="textfieldLcard">
                 <TextField
@@ -150,6 +151,7 @@ class Login extends React.Component {
                 </div>
               </div>
             </form >
+            </div>
           </Card>
 
       </div>

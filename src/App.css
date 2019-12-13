@@ -14,6 +14,7 @@
 .login {
   margin-top: 50px;
   text-align: center;
+  align-content: center;
   color:#3f51b5;
 }
 .loginButton{

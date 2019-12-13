@@ -1,6 +1,6 @@
 /********************************************************************************
  *  @Purpose        : to design searchBar fro dashboard
- *  @file           :  searcgBar.jsx    
+ *  @file           :  searchBar.jsx    
  *  @author         : Girish B R
  *  @version        : v0.1
  *  @since          : 12-12-2019

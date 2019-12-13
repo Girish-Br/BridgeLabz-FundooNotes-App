@@ -61,8 +61,8 @@ class GetCards extends React.Component {
 }
     render() {
         return (
-            <div>
-                <Card className="addedNoteCards">
+            <div className="addedNoteCards">
+                <Card >
                 <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
                             open={this.state.snackbarOpen}
                             autoHideDuration={6000}
