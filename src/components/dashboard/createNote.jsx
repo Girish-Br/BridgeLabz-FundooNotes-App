@@ -72,6 +72,12 @@ class CreateNoteDashboard extends React.Component {
         }
 
     }
+    handleDeleteIcon = (e) => {
+        this.setState({ "deleteIcon": e.currentTarget });
+    }
+    handleCloseDeleteIcon = () => {
+        this.setState({ "deleteIcon": null });
+    }
     render() {
         return (
             !this.state.openCard ?
@@ -86,7 +92,7 @@ class CreateNoteDashboard extends React.Component {
                                 <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
                                 </IconButton>} />
 
-                         <TextField
+                        <TextField
                             multiline
                             InputProps={{ disableUnderline: true }}
                             placeholder="Note.."
@@ -96,26 +102,26 @@ class CreateNoteDashboard extends React.Component {
                             value=""
                         >
                         </TextField>
-            
-                            <Tooltip title="New List">
-                                <AddBoxIcon
-                                    aria-label="New List"
-                                    className="create-note-card-icons"
-                                />
-                            </Tooltip>
-                            <Tooltip title="New Note With Image">
-                                <BrushIcon
-                                    aria-label="Image"
-                                    className="create-note-card-icons"
-                                />
-                            </Tooltip>
-                            <Tooltip title="New Note with Draw">
-                                <ImageIcon
-                                    aria-label="Image"
-                                    className="create-note-card-icons"
-                                />
-                            </Tooltip>
-            
+
+                        <Tooltip title="New List">
+                            <AddBoxIcon
+                                aria-label="New List"
+                                className="create-note-card-icons"
+                            />
+                        </Tooltip>
+                        <Tooltip title="New Note With Image">
+                            <BrushIcon
+                                aria-label="Image"
+                                className="create-note-card-icons"
+                            />
+                        </Tooltip>
+                        <Tooltip title="New Note with Draw">
+                            <ImageIcon
+                                aria-label="Image"
+                                className="create-note-card-icons"
+                            />
+                        </Tooltip>
+
 
                     </Card>
                 </div>
@@ -179,9 +185,18 @@ class CreateNoteDashboard extends React.Component {
                                 <IconButton>
                                     <ArchiveIcon />
                                 </IconButton>
-                                <IconButton>
+                                <IconButton aria-label="more"
+                                    aria-controls="delete-menu"
+                                    aria-haspopup="true"
+                                    onClick={this.handleDeleteIcon}>
                                     <MoreVertIcon />
                                 </IconButton>
+                                <Menu
+                                    id="delete-menu"
+                                    anchorEl={this.state.deleteIcon}
+                                    open={Boolean(this.state.deleteIcon)}
+                                    onClose={this.handleCloseDeleteIcon}>Delete
+                                </Menu>
                                 <Button onClick={this.closeCard} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
