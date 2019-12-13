@@ -1,3 +1,10 @@
+/********************************************************************************
+ *  @Purpose        : to design appbar fro dashboard
+ *  @file           : appBar.jsx    
+ *  @author         : Girish B R
+ *  @version        : v0.1
+ *  @since          : 11-12-2019
+ *********************************************************************************/
 import React from 'react'
 import DrawerNav from './drawer.jsx'
 import { AppBar, Toolbar, IconButton, Typography, MuiThemeProvider, createMuiTheme } from '@material-ui/core';

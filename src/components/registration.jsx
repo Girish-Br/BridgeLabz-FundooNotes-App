@@ -116,9 +116,9 @@ handleSubmit = () => {
             <div className="rname">
               <h1><u>Registration</u></h1>
             </div>
-            <div>
               <TextField
                 id="firstName"
+                fullWidth
                 label="FirstName"
                 type="text"
                 margin="normal"
@@ -127,10 +127,9 @@ handleSubmit = () => {
                 value={this.state.firstName}
                 onChange={this.onChange}
               />
-            </div>
-            <div>
               <TextField
                 id="lastName"
+                fullWidth
                 label="lastName"
                 type="text"
                 name="lastName"
@@ -139,10 +138,9 @@ handleSubmit = () => {
                 value={this.state.lastName}
                 onChange={this.onChange}
               />
-            </div>
-            <div>
               <TextField
                 id="email"
+                fullWidth
                 label="Email"
                 type="email"
                 name="email"
@@ -152,10 +150,10 @@ handleSubmit = () => {
                 value={this.state.email}
                 onChange={this.onChange}
               />
-            </div>
-            <div>
+
               <TextField
                 id="password"
+                fullWidth
                 label="Password"
                 type="password"
                 name="password"
@@ -164,7 +162,6 @@ handleSubmit = () => {
                 value={this.state.password}
                 onChange={this.onChange}
               />
-            </div>
             <div className="rsbutton">
               <Button onClick={this.handleSubmit} variant="contained" color="primary">
                 submit

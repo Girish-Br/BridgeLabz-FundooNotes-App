@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 import GetCards from './getNote.jsx'
 import Appbar from './appBar.jsx'
 import CreateNote from './createNote';
-import { GetNote } from '../../controller/userController.js'
+import  {GetNote}  from '../../controller/userController'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
   render() {
     let notesCard = this.state.notes.map(item => {
       return (
-        <GetCards title={item.title} description={item.description} onClick={this.handleDialogBox} />
+        <GetCards data={item} />
       )
     })
     return (

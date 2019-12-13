@@ -102,7 +102,7 @@ export async function CreateNote(notes) {
     return error.message;
   }
 }
-export async function GetNote(){
+export  async function GetNote(){
   try{
     const token=localStorage.usertoken
     const decodedJwt=jwt_decode(token)
@@ -110,7 +110,7 @@ export async function GetNote(){
     await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id)
     .get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
-        notes.push(doc.data())
+        notes.push(doc)
       });
       })
 console.log(notes);
@@ -119,4 +119,17 @@ return(notes)
   catch(error){
     return error.message
   }
+}
+export async function noteUpdate(data){
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+    "title":data.title,
+    "description":data.description
+  })
+.then(res=>{
+  res=true;
+  return res
+})
+.catch(error=>{
+  return error.message
+})
 }

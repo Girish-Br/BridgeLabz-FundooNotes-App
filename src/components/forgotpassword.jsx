@@ -81,7 +81,7 @@ export default class ForgotPwd extends React.Component {
             <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
             </IconButton>} />
         <form>
-          <div className="fTextfield">
+          <div className="textFieldfcard">
             <TextField
               id="email"
               label="Email"
@@ -93,12 +93,11 @@ export default class ForgotPwd extends React.Component {
               value={this.state.email}
               onChange={this.onChangeEmail}
             />
-          </div>
-          <div className="fsButton">
+</div>
             <Button onClick={this.handleClick} variant="contained" style={{ color: "#212121", backgroundColor: "#9fa8da" }}>
               Submit
             </Button>
-          </div>
+
         </form >
       </Card>
     );

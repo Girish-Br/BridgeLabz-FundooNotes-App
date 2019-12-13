@@ -1,13 +1,14 @@
-body {
-  background-color: rgb(232, 232, 241);
-}
+
 .lcard {
   margin:auto;
   position: relative;
-  border: 2px solid rgb(184, 178, 218);
+  border: 2px solid rgb(176, 172, 197);
   align-items: center;
   margin-top: 68px;
   background-color: white;
+}
+.textfieldLcard{
+  margin-left: 200px;
 }
 .login {
   margin-top: 50px;
@@ -28,7 +29,6 @@ body {
 
 
 
-
 .register {
   margin-top: 100px;
   border-color: 20ch, black;
@@ -38,8 +38,8 @@ body {
   width: 300px;
   padding: 0;
   margin: auto;
-  border: 2px solid aliceblue;
-  text-align: center
+  border: 2px solid rgb(213, 211, 224);
+
 }
 .typo{
   color:white;
@@ -85,10 +85,13 @@ color:#3f51b5;
   margin: auto;
   color: blue;
   margin-top: 20px;
-  border: 2px solid rgb(176, 176, 196);
+  border: 2px solid rgb(176, 172, 197);
   align-items: center;
   text-align: center;
   width: 400px
+}
+.textFieldfcard{
+  margin-left: 100px;
 }
 .forgotpwd{
   background-color: #eeeff7;
@@ -121,9 +124,9 @@ color:#3f51b5;
   border-radius: 5px;
   margin-left: 10px;
 }
-.MuiInputBase-root {
+ .MuiInputBase-root {
   margin-right: 100px;
-}
+} 
 
 /* For mobile phones: */
 [className*=""] {
@@ -133,14 +136,19 @@ color:#3f51b5;
   width: 100%;
 }
 
-
+/* .create-note-card{
+border-style: inset;
+} */
+/* .create-note-card1{
+  border-style: groove;
+} */
 /* Large devices (laptops/desktops, 900px and up) */
 @media only screen and (min-width: 900px) {
   .lcard{
-    width: 500px;
+    width: 400px;
   }
   .fCard{
-    width: 400px;
+    width: 350px;
   }
   .rCard{
     width: 400px;
@@ -171,12 +179,14 @@ color:#3f51b5;
     }
     .searchbar{
 background-color: rgb(235, 229, 221);
+margin-right:100px;
     }
     .drawerButton{
       left: 0px;
     }
     .fundoonote{
-      width:200px;
+      width:50px;
+      margin-right: 100px;
     }
     .Avatar{
       margin-right: 100px;
@@ -214,9 +224,6 @@ background-color: rgb(235, 229, 221);
     .create-note-textarea{
       width:300px;
     }
-    /* .create-note-card-icons{
-      margin: 0px 8px 0px 8px;
-    } */
     .addedNoteCards{
       display: inline-block;
       margin:20px;
@@ -225,9 +232,11 @@ background-color: rgb(235, 229, 221);
     }
     .searchbar{
       background-color: antiquewhite;
+      margin-right: 100px;
           }
           .fundoonote{
-            width:200px;
+            width:50px;
+            margin-right: 100px;
           }
           .Avatar{
             margin-right: 100px;
@@ -236,5 +245,4 @@ background-color: rgb(235, 229, 221);
   .create-note-card-icons{
     margin: 0px 8px 0px 8px;
   }
-
 

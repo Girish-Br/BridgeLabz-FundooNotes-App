@@ -83,7 +83,7 @@ class Login extends React.Component {
   }
   //to display
   render() {
-    return (<div>
+    return( 
       <div className="loginComp">
         <AppBar color="primary" position="fixed" className="lAppbar">
           <Toolbar>
@@ -98,7 +98,6 @@ class Login extends React.Component {
     </Typography>
           </Toolbar>
         </AppBar>
-        <div>
           <Card class="lcard">
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
               open={this.state.snackbarOpen}
@@ -110,7 +109,7 @@ class Login extends React.Component {
                 </IconButton>} />
             <form className="login">
               <h3><u>Login Page</u></h3>
-              <div>
+              <div clasName="textfieldLcard">
                 <TextField
                   id="outlined-email-input"
                   label="Email"
@@ -122,8 +121,6 @@ class Login extends React.Component {
                   value={this.state.email}
                   onChange={this.onChange}
                 />
-              </div>
-              <div>
                 <TextField
                   required
                   id="outlined-pass-input"
@@ -153,9 +150,8 @@ class Login extends React.Component {
               </div>
             </form >
           </Card>
-        </div>
+
       </div>
-    </div>
     );
   }
 }

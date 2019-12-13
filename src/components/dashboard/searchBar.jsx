@@ -7,7 +7,6 @@
  *********************************************************************************/
 import React, { Component } from 'react';
 import { Card } from '@material-ui/core';
-import EditPin from '../components/editPin.jsx';
 import Tools from '../components/tools.jsx';
 export default class SearchedNotes extends Component {
     render() {

@@ -1,3 +1,10 @@
+/********************************************************************************
+ *  @Purpose        : to design drawer for dashboard
+ *  @file           : drawer.jsx    
+ *  @author         : Girish B R
+ *  @version        : v0.1
+ *  @since          : 8-12-2019
+ *********************************************************************************/
 import React from 'react'
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, } from '@material-ui/core';
 import NotesIcon from '@material-ui/icons/Notes';
