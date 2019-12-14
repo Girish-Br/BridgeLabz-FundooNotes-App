@@ -7,8 +7,9 @@
  *********************************************************************************/
 import React from 'react'
 import DrawerNav from './drawer.jsx'
-import { AppBar, Toolbar, IconButton, Typography, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, MuiThemeProvider, createMuiTheme, Tooltip } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import LongMenu from './dropDownMenu.jsx';
 const theme = createMuiTheme({
@@ -79,6 +80,7 @@ class Appbar extends React.Component {
                 <MuiThemeProvider theme={theme}>
                     <AppBar color="inherit">
                         <Toolbar>
+                            <div className="navFundooSearch">
                                 <div className="drawerButton">
                                     <IconButton
                                         color="inherit"
@@ -88,28 +90,37 @@ class Appbar extends React.Component {
                                         <MenuIcon />
                                     </IconButton>
                                 </div>
-                                <div  className="fundoonote">
-                                <Typography variant="h6">
-                                    Fundoonote
+                                <div className="fundoonote">
+                                    <Typography variant="h6">
+                                        Fundoonote
                                 </Typography>
-                             </div>
-                               <div class="searchbar">
-                                <InputBase
-                                    // id="searchInputBase"
-                                    value={this.state.searchNote}
-                                    onChange={this.handleSearchBar}
-                                    placeholder="Search"
-                                    id="inputRoot"
-                                />
-                              </div>
-                              <div className="Avatar">
-                            <LongMenu />
+                                </div>
+                                <div className="searchbar">
+                                    <div className="searchIconAppBar">
+                                        <Tooltip>
+                                            <SearchIcon />
+                                        </Tooltip>
+                                    </div>
+                                    <div className="inputBase">
+                                    <InputBase
+                                        // id="searchInputBase"
+                                        value={this.state.searchNote}
+                                        onChange={this.handleSearchBar}
+                                        placeholder="Search"
+                                        id="inputRoot"
+                                    >
+                                    </InputBase>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="Avatar">
+                                <LongMenu />
                             </div>
                         </Toolbar>
-                <DrawerNav open={this.state.drawerOpen} />
+                        <DrawerNav open={this.state.drawerOpen} />
                     </AppBar>
                 </MuiThemeProvider>
-              
+
             </div>
         )
     }

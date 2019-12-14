@@ -134,7 +134,7 @@ export async function noteUpdate(data){
 })
 }
 export default async function DeleteNote(data){
-await servicesConstant.firestore.collection("notes").doc(data.user_id).delete()
+await servicesConstant.firestore.collection("notes").doc(data.doc_id).delete()
 .then(res=>{
   res=true;
   return res

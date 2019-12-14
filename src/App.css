@@ -162,6 +162,10 @@ border-style: inset;
     .create-note-card{
       width:600px;
     }
+    .inputBase{
+      width: 650px;
+    padding-top: 8px;
+    }
     .create-note-card1{
       width:600px;
     }
@@ -179,14 +183,25 @@ border-style: inset;
     }
     .searchbar{
 background-color: rgb(235, 229, 221);
-margin-right:100px;
+margin-left: 60px;
+width: 700px;
+display: flex;
+justify-content: space-between;
+    }
+    .searchIconAppBar{
+      margin-top: 10px;
+      margin-left: 10px;
     }
     .drawerButton{
       left: 0px;
     }
+    .inputBase{
+      width: 650px;
+      padding-top: 8px;
+    }
     .fundoonote{
-      width:50px;
-      margin-right: 100px;
+      margin-left: 10px;
+      padding-top: 10px;
     }
     .Avatar{
       margin-right: 100px;
@@ -231,14 +246,21 @@ margin-right:100px;
     }
     .searchbar{
       background-color: antiquewhite;
-      margin-right: 100px;
+      margin-left: 60px;
+      width: 700px;
+      display: flex;
+      justify-content: space-between;
           }
-          .fundoonote{
-            width:50px;
-            margin-right: 100px;
+          .searchIconAppBar{
+            margin-top: 10px;
+            margin-left: 10px;
           }
           .Avatar{
             margin-right: 100px;
+          }
+          .fundoonote{
+            margin-left: 10px;
+            padding-top: 10px;
           }
   }
   .create-note-card-icons{
@@ -246,4 +268,8 @@ margin-right:100px;
   }
 .spaceBetweenContentsInCards{
   margin-top: 10px;
+}
+.navFundooSearch{
+  display: flex;
+  justify-content: space-between;
 }

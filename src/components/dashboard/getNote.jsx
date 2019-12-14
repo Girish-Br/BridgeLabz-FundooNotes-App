@@ -8,7 +8,7 @@
 import React from 'react';
 import DailogBox from './dialogBox.jsx'
 import Menu from '@material-ui/core/Menu';
-import { Card, IconButton, Button,Snackbar, Typography } from '@material-ui/core';
+import { Card, IconButton, Snackbar, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import deleteNote from '../../controller/userController.js'
 import ImageIcon from '@material-ui/icons/Image';
@@ -39,9 +39,12 @@ class GetCards extends React.Component {
     handleCloseDeleteIcon = () => {
         this.setState({ "deleteIcon": null });
     }
+    snackbarClose = () => {
+        this.setState({ snackbarOpen: false });
+    }
     handleDeleteNote = () => {
         const data =
-            { user_id: this.state.id }
+            { doc_id: this.state.id }
         deleteNote(data)
             .then(res => {
                 console.log(res)
@@ -57,20 +60,20 @@ class GetCards extends React.Component {
                         snackbarOpen: true
                     })
                 }
-    })
-}
+            })
+    }
     render() {
         return (
             <div className="addedNoteCards">
                 <Card >
-                <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
-                            open={this.state.snackbarOpen}
-                            autoHideDuration={6000}
-                            onClose={this.snackbarClose}
-                            message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-                            action={
-                                <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
-                                </IconButton>} />
+                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+                        open={this.state.snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={this.snackbarClose}
+                        message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+                        action={
+                            <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
+                            </IconButton>} />
 
                     <div onClick={this.NoteOpenForEdit}>
                         <div className="spaceBetweenContentsInCards">
@@ -122,7 +125,6 @@ class GetCards extends React.Component {
                         open={Boolean(this.state.deleteIcon)}
                         onClose={this.handleCloseDeleteIcon}><MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
                     </Menu>
-
                 </Card>
                 <DailogBox open={this.state.noteOpen} data={this.props.data} closeDialog={this.NoteOpenForEdit} />
             </div>

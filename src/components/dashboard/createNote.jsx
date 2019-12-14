@@ -185,18 +185,9 @@ class CreateNoteDashboard extends React.Component {
                                 <IconButton>
                                     <ArchiveIcon />
                                 </IconButton>
-                                <IconButton aria-label="more"
-                                    aria-controls="delete-menu"
-                                    aria-haspopup="true"
-                                    onClick={this.handleDeleteIcon}>
+                                <IconButton >
                                     <MoreVertIcon />
                                 </IconButton>
-                                <Menu
-                                    id="delete-menu"
-                                    anchorEl={this.state.deleteIcon}
-                                    open={Boolean(this.state.deleteIcon)}
-                                    onClose={this.handleCloseDeleteIcon}>Delete
-                                </Menu>
                                 <Button onClick={this.closeCard} class="closeButton">Close</Button>
                             </CardActions>
                         </div>
