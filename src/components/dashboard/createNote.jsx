@@ -81,7 +81,7 @@ class CreateNoteDashboard extends React.Component {
     render() {
         return (
             !this.state.openCard ?
-                <div>
+                <div className="firstCard">
                     <Card className="create-note-card">
                         <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
                             open={this.state.snackbarOpen}
@@ -121,8 +121,6 @@ class CreateNoteDashboard extends React.Component {
                                 className="create-note-card-icons"
                             />
                         </Tooltip>
-
-
                     </Card>
                 </div>
                 :

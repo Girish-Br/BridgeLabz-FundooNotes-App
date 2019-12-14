@@ -111,6 +111,7 @@ class Login extends React.Component {
             <form>
               <h3><u>Login Page</u></h3>
               <div clasName="textfieldLcard">
+                <div className="firsttxtField">
                 <TextField
                   id="outlined-email-input"
                   label="Email"
@@ -122,6 +123,8 @@ class Login extends React.Component {
                   value={this.state.email}
                   onChange={this.onChange}
                 />
+                </div>
+                  <div className="secondtxtField"> 
                 <TextField
                   required
                   id="outlined-pass-input"
@@ -134,6 +137,7 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.onChange}
                 />
+                </div>
               </div>
               <div className="loginButton">
                 <Button onClick={this.handleClick} fullwidth variant="contained" color="primary">

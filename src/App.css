@@ -181,6 +181,12 @@ border-style: inset;
       border-block-end-style: outset;
       mask-border: 5px;
     }
+    .firsttxtField{
+      margin-left: 85px;
+    }
+    .secondtxtField{
+      margin-left: 85px;
+    }
     .searchbar{
 background-color: rgb(235, 229, 221);
 margin-left: 60px;
@@ -229,6 +235,12 @@ justify-content: space-between;
     align-content: center;
     margin-left: 230px;
     }
+   .firsttxtField{
+     margin-left: 85px;
+   }
+   .secondtxtField{
+     margin-left: 85px;
+   }
     .create-note-card{
       width:600px;
     }
