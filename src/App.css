@@ -5,7 +5,7 @@
   margin:auto;
   position: relative;
   border: 2px solid rgb(176, 172, 197);
-  margin-top: 68px;
+  margin-top: 88px;
   background-color: white;
 }
 .MuiFormControl-marginNormal{
@@ -28,6 +28,12 @@
 .lfbutton{
   margin-top:15px;
 }
+.firsttxtField{
+  margin-left: 95px;
+}
+.secondtxtField{
+  margin-left: 95px;
+}
 
 
 
@@ -38,8 +44,9 @@
 }
 .rcard {
   width: 300px;
-  padding: 0;
   margin: auto;
+  margin-top: 50px;
+  padding: 0%;
   border: 2px solid rgb(213, 211, 224);
 
 }
@@ -59,10 +66,13 @@
 
 .rname{
 color:#3f51b5;
+margin-left: 55px;
 }
 .rlbutton{
-  margin-left:1px;
-  margin-top:20px;
+  margin-left: 38px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
 }
 .logout {
   margin-left: 200px;
@@ -70,6 +80,14 @@ color:#3f51b5;
 .lbutton{
   margin-left:400px;
   margin-top:5px;
+}
+.rsbutton{
+ margin-left: 105px;
+  margin-top: 20px;
+}
+.rtxtfield{
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 
@@ -91,6 +109,10 @@ color:#3f51b5;
   align-items: center;
   text-align: center;
   width: 400px
+}
+.fSubmitButton{
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .textFieldfcard{
   margin-left: 100px;
@@ -182,10 +204,10 @@ border-style: inset;
       mask-border: 5px;
     }
     .firsttxtField{
-      margin-left: 85px;
+      margin-left: 95px;
     }
     .secondtxtField{
-      margin-left: 85px;
+      margin-left: 95px;
     }
     .searchbar{
 background-color: rgb(235, 229, 221);

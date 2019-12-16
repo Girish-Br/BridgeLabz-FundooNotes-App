@@ -14,6 +14,7 @@
     "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "node-modules": "^1.0.1",
     "promise-events": "^0.1.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -49,5 +50,17 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-15": "^1.4.1",
     "enzyme-adapter-react-16": "^1.15.1"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Girish-Br/BridgeLabz-FundooNotes-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Girish-Br/BridgeLabz-FundooNotes-App/issues"
+  },
+  "homepage": "https://github.com/Girish-Br/BridgeLabz-FundooNotes-App#readme"
 }

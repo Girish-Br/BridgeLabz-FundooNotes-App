@@ -91,12 +91,10 @@ handleSubmit = () => {
   //to display
   render() {
     return (
-      <div>
-        <form className="register">
-          <Card className="rcard">
-            <Snackbar
+      <div className="rcard">
+         <Snackbar
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'center',
               }}
               open={this.state.snackbarOpen}
@@ -113,9 +111,12 @@ handleSubmit = () => {
                 </IconButton>
               ]}
             />
+          <Card >
+              <form >
             <div className="rname">
               <h1><u>Registration</u></h1>
             </div>
+            <div className="rtxtfield">
               <TextField
                 id="firstName"
                 fullWidth
@@ -162,6 +163,7 @@ handleSubmit = () => {
                 value={this.state.password}
                 onChange={this.onChange}
               />
+              </div>
             <div className="rsbutton">
               <Button onClick={this.handleSubmit} variant="contained" color="primary">
                 submit
@@ -170,8 +172,8 @@ handleSubmit = () => {
             <div className="rlbutton">
               <a href='/login'>Already have an account?Login</a>
             </div>
+            </form>
           </Card>
-        </form >
       </div>
     )
   }

@@ -51,13 +51,13 @@ class GetCards extends React.Component {
                 if (res) {
                     this.setState({
                         snackbarMsg: 'Note deleted',
-                        snackbarOpen: true
+                        snackbarOpen: false
                     })
                 }
                 else {
                     this.setState({
                         snackbarMsg: res,
-                        snackbarOpen: true
+                        snackbarOpen: false
                     })
                 }
             })
