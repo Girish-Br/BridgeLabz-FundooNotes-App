@@ -26,13 +26,6 @@
   margin-top:35px;
   margin-bottom: 20px;
 }
-.firsttxtField{
-  margin-top: 35px;
-  margin-left: 85px;
-}
-.secondtxtField{
-  margin-left: 85px;
-}
 .loginButton{
   width: 167px;
   color: rgb(173, 20, 20);
@@ -101,15 +94,11 @@ padding-left: 55px;
   border: 2px solid rgb(176, 172, 197);
   align-items: center;
   text-align: center;
-  width: 400px
 }
 .fSubmitButton{
   margin-top: 10px;
   margin-bottom: 20px;
   color: rgb(206, 206, 223);
-}
-.textFieldfcard{
-  margin-left: 100px;
 }
 .forgotpwd{
   background-color: #eeeff7;
@@ -134,11 +123,7 @@ padding-left: 55px;
 }
 @media only screen and (min-width: 992px) {
   .lcard {
-    margin:auto;
-    position: relative;
-    border: 2px solid rgb(176, 172, 197);
     margin-top: 88px;
-    background-color: white;
   }
   .login {
     text-align: center;
@@ -161,11 +146,7 @@ padding-left: 55px;
     margin-left: 340px;
   }
   .firsttxtField{
-    margin-left: 95px;
     margin-top: 35px;
-  }
-  .secondtxtField{
-    margin-left: 95px;
   }
   .loginButton{
     width: 167px;
@@ -175,15 +156,14 @@ padding-left: 55px;
     width: 420px;
   }
  
-  .lcard{
-    width: 400px;
-  }
+
   .fCard{
     width: 350px;
   }
   .rCard{
     width: 400px;
   }
+
  
 .register {
   margin-top: 100px;
@@ -271,12 +251,6 @@ background-color: rgb(206, 206, 223);
       margin:20px;
       mask-border: 5px;
     }
-    .firsttxtField{
-      margin-left: 95px;
-    }
-    .secondtxtField{
-      margin-left: 95px;
-    }
     .searchbar{
 background-color: rgb(235, 229, 221);
 margin-left: 60px;
@@ -339,15 +313,10 @@ justify-content: space-between;
     margin-left: 340px;
   }
   .firsttxtField{
-    margin-left: 95px;
     margin-top: 35px;
   }
-  .secondtxtField{
-    margin-left: 95px;
-  }
-  
-  .txtFieldWidth{
-    width: 420px;
+ .txtFieldWidth{
+    width: 320px;
   }
   .loginButton{
     width: 167px;

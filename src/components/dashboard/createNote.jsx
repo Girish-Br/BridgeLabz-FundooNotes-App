@@ -17,6 +17,7 @@ import {
   IconButton,
   Button
 } from "@material-ui/core";
+import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import ImageIcon from "@material-ui/icons/Image";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -36,6 +37,8 @@ class CreateNoteDashboard extends React.Component {
       title: "",
       description: "",
       anchorEl: null,
+      color:'',
+      anchorEl1: null,
       snackbarMsg: "",
       snackbarOpen: false
     };
@@ -60,7 +63,8 @@ class CreateNoteDashboard extends React.Component {
     this.setState({ openCard: false });
     const notes = {
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
+      color:this.state.color
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {
@@ -84,34 +88,40 @@ class CreateNoteDashboard extends React.Component {
   handleCloseDeleteIcon = () => {
     this.setState({ deleteIcon: null });
   };
+  closeColorMenu = e => {
+    this.setState({ anchorEl1: e.currentTarget });
+  };
+  colorChange = (e) => {
+    this.setState({ color:e.currentTarget.style.backgroundColor,anchorEl1:null });
+  };
   render() {
     return !this.state.openCard ? (
       <div>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            open={this.state.snackbarOpen}
-            autoHideDuration={6000}
-            onClose={this.snackbarClose}
-            message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-            action={
-              <IconButton
-                key="close"
-                arial-label="close"
-                color="inherit"
-                onClick={this.snackbarClose}
-              ></IconButton>
-            }
-          />       
-          <div className="paddingInCards">
-            <TextField
-              multiline
-              InputProps={{ disableUnderline: true }}
-              placeholder="Note.."
-              readOnly={true}
-              onClick={this.cardOpen}
-              className="text-area"
-              value=""
-            ></TextField>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          open={this.state.snackbarOpen}
+          autoHideDuration={6000}
+          onClose={this.snackbarClose}
+          message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+          action={
+            <IconButton
+              key="close"
+              arial-label="close"
+              color="inherit"
+              onClick={this.snackbarClose}
+            ></IconButton>
+          }
+        />
+        <div className="paddingInCards">
+          <TextField
+            multiline
+            InputProps={{ disableUnderline: true }}
+            placeholder="Note.."
+            readOnly={true}
+            onClick={this.cardOpen}
+            className="text-area"
+            value=""
+          ></TextField>
           <Tooltip title="New List">
             <AddBoxIcon
               aria-label="New List"
@@ -124,87 +134,126 @@ class CreateNoteDashboard extends React.Component {
           <Tooltip title="New Note with Draw">
             <ImageIcon aria-label="Image" className="create-note-card-icons" />
           </Tooltip>
-          </div>
-             </div>
+        </div>
+      </div>
     ) : (
-      <div>
+      <div style={{backgroundColor:this.state.color}}>
         {" "}
-            <div  className="paddingInCards">
-              <TextField
-                multiline
-                InputProps={{ disableUnderline: true }}
-                placeholder="Title..."
-                name="title"
-                value={this.state.title}
-                onChange={this.onChange}
-           
-              
-              ></TextField>
-              <IconButton>
-                <PinDropIcon />
-              </IconButton>
-            </div>
-            <div >
-              <TextField
-                multiline
-                InputProps={{ disableUnderline: true }}
-                placeholder="Take a Note"
-                name="description"
-                value={this.state.description}
-                onChange={this.onChange}
-              ></TextField>
-            </div>
+        <div className="paddingInCards">
+          <TextField
+            multiline
+            InputProps={{ disableUnderline: true }}
+            placeholder="Title..."
+            name="title"
+            value={this.state.title}
+            onChange={this.onChange}
+          ></TextField>
+          <IconButton>
+            <PinDropIcon />
+          </IconButton>
+        </div>
+        <div>
+          <TextField
+            multiline
+            InputProps={{ disableUnderline: true }}
+            placeholder="Take a Note"
+            name="description"
+            value={this.state.description}
+            onChange={this.onChange}
+          ></TextField>
+        </div>
+        <div>
+          <CardActions disableSpacing>
+            <IconButton
+              aria-label="more"
+              aria-controls="remainder-menu"
+              aria-haspopup="true"
+              onClick={this.handleRemainderClick}
+            >
+              <AddAlertIcon />
+            </IconButton>
             <div>
-              <CardActions disableSpacing>
-                <IconButton
-                  aria-label="more"
-                  aria-controls="remainder-menu"
-                  aria-haspopup="true"
-                  onClick={this.handleRemainderClick}
-                >
-                  <AddAlertIcon />
-                </IconButton>
-                <div>
-                  <Menu
-                    id="remainder-menu"
-                    anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}
-                    onClose={this.handleCloseRemainder}
-                  >
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Remainder :
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Later today
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Tommorrow
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Next week
-                    </MenuItem>
-                  </Menu>
-                </div>
-                <IconButton>
-                  <PersonAddIcon />
-                </IconButton>
-                <IconButton>
-                  <ColorLensIcon />
-                </IconButton>
-                <IconButton>
-                  <ImageIcon />
-                </IconButton>
-                <IconButton>
-                  <ArchiveIcon />
-                </IconButton>
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
-                <Button onClick={this.closeCard} class="closeButton">
-                  Close
-                </Button>
-              </CardActions>
+              <Menu
+                id="remainder-menu"
+                anchorEl={this.state.anchorEl}
+                open={Boolean(this.state.anchorEl)}
+                onClose={this.handleCloseRemainder}
+              >
+                <MenuItem onClick={this.handleCloseRemainder}>
+                  Remainder :
+                </MenuItem>
+                <MenuItem onClick={this.handleCloseRemainder}>
+                  Later today
+                </MenuItem>
+                <MenuItem onClick={this.handleCloseRemainder}>
+                  Tommorrow
+                </MenuItem>
+                <MenuItem onClick={this.handleCloseRemainder}>
+                  Next week
+                </MenuItem>
+              </Menu>
             </div>
+            <IconButton>
+              <PersonAddIcon />
+            </IconButton>
+            <IconButton
+              aria-label="more"
+              aria-controls="color-menu"
+              aria-haspopup="true"
+              onClick={this.closeColorMenu}
+            >
+              <ColorLensIcon />
+            </IconButton>
+            <Menu
+              id="color-menu"
+              anchorEl={this.state.anchorEl1}
+              keepMounted
+              open={Boolean(this.state.anchorEl1)}
+              onClose={this.closeColorMenu}
+            >
+              <div>
+                <IconButton>
+                  <RadioButtonUncheckedRoundedIcon
+                    style={{ backgroundColor: "#f28b82" }}
+                    onClick={this.colorChange}
+                  />
+                </IconButton>
+                <IconButton>
+                  <RadioButtonUncheckedRoundedIcon
+                    style={{ backgroundColor: "#cbf0f8" }}
+                    onClick={this.colorChange}
+                  />
+                </IconButton>
+              </div>
+              <div>
+                <IconButton>
+                  <RadioButtonUncheckedRoundedIcon
+                    style={{ backgroundColor: "#a7ffeb" }}
+                    onClick={this.colorChange}
+                  />
+                </IconButton>
+                <IconButton>
+                  <RadioButtonUncheckedRoundedIcon
+                    style={{ backgroundColor: "#fdcfe8" }}
+                    onClick={this.colorChange}
+                  />
+                </IconButton>
+              </div>
+            </Menu>
+            <IconButton>
+              <ImageIcon />
+            </IconButton>
+            <IconButton>
+              <ArchiveIcon />
+            </IconButton>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+            <Button onClick={this.closeCard} class="closeButton">
+              Close
+            </Button>
+          </CardActions>
+        </div>
       </div>
     );
   }

@@ -92,6 +92,7 @@ export async function CreateNote(notes) {
     const Notesdetails={
       title:notes.title,
       description:notes.description,
+      color:notes.color,
       user_id:servicesConstant.firebaseAuthorization.currentUser.uid
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)

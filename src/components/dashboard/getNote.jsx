@@ -73,7 +73,7 @@ class GetCards extends React.Component {
                         action={
                             <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
                             </IconButton>} />
-                <Card className="cardshadow">
+                <Card className="cardshadow" style={{backgroundColor:this.props.data.data().color}}>
                     <div >
                     <div onClick={this.NoteOpenForEdit}>
                         <div className="paddingInCards">
