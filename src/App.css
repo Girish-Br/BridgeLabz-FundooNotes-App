@@ -125,60 +125,6 @@ padding-left: 55px;
 
 
 
-/* Dasboard css*/
-.dashboardMainDiv{
-  display: flex;
-}
- .drawerPaper{
-  width: 240px;
-}
-/* dashboard css end*/
-.dropdown{
-  position: absolute;
-  bottom: 17px;
-}
-.lAppbar{
-  align-items: center;
-}
-.content{
-  margin-top:80px;
-}
-.searchbar{
-  background-color: rgb(238, 233, 226);
-  border-radius: 5px;
-}
- .MuiInputBase-root {
-  margin-right: 100px;
-} 
-.fundoonote{
-  margin-left: 5px;
-  padding-top: 10px;
-}
-.searchbar{
-  background-color: rgb(235, 229, 221);
-  display: flex;
-  justify-content: space-between;
-  width: fit-content;
-      }
-      .searchIconAppBar{
-        margin-top: 10px;
-      }
-      .inputBase{
-        padding-top: 8px;
-        width: 50%;
-      }
-       .drawerButton{
-        left: 0px;
-        width: fit-content;
-      }
-      .Avatar{
-        margin-right: 5px;
-      }
-  .cardshadow{
-
-  }
-
-
 /* For mobile phones: */
 [className*=""] {
   width: 100%;
@@ -291,21 +237,25 @@ background-color: rgb(206, 206, 223);
   margin-left: 20px;
   margin-right: 20px;
 }
-
+.navFundooSearch{
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+}
   .content{
     align-content: center;
-    margin-left: 330px;
+    padding-left: 230px;
     }
    
     .create-note-card{
       width:500px;
       padding: 5px;
-      margin-left: 20px;
+      margin-left: 25px;
     }
-    .inputBase{
-      width: 650px;
-    padding-top: 8px;
-    }
+   .inputbasediv{
+      width: 600px;
+
+  }
     .create-note-card1{
       width:600px;
       box-shadow: 0px 5px 3px;
@@ -350,7 +300,7 @@ justify-content: space-between;
       padding-top: 10px;
     }
     .Avatar{
-      margin-right: 100px;
+      padding-right: 85px;
     }
     .text-area{
       margin-left: 5px;
@@ -471,7 +421,7 @@ background-color: rgb(206, 206, 223);
 
   .content{
     align-content: center;
-    margin-left: 230px;
+    margin-left: 80px;
     }
     .create-note-card{
       width:500px;
@@ -497,9 +447,7 @@ background-color: rgb(206, 206, 223);
             margin-top: 10px;
             margin-left: 10px;
           }
-          .Avatar{
-            margin-right: 100px;
-          }
+      
           .fundoonote{
             margin-left: 10px;
             padding-top: 10px;
@@ -517,13 +465,67 @@ background-color: rgb(206, 206, 223);
 .navFundooSearch{
   display: flex;
   justify-content: space-between;
+  width: 700px;
 }
 .paddingInCards{
   padding: 10px;
 }
-.cardshadow{
-  box-shadow: 0px 3px 5px;
-}
 .MuiCard-root {
   box-shadow: 0px 3px 5px;
 }
+.create-note-card{
+  box-shadow: 0px 3px 5px;
+}
+.paddingInCards1{
+  padding-left: 10px;
+}
+.closeDiv{
+  margin-left: 120px;
+}
+
+/* Dasboard css*/
+.dashboardMainDiv{
+  display: flex;
+}
+/* dashboard css end*/
+.dropdown{
+  position: absolute;
+  bottom: 17px;
+}
+.lAppbar{
+  align-items: center;
+}
+.content{
+  margin-top:80px;
+  align-content: center;
+}
+.searchbar{
+  background-color: rgb(238, 233, 226);
+  border-radius: 5px;
+}
+
+.fundoonote{
+  margin-left: 5px;
+  padding-top: 10px;
+}
+.searchbar{
+  background-color: rgb(235, 229, 221);
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+      }
+      .searchIconAppBar{
+        margin-top: 10px;
+      }
+      .inputBase{
+        padding-top: 8px;
+        width: 50%;
+      }
+       .drawerButton{
+        left: 0px;
+        width: fit-content;
+      }
+      .Avatar{
+        margin-right: 5px;
+      }
+

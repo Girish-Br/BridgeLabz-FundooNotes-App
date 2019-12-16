@@ -101,8 +101,7 @@ class CreateNoteDashboard extends React.Component {
                 onClick={this.snackbarClose}
               ></IconButton>
             }
-          />
-        <Card className="cardshadow">         
+          />       
           <div className="paddingInCards">
             <TextField
               multiline
@@ -126,14 +125,11 @@ class CreateNoteDashboard extends React.Component {
             <ImageIcon aria-label="Image" className="create-note-card-icons" />
           </Tooltip>
           </div>
-        </Card>
              </div>
     ) : (
       <div>
         {" "}
-        <Card className="create-note-card1">
-          <CardContent disableSpacing>
-            <div>
+            <div  className="paddingInCards">
               <TextField
                 multiline
                 InputProps={{ disableUnderline: true }}
@@ -141,12 +137,14 @@ class CreateNoteDashboard extends React.Component {
                 name="title"
                 value={this.state.title}
                 onChange={this.onChange}
+           
+              
               ></TextField>
               <IconButton>
                 <PinDropIcon />
               </IconButton>
             </div>
-            <div>
+            <div >
               <TextField
                 multiline
                 InputProps={{ disableUnderline: true }}
@@ -207,8 +205,6 @@ class CreateNoteDashboard extends React.Component {
                 </Button>
               </CardActions>
             </div>
-          </CardContent>
-        </Card>
       </div>
     );
   }

@@ -49,7 +49,9 @@ class Dashboard extends React.Component {
           <div  className="create-note-card">
           <CreateNote />
           </div>
+          <div>
           {notesCard}
+        </div>
         </div>
       </div>
     )
