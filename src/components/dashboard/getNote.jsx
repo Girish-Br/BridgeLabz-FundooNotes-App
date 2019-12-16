@@ -93,13 +93,13 @@ class GetCards extends React.Component {
                     </IconButton>
                     <Menu
                         id="remainder-menu"
-                        anchorEl={this.state.anchorEl}
-                        open={Boolean(this.state.anchorEl)}
-                        onClose={this.handleCloseRemainder}>
-                        <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
-                        <MenuItem onClick={this.handleCloseRemainder}>Later today</MenuItem>
-                        <MenuItem onClick={this.handleCloseRemainder}>Tommorrow</MenuItem>
-                        <MenuItem onClick={this.handleCloseRemainder}>Next week</MenuItem>
+                        anchorEl={this.props.anchorEl}
+                        open={Boolean(this.props.anchorEl)}
+                        onClose={this.props.handleCloseRemainder}>
+                        <MenuItem onClick={this.props.handleCloseRemainder}>Remainder :</MenuItem>
+                        <MenuItem onClick={this.props.handleCloseRemainder}>Later today</MenuItem>
+                        <MenuItem onClick={this.props.handleCloseRemainder}>Tommorrow</MenuItem>
+                        <MenuItem onClick={this.props.handleCloseRemainder}>Next week</MenuItem>
                     </Menu>
                     <IconButton>
                         <PersonAddIcon />

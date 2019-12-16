@@ -452,11 +452,8 @@ background-color: rgb(206, 206, 223);
   margin-left: 120px;
 }
 
-/* Dasboard css*/
-.dashboardMainDiv{
-  display: flex;
-}
-/* dashboard css end*/
+
+
 .dropdown{
   position: absolute;
   bottom: 17px;
