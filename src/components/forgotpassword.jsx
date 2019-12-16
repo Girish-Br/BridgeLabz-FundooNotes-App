@@ -113,7 +113,7 @@ export default class ForgotPwd extends React.Component {
           <Button
             onClick={this.handleClick}
             variant="contained"
-            style={{ color: "#212121", backgroundColor: "#9fa8da" }}
+            style={{ color: "#212121", backgroundColor: " rgb(206, 206, 223)" }}
           >
             Submit
           </Button>

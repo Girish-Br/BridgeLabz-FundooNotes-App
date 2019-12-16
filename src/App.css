@@ -3,21 +3,18 @@
 }
 .lcard {
   margin:auto;
-  position: relative;
   border: 2px solid rgb(176, 172, 197);
   margin-top: 88px;
   background-color: white;
 }
-.MuiFormControl-marginNormal{
-  margin-left: 100px;
-}
 .login {
-  margin-top: 50px;
   text-align: center;
   align-content: center;
   color:#3f51b5;
+  padding-top: 5px;
+  padding-bottom:5px;
 }
-.loginButton{
+.loginButtondiv{
   margin-top: 15px;
  color:#3f51b5 ;
  }
@@ -25,15 +22,22 @@
   margin-top:25px;
 }
 
-.lfbutton{
-  margin-top:15px;
+.lfbuttondiv{
+  margin-top:35px;
+  margin-bottom: 20px;
 }
 .firsttxtField{
-  margin-left: 95px;
+  margin-top: 35px;
+  margin-left: 85px;
 }
 .secondtxtField{
-  margin-left: 95px;
+  margin-left: 85px;
 }
+.loginButton{
+  width: 167px;
+  color: rgb(173, 20, 20);
+}
+
 
 
 
@@ -43,7 +47,6 @@
   text-align: center
 }
 .rcard {
-  width: 300px;
   margin: auto;
   margin-top: 50px;
   padding: 0%;
@@ -53,37 +56,27 @@
 .typo{
   color:white;
   background-color: #3f51b5;
-
 }
 .button {
   display: flex;
   justify-content: space-between;
-  margin-right: 460px;
-  margin-left: 460px;
   padding-top: 4;
   margin-top: 12px;
 }
 
 .rname{
 color:#3f51b5;
-margin-left: 55px;
+background-color: rgb(206, 206, 223);
+padding-left: 55px;
 }
 .rlbutton{
-  margin-left: 38px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-
-}
-.logout {
-  margin-left: 200px;
-}
-.lbutton{
-  margin-left:400px;
-  margin-top:5px;
+  margin-bottom: 20px;
+ padding-top: 20px;
+ margin-left: 55px;
 }
 .rsbutton{
- margin-left: 105px;
   margin-top: 20px;
+  margin-left: 130px;
 }
 .rtxtfield{
   margin-left: 20px;
@@ -113,6 +106,7 @@ margin-left: 55px;
 .fSubmitButton{
   margin-top: 10px;
   margin-bottom: 20px;
+  color: rgb(206, 206, 223);
 }
 .textFieldfcard{
   margin-left: 100px;
@@ -121,9 +115,16 @@ margin-left: 55px;
   background-color: #eeeff7;
 }
 .fsButton{
-  color: #3f51b5;
+  color: rgb(206, 206, 223);
   margin-bottom: 10px;
 }
+.inputbasediv{
+  width: fit-content;
+}
+
+
+
+
 /* Dasboard css*/
 .dashboardMainDiv{
   display: flex;
@@ -145,11 +146,38 @@ margin-left: 55px;
 .searchbar{
   background-color: rgb(238, 233, 226);
   border-radius: 5px;
-  margin-left: 10px;
 }
  .MuiInputBase-root {
   margin-right: 100px;
 } 
+.fundoonote{
+  margin-left: 5px;
+  padding-top: 10px;
+}
+.searchbar{
+  background-color: rgb(235, 229, 221);
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+      }
+      .searchIconAppBar{
+        margin-top: 10px;
+      }
+      .inputBase{
+        padding-top: 8px;
+        width: 50%;
+      }
+       .drawerButton{
+        left: 0px;
+        width: fit-content;
+      }
+      .Avatar{
+        margin-right: 5px;
+      }
+  .cardshadow{
+
+  }
+
 
 /* For mobile phones: */
 [className*=""] {
@@ -158,15 +186,49 @@ margin-left: 55px;
 [class*=""]{
   width: 100%;
 }
-
-/* .create-note-card{
-border-style: inset;
-} */
-/* .create-note-card1{
-  border-style: groove;
-} */
-/* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .lcard {
+    margin:auto;
+    position: relative;
+    border: 2px solid rgb(176, 172, 197);
+    margin-top: 88px;
+    background-color: white;
+  }
+  .login {
+    text-align: center;
+    align-content: center;
+    color:#3f51b5;
+    padding-top: 5px;
+    padding-bottom:5px;
+  }
+  .loginButtondiv{
+    margin-top: 15px;
+   color:#3f51b5 ;
+   }
+  .cbutton {
+    margin-top:25px;
+  }
+  
+  .lfbuttondiv{
+    margin-top:35px;
+    margin-bottom: 20px;
+    margin-left: 340px;
+  }
+  .firsttxtField{
+    margin-left: 95px;
+    margin-top: 35px;
+  }
+  .secondtxtField{
+    margin-left: 95px;
+  }
+  .loginButton{
+    width: 167px;
+    color: rgb(173, 20, 20);
+  }
+  .txtFieldWidth{
+    width: 420px;
+  }
+ 
   .lcard{
     width: 400px;
   }
@@ -176,13 +238,69 @@ border-style: inset;
   .rCard{
     width: 400px;
   }
+ 
+.register {
+  margin-top: 100px;
+  border-color: 20ch, black;
+  text-align: center
+}
+.rcard {
+  margin: auto;
+  margin-top: 50px;
+  padding: 0%;
+  border: 2px solid rgb(213, 211, 224);
+
+}
+.text-area{
+  padding-left: 5px;
+}
+.typo{
+  color:white;
+  background-color: #3f51b5;
+
+}
+.button {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4;
+  margin-top: 12px;
+}
+
+.rname{
+color:#3f51b5;
+padding-left: 83px;
+background-color: rgb(206, 206, 223);
+}
+.rlbutton{
+  margin-bottom: 20px;
+ padding-top: 20px;
+ padding-left: 80px;
+}
+.logout {
+  margin-left: 200px;
+}
+.lbutton{
+  margin-left:400px;
+  margin-top:5px;
+}
+.rsbutton{
+ margin-left: 150px;
+  margin-top: 20px;
+}
+.rtxtfield{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
   .content{
     align-content: center;
     margin-left: 330px;
     }
    
     .create-note-card{
-      width:600px;
+      width:500px;
+      padding: 5px;
+      margin-left: 20px;
     }
     .inputBase{
       width: 650px;
@@ -190,6 +308,7 @@ border-style: inset;
     }
     .create-note-card1{
       width:600px;
+      box-shadow: 0px 5px 3px;
     }
     .create-note-textarea{
       width:300px;
@@ -200,7 +319,6 @@ border-style: inset;
     .addedNoteCards{
       display: inline-block;
       margin:20px;
-      border-block-end-style: outset;
       mask-border: 5px;
     }
     .firsttxtField{
@@ -234,49 +352,139 @@ justify-content: space-between;
     .Avatar{
       margin-right: 100px;
     }
+    .text-area{
+      margin-left: 5px;
+    }
 }
 .create-note-card-icons{
   margin: 0px 8px 0px 8px;
 } 
+.cardshadow{
+  justify-content: space-between;
+}
 /* .root{
   display: "flex";
   flex-wrap: wrap;
 } */
 /* For tablets: */
 @media only screen and (min-width: 600px) {
+  .login {
+    text-align: center;
+    align-content: center;
+    color:#3f51b5;
+    padding-top: 5px;
+    padding-bottom:5px;
+  }
+  .loginButtondiv{
+    margin-top: 15px;
+   color:#3f51b5 ;
+   }
+  .cbutton {
+    margin-top:25px;
+  }
+  
+  .lfbuttondiv{
+    margin-top:35px;
+    margin-bottom: 20px;
+    margin-left: 340px;
+  }
+  .firsttxtField{
+    margin-left: 95px;
+    margin-top: 35px;
+  }
+  .secondtxtField{
+    margin-left: 95px;
+  }
+  
+  .txtFieldWidth{
+    width: 420px;
+  }
+  .loginButton{
+    width: 167px;
+    color: rgb(173, 20, 20);
+  }
   .lcard{
     width: 500px;
+    margin:auto;
+    position: relative;
+    border: 2px solid rgb(176, 172, 197);
+    margin-top: 88px;
+    background-color: white;
   }
+  .rCard{
+    width: 400px;
+  }
+  
+.register {
+  margin-top: 100px;
+  border-color: 20ch, black;
+  text-align: center
+}
+.rcard {
+  margin: auto;
+  margin-top: 50px;
+  padding: 0%;
+  border: 2px solid rgb(213, 211, 224);
+width: 400px;
+}
+.typo{
+  color:white;
+  background-color: #3f51b5;
+
+}
+.button {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4;
+  margin-top: 12px;
+}
+
+.rname{
+color:#3f51b5;
+padding-left: 83px;
+background-color: rgb(206, 206, 223);
+}
+.rlbutton{
+  margin-bottom: 20px;
+ padding-top: 20px;
+ padding-left: 32px;
+}
+.logout {
+  margin-left: 200px;
+}
+.lbutton{
+  margin-left:400px;
+  margin-top:5px;
+}
+.rsbutton{
+ margin-left: 150px;
+  margin-top: 20px;
+}
+.rtxtfield{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
   .fCard{
     width: 400px;
   }
-  .rCard{
-    width: 300px;
-  }
+
   .content{
     align-content: center;
     margin-left: 230px;
     }
-   .firsttxtField{
-     margin-left: 85px;
-   }
-   .secondtxtField{
-     margin-left: 85px;
-   }
     .create-note-card{
-      width:600px;
+      width:500px;
     }
     .create-note-card1{
       width:600px;
+      box-shadow: 0px 5px 3px;
     }
     .create-note-textarea{
       width:300px;
     }
     .addedNoteCards{
-      display: inline-block;
-      margin:20px;
-      border-block-end-style: outset;
-      mask-border: 5px;
+      padding: 5px;
     }
     .searchbar{
       background-color: antiquewhite;
@@ -296,6 +504,9 @@ justify-content: space-between;
             margin-left: 10px;
             padding-top: 10px;
           }
+          .text-area{
+            margin-left: 5px;
+          }
   }
   .create-note-card-icons{
     margin: 0px 8px 0px 8px;
@@ -306,4 +517,13 @@ justify-content: space-between;
 .navFundooSearch{
   display: flex;
   justify-content: space-between;
+}
+.paddingInCards{
+  padding: 10px;
+}
+.cardshadow{
+  box-shadow: 0px 3px 5px;
+}
+.MuiCard-root {
+  box-shadow: 0px 3px 5px;
 }

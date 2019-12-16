@@ -64,9 +64,8 @@ class GetCards extends React.Component {
     }
     render() {
         return (
-            <div className="addedNoteCards">
-                <Card >
-                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+            <div className="addedNoteCards" >
+                <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
                         open={this.state.snackbarOpen}
                         autoHideDuration={6000}
                         onClose={this.snackbarClose}
@@ -74,12 +73,13 @@ class GetCards extends React.Component {
                         action={
                             <IconButton key="close" arial-label="close" color="inherit" onClick={this.snackbarClose}>
                             </IconButton>} />
-
+                <Card className="cardshadow">
+                    <div >
                     <div onClick={this.NoteOpenForEdit}>
-                        <div className="spaceBetweenContentsInCards">
+                        <div className="paddingInCards">
                             <Typography>{this.props.data.data().title}</Typography>
                         </div>
-                        <div><Typography>
+                        <div className="paddingInCards"><Typography>
                             {this.props.data.data().description}
                         </Typography>
                         </div>
@@ -125,6 +125,7 @@ class GetCards extends React.Component {
                         open={Boolean(this.state.deleteIcon)}
                         onClose={this.handleCloseDeleteIcon}><MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
                     </Menu>
+                    </div>
                 </Card>
                 <DailogBox open={this.state.noteOpen} data={this.props.data} closeDialog={this.NoteOpenForEdit} />
             </div>

@@ -101,13 +101,14 @@ class Appbar extends React.Component {
                                             <SearchIcon />
                                         </Tooltip>
                                     </div>
-                                    <div className="inputBase">
+                                    <div className="inputbasediv">
                                     <InputBase
                                         // id="searchInputBase"
                                         value={this.state.searchNote}
                                         onChange={this.handleSearchBar}
                                         placeholder="Search"
                                         id="inputRoot"
+                                        className="inputBase"
                                     >
                                     </InputBase>
                                     </div>
@@ -120,7 +121,6 @@ class Appbar extends React.Component {
                         <DrawerNav open={this.state.drawerOpen} />
                     </AppBar>
                 </MuiThemeProvider>
-
             </div>
         )
     }

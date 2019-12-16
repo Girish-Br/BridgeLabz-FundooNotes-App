@@ -46,7 +46,9 @@ class Dashboard extends React.Component {
       <div className="dashboardMainDiv">
         <Appbar />
         <div className="content">
+          <div  className="create-note-card">
           <CreateNote />
+          </div>
           {notesCard}
         </div>
       </div>

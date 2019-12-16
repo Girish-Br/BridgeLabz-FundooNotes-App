@@ -114,7 +114,7 @@ handleSubmit = () => {
           <Card >
               <form >
             <div className="rname">
-              <h1><u>Registration</u></h1>
+              <h1>REGISTRATION</h1>
             </div>
             <div className="rtxtfield">
               <TextField
@@ -170,7 +170,7 @@ handleSubmit = () => {
             </Button>
             </div>
             <div className="rlbutton">
-              <a href='/login'>Already have an account?Login</a>
+              <a href='/login'>Already have an account?  Login</a>
             </div>
             </form>
           </Card>
