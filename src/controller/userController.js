@@ -93,6 +93,8 @@ export async function CreateNote(notes) {
       title:notes.title,
       description:notes.description,
       color:notes.color,
+      archive:notes.archive,
+      pin:notes.pin,
       user_id:servicesConstant.firebaseAuthorization.currentUser.uid
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
@@ -108,7 +110,25 @@ export  async function GetNote(){
     const token=localStorage.usertoken
     const decodedJwt=jwt_decode(token)
     var notes=[];
-    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id)
+    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("pin","==",false).where("archive","==",false)
+    .get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        notes.push(doc)
+      });
+      })
+console.log(notes);
+return(notes)
+  }
+  catch(error){
+    return error.message
+  }
+}
+export  async function GetNoteForNotPinned(){
+  try{
+    const token=localStorage.usertoken
+    const decodedJwt=jwt_decode(token)
+    var notes=[];
+    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("archive","==",false).where("pin","==",true)
     .get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
         notes.push(doc)
@@ -122,10 +142,16 @@ return(notes)
   }
 }
 export async function noteUpdate(data){
+  console.log()
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
     "title":data.title,
-    "description":data.description
-  })
+    "description":data.description,
+    "id":data.id,
+    "color":data.color,
+    "archive":data.archive,
+    "pin":data.pin
+    
+ })
 .then(res=>{
   res=true;
   return res
@@ -142,5 +168,23 @@ await servicesConstant.firestore.collection("notes").doc(data.doc_id).delete()
 })
 .catch(error=>{
 return error.message
+})
+}
+export async function archiveData(data){
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+   "archieve":true
+}).then(res=>{
+ return res
+}).catch(error=>{
+ return error.message
+})
+}
+export async function notePinned(data){
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+   "pinned":data.pinned
+}).then(res=>{
+ return res
+}).catch(error=>{
+ return error.message
 })
 }

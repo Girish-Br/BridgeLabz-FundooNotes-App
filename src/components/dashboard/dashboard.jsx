@@ -8,20 +8,26 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
 import GetCards from './getNote.jsx'
+import {Tooltip,CardActions} from '@material-ui/core'
 import Appbar from './appBar.jsx'
 import CreateNote from './createNote';
-import  {GetNote}  from '../../controller/userController'
+import  {GetNote,GetNoteForNotPinned}  from '../../controller/userController'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       notes: [],
+      pinnedNotes:[],
       dialogBox: false
     }
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
 
   componentDidMount() {
+    GetNoteForNotPinned().then(res => {
+      this.setState({ pinnedNotes: res })
+      console.log(res)
+    })
     GetNote().then(res => {
       this.setState({ notes: res })
       console.log(res)
@@ -37,6 +43,9 @@ class Dashboard extends React.Component {
     await this.setState({ description: evt.target.value })
   }
   render() {
+    let notesCardPinned=this.state.pinnedNotes.map(item=>{
+      return(<GetCards data={item}/>)
+    })
     let notesCard = this.state.notes.map(item => {
       return (
         <GetCards data={item} />
@@ -46,10 +55,15 @@ class Dashboard extends React.Component {
       <div className="dashboardMainDiv">
         <Appbar />
         <div className="content">
-          <div  className="create-note-card">
+          <div>
           <CreateNote />
           </div>
+          <div className="PINNED">
+            <p>PINNED:</p>
+            {notesCardPinned}
+          </div>
           <div>
+            <p>OTHER NOTES:</p>
           {notesCard}
         </div>
         </div>

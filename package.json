@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "svgr": "svgr -d src/icons/ assets/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@svgr/cli": "^4.3.3",
     "babel-eslint": "^10.0.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-15": "^1.4.1",
