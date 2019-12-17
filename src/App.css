@@ -258,6 +258,9 @@ width: 700px;
 display: flex;
 justify-content: space-between;
     }
+    .refreshIcon{
+      margin-left: 70px;
+    }
     .gridIcon{
       margin-left: 75px;
     }
@@ -535,6 +538,10 @@ margin-left: 20px;
      .gridIcon{
           display: flex;
           align-items: center;
+      }
+      .cardsHover{
+        min-width: 300px;
+        min-height: 50px;
       }
     
 

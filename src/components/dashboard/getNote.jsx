@@ -30,7 +30,8 @@ class GetCards extends React.Component {
       id: this.props.data.id,
       pinned: this.props.data.data().pinned,
       snackbarMsg: "",
-      snackbarOpen: false
+      snackbarOpen: false,
+      iconDisplay:false
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
@@ -78,9 +79,73 @@ class GetCards extends React.Component {
     };
     notePinned(data);
   };
+  handleMouseOver=()=>{
+      this.setState({iconDisplay:true})
+  }
+  handleMouseClose=()=>{
+      this.setState({iconDisplay:false})
+  }
   render() {
-    return (
-      <div className="addedNoteCards">
+    let iconsContent = !this.state.iconDisplay ?<div className="cardsHover"/>:
+    <div className="cardsHover">
+    <IconButton
+    aria-label="more"
+    aria-controls="remainder-menu"
+    aria-haspopup="true"
+    onClick={this.props.handleRemainderClick}
+  >
+    <AddAlertIcon />
+  </IconButton>
+  <Menu
+    id="remainder-menu"
+    anchorEl={this.props.anchorEl}
+    open={Boolean(this.props.anchorEl)}
+    onClose={this.props.handleCloseRemainder}
+  >
+    <MenuItem onClick={this.props.handleCloseRemainder}>
+      Remainder :
+    </MenuItem>
+    <MenuItem onClick={this.props.handleCloseRemainder}>
+      Later today
+    </MenuItem>
+    <MenuItem onClick={this.props.handleCloseRemainder}>
+      Tommorrow
+    </MenuItem>
+    <MenuItem onClick={this.props.handleCloseRemainder}>
+      Next week
+    </MenuItem>
+  </Menu>
+  <IconButton>
+    <PersonAddIcon />
+  </IconButton>
+  <IconButton>
+    <ColorLensIcon />
+  </IconButton>
+  <IconButton>
+    <ImageIcon />
+  </IconButton>
+  <IconButton>
+    <ArchiveIcon />
+  </IconButton>
+  <IconButton
+    aria-label="more"
+    aria-controls="delete-menu"
+    aria-haspopup="true"
+    onClick={this.handleDeleteIcon}
+  >
+    <MoreVertIcon />
+  </IconButton>
+  <Menu
+    id="delete-menu"
+    anchorEl={this.state.deleteIcon}
+    open={Boolean(this.state.deleteIcon)}
+    onClose={this.handleCloseDeleteIcon}
+  >
+    <MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
+  </Menu>
+  </div>
+  return ( 
+      <div className="addedNoteCards" onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseClose}>
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={this.state.snackbarOpen}
@@ -109,61 +174,7 @@ class GetCards extends React.Component {
                 <Typography>{this.props.data.data().description}</Typography>
               </div>
             </div>
-            <IconButton
-              aria-label="more"
-              aria-controls="remainder-menu"
-              aria-haspopup="true"
-              onClick={this.props.handleRemainderClick}
-            >
-              <AddAlertIcon />
-            </IconButton>
-            <Menu
-              id="remainder-menu"
-              anchorEl={this.props.anchorEl}
-              open={Boolean(this.props.anchorEl)}
-              onClose={this.props.handleCloseRemainder}
-            >
-              <MenuItem onClick={this.props.handleCloseRemainder}>
-                Remainder :
-              </MenuItem>
-              <MenuItem onClick={this.props.handleCloseRemainder}>
-                Later today
-              </MenuItem>
-              <MenuItem onClick={this.props.handleCloseRemainder}>
-                Tommorrow
-              </MenuItem>
-              <MenuItem onClick={this.props.handleCloseRemainder}>
-                Next week
-              </MenuItem>
-            </Menu>
-            <IconButton>
-              <PersonAddIcon />
-            </IconButton>
-            <IconButton>
-              <ColorLensIcon />
-            </IconButton>
-            <IconButton>
-              <ImageIcon />
-            </IconButton>
-            <IconButton>
-              <ArchiveIcon />
-            </IconButton>
-            <IconButton
-              aria-label="more"
-              aria-controls="delete-menu"
-              aria-haspopup="true"
-              onClick={this.handleDeleteIcon}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id="delete-menu"
-              anchorEl={this.state.deleteIcon}
-              open={Boolean(this.state.deleteIcon)}
-              onClose={this.handleCloseDeleteIcon}
-            >
-              <MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
-            </Menu>
+            {iconsContent}
           </div>
         </Card>
         <DailogBox

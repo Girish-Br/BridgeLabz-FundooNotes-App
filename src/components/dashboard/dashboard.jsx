@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
             <p>PINNED:</p>
             {notesCardPinned}
           </div>
-          <div>
+          <div className="PINNED">
             <p>OTHER NOTES:</p>
           {notesCard}
         </div>
