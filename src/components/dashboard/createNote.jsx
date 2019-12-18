@@ -254,6 +254,12 @@ class CreateNoteDashboard extends React.Component {
                   <MenuItem onClick={this.handleCloseRemainder}>
                     Next week
                   </MenuItem>
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Select Date and Time
+                  </MenuItem>
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Select Place
+                  </MenuItem>
                 </Menu>
               </div>
               <IconButton>

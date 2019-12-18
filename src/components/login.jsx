@@ -168,23 +168,23 @@ class Login extends React.Component {
               <div className="loginButtondiv">
                 <Button
                   onClick={this.handleClick}
-                  fullwidth
                   variant="contained"
                   color="primary"
-                  className="loginButton"
                 >
                   Login
                 </Button>
               </div>
+              <div className="createAndForgot">
               <div className="cbutton">
-                <Button
+                <a href
                   onClick={this.handleRegisterClick}
                   fullwidth
                   variant="contained"
                   color="primary"
                 >
                   Create Account
-                </Button>
+                </a>
+                </div>
                 <div className="lfbuttondiv">
                   <a
                     href

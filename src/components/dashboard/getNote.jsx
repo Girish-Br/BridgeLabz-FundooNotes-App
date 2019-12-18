@@ -28,6 +28,7 @@ class GetCards extends React.Component {
       anchorEl: null,
       deleteIcon: null,
       id: this.props.data.id,
+      anchorEl: null,
       pinned: this.props.data.data().pinned,
       snackbarMsg: "",
       snackbarOpen: false,
@@ -46,6 +47,12 @@ class GetCards extends React.Component {
   };
   snackbarClose = () => {
     this.setState({ snackbarOpen: false });
+  };
+  handleRemainderClick = e => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+  handleCloseRemainder = () => {
+    this.setState({ anchorEl: null });
   };
   handleDeleteNote = () => {
     this.setState({ deleteIcon: null });
@@ -100,26 +107,26 @@ class GetCards extends React.Component {
           aria-label="more"
           aria-controls="remainder-menu"
           aria-haspopup="true"
-          onClick={this.props.handleRemainderClick}
+          onClick={this.handleRemainderClick}
         >
           <AddAlertIcon />
         </IconButton>
         <Menu
           id="remainder-menu"
-          anchorEl={this.props.anchorEl}
-          open={Boolean(this.props.anchorEl)}
-          onClose={this.props.handleCloseRemainder}
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleCloseRemainder}
         >
-          <MenuItem onClick={this.props.handleCloseRemainder}>
+          <MenuItem onClick={this.handleCloseRemainder}>
             Remainder :
           </MenuItem>
-          <MenuItem onClick={this.props.handleCloseRemainder}>
+          <MenuItem onClick={this.handleCloseRemainder}>
             Later today
           </MenuItem>
-          <MenuItem onClick={this.props.handleCloseRemainder}>
+          <MenuItem onClick={this.handleCloseRemainder}>
             Tommorrow
           </MenuItem>
-          <MenuItem onClick={this.props.handleCloseRemainder}>
+          <MenuItem onClick={this.handleCloseRemainder}>
             Next week
           </MenuItem>
         </Menu>
@@ -186,9 +193,6 @@ class GetCards extends React.Component {
                     <b>{this.props.data.data().title}</b>
                   </Typography>
                 </div>
-                <div className="heightSvg">
-        <IconButton>{svg}</IconButton>
-        </div>
               </div>
               <div className="paddingInCards">
                 <Typography className="descIn">

@@ -35,9 +35,17 @@ class DailogBox extends Component {
       id: this.props.data.id,
       archive:this.props.data.data().archive,
       color:this.props.data.data().color,
-      pin:this.props.data.data().pin
+      pin:this.props.data.data().pin,
+      color: "",
+      anchorEl:null
     };
   }
+  handleRemainderClick = e => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+  handleCloseRemainder = () => {
+    this.setState({ anchorEl: null });
+  };
   updateNote = () => {
     const noteData = {
       title: this.state.title,

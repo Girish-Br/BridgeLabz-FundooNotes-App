@@ -64,10 +64,10 @@ class Dashboard extends React.Component {
           <CreateNote />
           </div>
           <div >
-            <div>
+            <div className>
             <p  className="pinned">PINNED:</p>
             </div>
-            <div style={{display:listStyle.display,width:listStyle.width}}>
+            <div style={{display:listStyle.display,width:listStyle.width}} className="pinnedCards">
             {notesCardPinned}
             </div>
           </div>
@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
           <div>
             <p className="others" >OTHER NOTES:</p>
             </div>
-            <div style={{display:listStyle.display,width:listStyle.width}}>
+            <div style={{display:listStyle.display,width:listStyle.width}} className="otherCards">
           {notesCard}
           </div>
         </div>

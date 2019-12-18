@@ -25,13 +25,14 @@
   margin-top:25px;
 }
 
-.lfbuttondiv{
-  margin-top:35px;
+/* .lfbuttondiv{
+   margin-top:35px;
   margin-bottom: 20px;
-}
-.loginButton{
-  width: 167px;
-  color: rgb(173, 20, 20);
+} */
+.createAndForgot{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -152,9 +153,9 @@ padding-left: 55px;
   }
   
   .lfbuttondiv{
-    margin-top:35px;
-    margin-bottom: 20px;
-    margin-left: 340px;
+   margin-top:25px;
+    /*margin-bottom: 20px;
+    margin-left: 340px; */
   }
   .firsttxtField{
     margin-top: 35px;
@@ -327,9 +328,9 @@ justify-content: space-between;
   }
   
   .lfbuttondiv{
-    margin-top:35px;
-    margin-bottom: 20px;
-    margin-left: 340px;
+     margin-top:25px;
+    /* margin-bottom: 20px;
+    margin-left: 340px;  */
   }
   .firsttxtField{
     margin-top: 35px;
@@ -557,6 +558,7 @@ margin-left: 20px;
       .addedNoteCards{
         box-shadow: 1px 1px 5px -1px;
         margin: 20px;
+        min-width: 315px;
       }
       .cards{
         display: flex;
@@ -577,4 +579,12 @@ margin-left: 20px;
        height: fit-content;
        size: 10px;
      }
+     .pinnedCards{
+       flex-direction: row;
+       flex-wrap: wrap;
+     }
+     .otherCards{
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
 
