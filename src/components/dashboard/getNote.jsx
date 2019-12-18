@@ -8,9 +8,10 @@
 import React from "react";
 import DailogBox from "./dialogBox.jsx";
 import Menu from "@material-ui/core/Menu";
-import { Card, IconButton, Snackbar, Typography } from "@material-ui/core";
+import { Card, IconButton, Snackbar, Typography,Tooltip } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import { archiveData, notePinned } from "../../controller/userController.js";
+import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import DeleteNote from "../../controller/userController.js";
 import ImageIcon from "@material-ui/icons/Image";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
@@ -28,7 +29,8 @@ class GetCards extends React.Component {
       anchorEl: null,
       deleteIcon: null,
       id: this.props.data.id,
-      anchorEl: null,
+      color: "",
+      anchorEl1: null,
       pinned: this.props.data.data().pinned,
       snackbarMsg: "",
       snackbarOpen: false,
@@ -36,6 +38,15 @@ class GetCards extends React.Component {
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
+  closeColorMenu = e => {
+    this.setState({ anchorEl1: e.currentTarget });
+  };
+  colorChange = e => {
+    this.setState({
+      color: e.currentTarget.style.backgroundColor,
+      anchorEl1: null
+    });
+  };
   NoteOpenForEdit = () => {
     this.setState({ noteOpen: !this.state.noteOpen });
   };
@@ -133,9 +144,66 @@ class GetCards extends React.Component {
         <IconButton>
           <PersonAddIcon />
         </IconButton>
-        <IconButton>
-          <ColorLensIcon />
-        </IconButton>
+        <IconButton
+                aria-label="more"
+                aria-controls="color-menu"
+                aria-haspopup="true"
+                onClick={this.closeColorMenu}
+              >
+                <Tooltip title="Add Color">
+                  <ColorLensIcon />
+                </Tooltip>
+              </IconButton>
+              <Menu
+                id="color-menu"
+                anchorEl={this.state.anchorEl1}
+                keepMounted
+                open={Boolean(this.state.anchorEl1)}
+                onClose={this.closeColorMenu}
+              >
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#f28b82" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#cbf0f8" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#faebd7" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#6B8E23" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#4BB8C0" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#3BDEDE" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+              </Menu>
         <IconButton>
           <ImageIcon />
         </IconButton>
@@ -161,11 +229,8 @@ class GetCards extends React.Component {
       </div>
     );
     return (
-      <div
-        className="addedNoteCards"
-        onMouseOver={this.handleMouseOver}
-        onMouseLeave={this.handleMouseClose}
-      >
+      <div className="addedNoteCards" onMouseOver={this.handleMouseOver}  onMouseLeave={this.handleMouseClose} style={{ backgroundColor: this.state.color }}
+ >
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={this.state.snackbarOpen}

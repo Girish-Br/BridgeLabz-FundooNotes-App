@@ -14,11 +14,11 @@ import {
   CardActions,
   Tooltip
 } from "@material-ui/core";
-import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import { noteUpdate } from "../../controller/userController";
 import SvgPin from "../../icons/pin.js";
 import SvgPinned from "../../icons/pinned.js";
 import ImageIcon from "@material-ui/icons/Image";
+import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
@@ -36,10 +36,18 @@ class DailogBox extends Component {
       archive:this.props.data.data().archive,
       color:this.props.data.data().color,
       pin:this.props.data.data().pin,
-      color: "",
       anchorEl:null
     };
   }
+  closeColorMenu = e => {
+    this.setState({ anchorEl1: e.currentTarget });
+  };
+  colorChange = e => {
+    this.setState({
+      color: e.currentTarget.style.backgroundColor,
+      anchorEl1: null
+    });
+  };
   handleRemainderClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
@@ -128,51 +136,65 @@ pinTheNote=()=>{
                   </Tooltip>
                 </IconButton>
                 <IconButton
-                  aria-label="more"
-                  aria-controls="color-menu"
-                  aria-haspopup="true"
-                  onClick={this.closeColorMenu}
-                >
-                  <Tooltip title="Add Color">
-                    <ColorLensIcon />
-                  </Tooltip>
-                </IconButton>
-                <Menu
-                  id="color-menu"
-                  anchorEl={this.state.anchorEl1}
-                  keepMounted
-                  open={Boolean(this.state.anchorEl1)}
-                  onClose={this.closeColorMenu}
-                >
-                  <div>
-                    <IconButton>
-                      <RadioButtonUncheckedRoundedIcon
-                        style={{ backgroundColor: "#f28b82" }}
-                        onClick={this.colorChange}
-                      />
-                    </IconButton>
-                    <IconButton>
-                      <RadioButtonUncheckedRoundedIcon
-                        style={{ backgroundColor: "#cbf0f8" }}
-                        onClick={this.colorChange}
-                      />
-                    </IconButton>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <RadioButtonUncheckedRoundedIcon
-                        style={{ backgroundColor: "#faebd7" }}
-                        onClick={this.colorChange}
-                      />
-                    </IconButton>
-                    <IconButton>
-                      <RadioButtonUncheckedRoundedIcon
-                        style={{ backgroundColor: "#fdcfe8" }}
-                        onClick={this.colorChange}
-                      />
-                    </IconButton>
-                  </div>
-                </Menu>
+                aria-label="more"
+                aria-controls="color-menu"
+                aria-haspopup="true"
+                onClick={this.closeColorMenu}
+              >
+                <Tooltip title="Add Color">
+                  <ColorLensIcon />
+                </Tooltip>
+              </IconButton>
+              <Menu
+                id="color-menu"
+                anchorEl={this.state.anchorEl1}
+                keepMounted
+                open={Boolean(this.state.anchorEl1)}
+                onClose={this.closeColorMenu}
+              >
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#f28b82" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#cbf0f8" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#faebd7" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#6B8E23" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+                <div>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#4BB8C0" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                  <IconButton>
+                    <RadioButtonUncheckedRoundedIcon
+                      style={{ backgroundColor: "#3BDEDE" }}
+                      onClick={this.colorChange}
+                    />
+                  </IconButton>
+                </div>
+              </Menu>
                 <IconButton>
                   <Tooltip title="Add Image">
                     <ImageIcon />

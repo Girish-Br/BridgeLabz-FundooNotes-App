@@ -44,6 +44,7 @@ class CreateNoteDashboard extends React.Component {
       archive: false,
       snackbarMsg: "",
       snackbarOpen: false,
+      remainder:"",
       pin: false
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
@@ -144,6 +145,15 @@ class CreateNoteDashboard extends React.Component {
       anchorEl1: null
     });
   };
+  handleSetTodayTime=()=>{
+    this.setState({remainder:Date(Date.now()).toString()})
+  }
+  handleSetTommoTime=()=>{
+    this.setState({remainder:})
+  }
+  handleSetNextTime=()=>{
+    this.setState({remainder:})
+  }
   render() {
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
     return !this.state.openCard ? (
@@ -198,7 +208,7 @@ class CreateNoteDashboard extends React.Component {
         </div>
       </div>
     ) : (
-      <div  className="create-note-card">
+      <div  className="create-note-card" style={{ backgroundColor: this.state.color }}>
         <div className="paddingInCards">
           <TextField
             multiline
@@ -245,13 +255,13 @@ class CreateNoteDashboard extends React.Component {
                   <MenuItem onClick={this.handleCloseRemainder}>
                     Remainder :
                   </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Later today
+                  <MenuItem onClick={this.handleSetTodayTime}>
+                  <div>  Later today</div>
                   </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
+                  <MenuItem onClick={this.handleSetTommoTime}>
                     Tommorrow
                   </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
+                  <MenuItem onClick={this.handleSetNextTime}>
                     Next week
                   </MenuItem>
                   <MenuItem onClick={this.handleCloseRemainder}>
