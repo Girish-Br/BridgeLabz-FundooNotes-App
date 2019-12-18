@@ -146,13 +146,16 @@ class CreateNoteDashboard extends React.Component {
     });
   };
   handleSetTodayTime=()=>{
-    this.setState({remainder:Date(Date.now()).toString()})
+    this.setState({remainder:"today,8:00pm"})
+.then(res=>{
+  
+})   
   }
   handleSetTommoTime=()=>{
-    this.setState({remainder:})
+    this.setState({remainder:"tommorrow,8:00pm"})
   }
-  handleSetNextTime=()=>{
-    this.setState({remainder:})
+  handleSetNextWeekTime=()=>{
+    this.setState({remainder:(Date(Date.now()).toString())})
   }
   render() {
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
@@ -232,6 +235,7 @@ class CreateNoteDashboard extends React.Component {
             onChange={this.onChange}
           ></TextField>
         </div>
+        <div>{this.state.remainder}</div>
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
@@ -261,7 +265,7 @@ class CreateNoteDashboard extends React.Component {
                   <MenuItem onClick={this.handleSetTommoTime}>
                     Tommorrow
                   </MenuItem>
-                  <MenuItem onClick={this.handleSetNextTime}>
+                  <MenuItem onClick={this.handleSetNextWeekTime}>
                     Next week
                   </MenuItem>
                   <MenuItem onClick={this.handleCloseRemainder}>
