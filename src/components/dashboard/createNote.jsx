@@ -29,6 +29,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SvgPin from "../../icons/pin.js";
+import  {GetNote,GetNoteForNotPinned}  from '../../controller/userController'
 import SvgPinned from "../../icons/pinned.js";
 class CreateNoteDashboard extends React.Component {
   constructor(props) {
@@ -88,6 +89,7 @@ class CreateNoteDashboard extends React.Component {
             snackbarOpen: true
           });
         }
+
       });
     }
   };

@@ -114,7 +114,7 @@ handleSubmit = () => {
           <Card >
               <form >
             <div className="rname">
-              <h1>REGISTRATION</h1>
+              <p className="registrationName">REGISTRATION</p>
             </div>
             <div className="rtxtfield">
               <TextField

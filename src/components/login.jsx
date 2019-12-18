@@ -103,9 +103,9 @@ class Login extends React.Component {
                 color="inherit"
                 aria-label="menu"
               ></IconButton>
-                <h3  variant="h6" color="inherit" className="typo">
+                <p  variant="h6" color="inherit" className="typo">
                 WELCOME TO FUNDOO-NOTES
-                </h3>
+                </p>
             </Toolbar>
           </AppBar>
         </div>
@@ -129,11 +129,11 @@ class Login extends React.Component {
           <div className="login">
             <form>
               <div>
-                <h4>
+                <p className="loginName">
                   <u>
                 LOGIN PAGE
                 </u>
-                </h4>
+                </p>
               </div>
               <div>
                 <div className="firsttxtField">

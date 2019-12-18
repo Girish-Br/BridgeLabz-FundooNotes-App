@@ -78,8 +78,7 @@ class Appbar extends React.Component {
     this.state = {
       drawerOpen: false,
       notes: [],
-      dialogBox: false,
-      gridView: false
+      dialogBox: false
     };
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
@@ -87,7 +86,7 @@ class Appbar extends React.Component {
     this.setState({ drawerOpen: !this.state.drawerOpen });
   };
   handleGrid = () => {
-    this.setState({ gridView: !this.state.gridView });
+    this.props.displayList();
   };
   render() {
     return (
@@ -132,7 +131,9 @@ class Appbar extends React.Component {
                   </IconButton>
                 </div>
                 <div className="gridIcon">
-                  <Grid />
+                  <IconButton onClick={this.handleGrid}>
+                    <Grid />
+                  </IconButton>
                 </div>
                 <div className="settingsIcon">
                   <IconButton>

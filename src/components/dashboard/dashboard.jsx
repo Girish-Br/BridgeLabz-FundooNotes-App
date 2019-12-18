@@ -18,7 +18,8 @@ class Dashboard extends React.Component {
     this.state = {
       notes: [],
       pinnedNotes:[],
-      dialogBox: false
+      dialogBox: false,
+      displayList:false
     }
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
@@ -36,13 +37,17 @@ class Dashboard extends React.Component {
   handleDialogBox() {
     this.setState({ dialogBox: true })
   }
-  async handleTitleClick(evt) {
-    await this.setState({ title: evt.target.value })
+   handleTitleClick(evt) {
+   this.setState({ title: evt.target.value })
   }
-  async handleDescClick(evt) {
-    await this.setState({ description: evt.target.value })
+   handleDescClick(evt) {
+    this.setState({ description: evt.target.value })
+  }
+  displayListView=()=>{
+    this.setState({displayList: !this.state.displayList})
   }
   render() {
+    let listStyle=!this.state.displayList?({display:"flex",width:"100%"}) : ({display:"block",width:"60%"}) 
     let notesCardPinned=this.state.pinnedNotes.map(item=>{
       return(<GetCards data={item}/>)
     })
@@ -53,18 +58,26 @@ class Dashboard extends React.Component {
     })
     return (
       <div className="dashboardMainDiv">
-        <Appbar />
+        <Appbar view={this.state.displayList} displayList={this.displayListView}/>
         <div className="content">
           <div>
           <CreateNote />
           </div>
-          <div className="PINNED">
-            <p>PINNED:</p>
+          <div >
+            <div>
+            <p  className="pinned">PINNED:</p>
+            </div>
+            <div style={{display:listStyle.display,width:listStyle.width}}>
             {notesCardPinned}
+            </div>
           </div>
-          <div className="PINNED">
-            <p>OTHER NOTES:</p>
+          <div >
+          <div>
+            <p className="others" >OTHER NOTES:</p>
+            </div>
+            <div style={{display:listStyle.display,width:listStyle.width}}>
           {notesCard}
+          </div>
         </div>
         </div>
       </div>

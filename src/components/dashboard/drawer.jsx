@@ -26,6 +26,7 @@ class DrawerNav extends React.Component {
                             <ListItemIcon><NotesIcon /></ListItemIcon>
                             <ListItemText primary="Note" />
                         </ListItem>
+                        <Divider/>
                         <ListItem button key="Reminder">
                             <ListItemIcon><AddAlertIcon /></ListItemIcon>
                             <ListItemText primary="Reminder" />

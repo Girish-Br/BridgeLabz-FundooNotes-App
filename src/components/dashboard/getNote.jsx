@@ -31,7 +31,7 @@ class GetCards extends React.Component {
       pinned: this.props.data.data().pinned,
       snackbarMsg: "",
       snackbarOpen: false,
-      iconDisplay:false
+      iconDisplay: false
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
@@ -48,7 +48,7 @@ class GetCards extends React.Component {
     this.setState({ snackbarOpen: false });
   };
   handleDeleteNote = () => {
-      this.setState({deleteIcon:null})
+    this.setState({ deleteIcon: null });
     const data = { doc_id: this.state.id };
     DeleteNote(data).then(res => {
       console.log(res);
@@ -79,73 +79,86 @@ class GetCards extends React.Component {
     };
     notePinned(data);
   };
-  handleMouseOver=()=>{
-      this.setState({iconDisplay:true})
-  }
-  handleMouseClose=()=>{
-      this.setState({iconDisplay:false})
-  }
+  handleMouseOver = () => {
+    this.setState({ iconDisplay: true });
+  };
+  handleMouseClose = () => {
+    this.setState({ iconDisplay: false });
+  };
   render() {
-    let iconsContent = !this.state.iconDisplay ?<div className="cardsHover"/>:
-    <div className="cardsHover">
-    <IconButton
-    aria-label="more"
-    aria-controls="remainder-menu"
-    aria-haspopup="true"
-    onClick={this.props.handleRemainderClick}
-  >
-    <AddAlertIcon />
-  </IconButton>
-  <Menu
-    id="remainder-menu"
-    anchorEl={this.props.anchorEl}
-    open={Boolean(this.props.anchorEl)}
-    onClose={this.props.handleCloseRemainder}
-  >
-    <MenuItem onClick={this.props.handleCloseRemainder}>
-      Remainder :
-    </MenuItem>
-    <MenuItem onClick={this.props.handleCloseRemainder}>
-      Later today
-    </MenuItem>
-    <MenuItem onClick={this.props.handleCloseRemainder}>
-      Tommorrow
-    </MenuItem>
-    <MenuItem onClick={this.props.handleCloseRemainder}>
-      Next week
-    </MenuItem>
-  </Menu>
-  <IconButton>
-    <PersonAddIcon />
-  </IconButton>
-  <IconButton>
-    <ColorLensIcon />
-  </IconButton>
-  <IconButton>
-    <ImageIcon />
-  </IconButton>
-  <IconButton>
-    <ArchiveIcon />
-  </IconButton>
-  <IconButton
-    aria-label="more"
-    aria-controls="delete-menu"
-    aria-haspopup="true"
-    onClick={this.handleDeleteIcon}
-  >
-    <MoreVertIcon />
-  </IconButton>
-  <Menu
-    id="delete-menu"
-    anchorEl={this.state.deleteIcon}
-    open={Boolean(this.state.deleteIcon)}
-    onClose={this.handleCloseDeleteIcon}
-  >
-    <MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
-  </Menu>
-  </div>
-  return ( 
-      <div className="addedNoteCards" onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseClose}>
+    let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
+    let svg = !this.state.iconDisplay ? (
+      <IconButton></IconButton>
+    ) : (
+      <IconButton onClick={this.pinTheNote}>{svgPin}</IconButton>
+    );
+    let iconsContent = !this.state.iconDisplay ? (
+      <div className="cardsHover" />
+    ) : (
+      <div className="cardsHover">
+        <IconButton
+          aria-label="more"
+          aria-controls="remainder-menu"
+          aria-haspopup="true"
+          onClick={this.props.handleRemainderClick}
+        >
+          <AddAlertIcon />
+        </IconButton>
+        <Menu
+          id="remainder-menu"
+          anchorEl={this.props.anchorEl}
+          open={Boolean(this.props.anchorEl)}
+          onClose={this.props.handleCloseRemainder}
+        >
+          <MenuItem onClick={this.props.handleCloseRemainder}>
+            Remainder :
+          </MenuItem>
+          <MenuItem onClick={this.props.handleCloseRemainder}>
+            Later today
+          </MenuItem>
+          <MenuItem onClick={this.props.handleCloseRemainder}>
+            Tommorrow
+          </MenuItem>
+          <MenuItem onClick={this.props.handleCloseRemainder}>
+            Next week
+          </MenuItem>
+        </Menu>
+        <IconButton>
+          <PersonAddIcon />
+        </IconButton>
+        <IconButton>
+          <ColorLensIcon />
+        </IconButton>
+        <IconButton>
+          <ImageIcon />
+        </IconButton>
+        <IconButton>
+          <ArchiveIcon />
+        </IconButton>
+        <IconButton
+          aria-label="more"
+          aria-controls="delete-menu"
+          aria-haspopup="true"
+          onClick={this.handleDeleteIcon}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="delete-menu"
+          anchorEl={this.state.deleteIcon}
+          open={Boolean(this.state.deleteIcon)}
+          onClose={this.handleCloseDeleteIcon}
+        >
+          <MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
+        </Menu>
+      </div>
+    );
+    return (
+      <div
+        className="addedNoteCards"
+        onMouseOver={this.handleMouseOver}
+        onMouseLeave={this.handleMouseClose}
+      >
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={this.state.snackbarOpen}
@@ -167,11 +180,20 @@ class GetCards extends React.Component {
         >
           <div>
             <div onClick={this.NoteOpenForEdit}>
-              <div className="paddingInCards">
-                <Typography>{this.props.data.data().title}</Typography>
+              <div className="pinAndTxtFld">
+                <div className="paddingInCards">
+                  <Typography className="titleinGetCards">
+                    <b>{this.props.data.data().title}</b>
+                  </Typography>
+                </div>
+                <div className="heightSvg">
+        <IconButton>{svg}</IconButton>
+        </div>
               </div>
               <div className="paddingInCards">
-                <Typography>{this.props.data.data().description}</Typography>
+                <Typography className="descIn">
+                  {this.props.data.data().description}
+                </Typography>
               </div>
             </div>
             {iconsContent}
