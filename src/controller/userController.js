@@ -95,7 +95,8 @@ export async function CreateNote(notes) {
       color:notes.color,
       archive:notes.archive,
       pin:notes.pin,
-      user_id:servicesConstant.firebaseAuthorization.currentUser.uid
+      user_id:servicesConstant.firebaseAuthorization.currentUser.uid,
+      remainder:notes.remainder
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
     return 'success';
@@ -129,6 +130,24 @@ export  async function GetNoteForNotPinned(){
     const decodedJwt=jwt_decode(token)
     var notes=[];
     await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("archive","==",false).where("pin","==",true)
+    .get().then(function(querySnapshot){
+      querySnapshot.forEach(function(doc){
+        notes.push(doc)
+      });
+      })
+console.log(notes);
+return(notes)
+  }
+  catch(error){
+    return error.message
+  }
+}
+export async function getArchivedNotes(){
+  try{
+    const token=localStorage.usertoken
+    const decodedJwt=jwt_decode(token)
+    var notes=[];
+    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("archive","==",true)
     .get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
         notes.push(doc)

@@ -12,6 +12,7 @@ import {
   InputBase,
   IconButton,
   CardActions,
+  Typography,
   Tooltip
 } from "@material-ui/core";
 import { noteUpdate } from "../../controller/userController";
@@ -36,7 +37,8 @@ class DailogBox extends Component {
       archive:this.props.data.data().archive,
       color:this.props.data.data().color,
       pin:this.props.data.data().pin,
-      anchorEl:null
+      anchorEl:null,
+      remainder:this.props.data.data().remainder
     };
   }
   closeColorMenu = e => {
@@ -54,6 +56,16 @@ class DailogBox extends Component {
   handleCloseRemainder = () => {
     this.setState({ anchorEl: null });
   };
+  handleSetTodayTime=()=>{
+    this.setState({remainder:"today,8:00pm"})
+}
+  handleSetTommoTime=()=>{
+    this.setState({remainder:"tommorrow,8:00pm"})
+  }
+  handleSetNextWeekTime=()=>{
+    this.setState({remainder:(Date(Date.now()).toString())})
+  }
+  handleSetDate=()=>{}
   updateNote = () => {
     const noteData = {
       title: this.state.title,
@@ -96,40 +108,48 @@ pinTheNote=()=>{
               name="description"
             />
           </div>
+          <div className="paddingInCards">
+                <Typography className="remainderIncards">
+                  {this.state.remainder}
+                </Typography>
+              </div>
           <div classname="onClickCard">
             <CardActions disableSpacing>
               <div className="onClickCardIcons">
-                <IconButton
-                  aria-label="more"
-                  aria-controls="remainder-menu"
-                  aria-haspopup="true"
-                  onClick={this.handleRemainderClick}
+              <IconButton
+                aria-label="more"
+                aria-controls="remainder-menu"
+                aria-haspopup="true"
+                onClick={this.handleRemainderClick}
+              >
+                <Tooltip title="Remainder">
+                  <AddAlertIcon />
+                </Tooltip>
+              </IconButton>
+              <div>
+              <Menu
+                  id="remainder-menu"
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleCloseRemainder}
                 >
-                  <Tooltip title="Remainder">
-                    <AddAlertIcon />
-                  </Tooltip>
-                </IconButton>
-                <div>
-                  <Menu
-                    id="remainder-menu"
-                    anchorEl={this.state.anchorEl}
-                    open={Boolean(this.state.anchorEl)}
-                    onClose={this.handleCloseRemainder}
-                  >
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Remainder :
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Later today
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Tommorrow
-                    </MenuItem>
-                    <MenuItem onClick={this.handleCloseRemainder}>
-                      Next week
-                    </MenuItem>
-                  </Menu>
-                </div>
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Remainder :
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetTodayTime}>
+                  <div>  Later today</div>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetTommoTime}>
+                    Tommorrow
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetNextWeekTime}>
+                    Next week
+                  </MenuItem>
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Select Date and Time
+                  </MenuItem>
+                </Menu>
+              </div>
                 <IconButton>
                   <Tooltip title="Add colaborator">
                     <PersonAddIcon />

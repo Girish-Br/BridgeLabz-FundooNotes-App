@@ -34,7 +34,8 @@ class GetCards extends React.Component {
       pinned: this.props.data.data().pinned,
       snackbarMsg: "",
       snackbarOpen: false,
-      iconDisplay: false
+      iconDisplay: false,
+      remainder:this.props.data.data().remainder
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
@@ -65,6 +66,19 @@ class GetCards extends React.Component {
   handleCloseRemainder = () => {
     this.setState({ anchorEl: null });
   };
+  handleSetTodayTime=()=>{
+    this.setState({remainder:"today,8:00pm"})
+}
+  handleSetTommoTime=()=>{
+    this.setState({remainder:"tommorrow,8:00pm"})
+  }
+  handleSetNextWeekTime=()=>{
+    this.setState({remainder:(Date(Date.now()).toString())})
+  }
+  handleSetDate=()=>{}
+  handleRemainderDelete=()=>{
+this.setState({remainder:null});
+  }
   handleDeleteNote = () => {
     this.setState({ deleteIcon: null });
     const data = { doc_id: this.state.id };
@@ -113,34 +127,39 @@ class GetCards extends React.Component {
     let iconsContent = !this.state.iconDisplay ? (
       <div className="cardsHover" />
     ) : (
-      <div className="cardsHover">
-        <IconButton
-          aria-label="more"
-          aria-controls="remainder-menu"
-          aria-haspopup="true"
-          onClick={this.handleRemainderClick}
-        >
-          <AddAlertIcon />
-        </IconButton>
-        <Menu
-          id="remainder-menu"
-          anchorEl={this.state.anchorEl}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleCloseRemainder}
-        >
-          <MenuItem onClick={this.handleCloseRemainder}>
-            Remainder :
-          </MenuItem>
-          <MenuItem onClick={this.handleCloseRemainder}>
-            Later today
-          </MenuItem>
-          <MenuItem onClick={this.handleCloseRemainder}>
-            Tommorrow
-          </MenuItem>
-          <MenuItem onClick={this.handleCloseRemainder}>
-            Next week
-          </MenuItem>
-        </Menu>
+      <div className="cardsHover" >
+         <IconButton
+                aria-label="more"
+                aria-controls="remainder-menu"
+                aria-haspopup="true"
+                onClick={this.handleRemainderClick}
+              >
+                <Tooltip title="Remainder">
+                  <AddAlertIcon />
+                </Tooltip>
+              </IconButton>           
+              <Menu
+                  id="remainder-menu"
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleCloseRemainder}
+                >
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Remainder :
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetTodayTime}>
+                  <div>  Later today</div>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetTommoTime}>
+                    Tommorrow
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSetNextWeekTime}>
+                    Next week
+                  </MenuItem>
+                  <MenuItem onClick={this.handleCloseRemainder}>
+                    Select Date and Time
+                  </MenuItem>
+                </Menu>
         <IconButton>
           <PersonAddIcon />
         </IconButton>
@@ -229,7 +248,7 @@ class GetCards extends React.Component {
       </div>
     );
     return (
-      <div className="addedNoteCards" onMouseOver={this.handleMouseOver}  onMouseLeave={this.handleMouseClose} style={{ backgroundColor: this.state.color }}
+      <div style={{ backgroundColor: this.state.color }} className="addedNoteCards" onMouseOver={this.handleMouseOver}  onMouseLeave={this.handleMouseClose} 
  >
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -263,6 +282,15 @@ class GetCards extends React.Component {
                 <Typography className="descIn">
                   {this.props.data.data().description}
                 </Typography>
+              </div>
+              <div className="remainderIncards">
+                <Typography className="remainderIncardstypo">
+                  {this.state.remainder}
+                </Typography>
+                <IconButton
+                color="inherit"
+                onClick={this.handleRemainderDelete}
+              ></IconButton>
               </div>
             </div>
             {iconsContent}

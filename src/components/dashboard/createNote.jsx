@@ -23,7 +23,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import BrushIcon from "@material-ui/icons/Brush";
 import AddBoxIcon from "@material-ui/icons/Add";
-import PinDropIcon from "@material-ui/icons/PinDrop";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
@@ -75,7 +74,8 @@ class CreateNoteDashboard extends React.Component {
       description: this.state.description,
       archive: this.state.archive,
       color: this.state.color,
-      pin: this.state.pin
+      pin: this.state.pin,
+      remainder:this.state.remainder
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {
@@ -94,39 +94,12 @@ class CreateNoteDashboard extends React.Component {
       });
     }
   };
-  archiveNoteCreation = () => {
+  archiveNoteCreation = async() => {
     try {
-      if (this.state.title === "" && this.state.description === "") {
-        this.setState({ cardOpen: false });
-      } else {
-        this.setState({ cardOpen: false, pin: false });
-        const archiveData = {
-          title: this.state.title,
-          description: this.state.description,
-          color: this.state.color,
-          archive: true,
-          pin: this.state.pin
-        };
-        CreateNote(archiveData).then(res => {
-          if (res === true) {
-            this.setState({
-              snackbarMessage: "Note Archieved",
-              snackbarOpen: true,
-              title: "",
-              description: "",
-              color: "",
-              archive: false,
-              openCard: false
-            });
-          } else {
-            this.setState({
-              snackbarMessage: res,
-              snackbarOpen: true
-            });
-          }
-        });
+       await this.setState({ archive: true, pin: false });
+        this.closeCard();
       }
-    } catch (error) {
+  catch (error) {
       console.log(error);
     }
   };
@@ -139,24 +112,22 @@ class CreateNoteDashboard extends React.Component {
   closeColorMenu = e => {
     this.setState({ anchorEl1: e.currentTarget });
   };
-  colorChange = e => {
+  colorChange = (e) => {
     this.setState({
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
-  };
+  }
   handleSetTodayTime=()=>{
     this.setState({remainder:"today,8:00pm"})
-.then(res=>{
-  
-})   
-  }
+}
   handleSetTommoTime=()=>{
     this.setState({remainder:"tommorrow,8:00pm"})
   }
   handleSetNextWeekTime=()=>{
     this.setState({remainder:(Date(Date.now()).toString())})
   }
+  handleSetDate=()=>{}
   render() {
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
     return !this.state.openCard ? (
@@ -270,9 +241,6 @@ class CreateNoteDashboard extends React.Component {
                   </MenuItem>
                   <MenuItem onClick={this.handleCloseRemainder}>
                     Select Date and Time
-                  </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Select Place
                   </MenuItem>
                 </Menu>
               </div>

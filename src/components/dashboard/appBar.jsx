@@ -145,7 +145,7 @@ class Appbar extends React.Component {
                 <LongMenu />
               </div>
             </Toolbar>
-            <DrawerNav open={this.state.drawerOpen} />
+            <DrawerNav open={this.state.drawerOpen} handleTheArchive={this.props.handleArchive} />
           </AppBar>
         </MuiThemeProvider>
       </div>

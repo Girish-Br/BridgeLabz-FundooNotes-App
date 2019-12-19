@@ -11,7 +11,7 @@ import GetCards from './getNote.jsx'
 import {Tooltip,CardActions} from '@material-ui/core'
 import Appbar from './appBar.jsx'
 import CreateNote from './createNote';
-import  {GetNote,GetNoteForNotPinned,getArchivedNotes}  from '../../controller/userController'
+import  {GetNote,GetNoteForNotPinned}  from '../../controller/userController'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
@@ -19,9 +19,7 @@ class Dashboard extends React.Component {
       notes: [],
       pinnedNotes:[],
       dialogBox: false,
-      displayList:false,
-      archiveCards:false,
-      archivedData:[]
+      displayList:false
     }
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
@@ -35,14 +33,7 @@ class Dashboard extends React.Component {
       this.setState({ notes: res })
       console.log(res)
     })
-    getArchivedNotes().then(res=>{
-      this.setState({archivedData:res})
-      console.log(res)
-    })
   }
-  handleArchive=()=>{
-    this.setState({archiveCards:!(this.state.archiveCards)})
-}
   handleDialogBox() {
     this.setState({ dialogBox: true })
   }
@@ -65,38 +56,30 @@ class Dashboard extends React.Component {
         <GetCards data={item} />
       )
     })
-    let archivedCards = this.state.archivedData.map(item => {
-      return (
-        <GetCards data={item} />
-      )
-    })
-        let cardsArchived=this.state.archiveCards ? archivedCards:
-        <div className="content">
-        <div>
-        <CreateNote />
-        </div>
-        <div >
-          <div className>
-          <p  className="pinned">PINNED:</p>
-          </div>
-          <div style={{display:listStyle.display,width:listStyle.width}} className="pinnedCards">
-          {notesCardPinned}
-          </div>
-        </div>
-        <div >
-        <div>
-          <p className="others" >OTHER NOTES:</p>
-          </div>
-          <div style={{display:listStyle.display,width:listStyle.width}} className="otherCards">
-        {notesCard}
-        </div>
-      </div>
-      </div>
-  
     return (
       <div className="dashboardMainDiv">
-        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive}/>
-        {cardsArchived}
+        <Appbar view={this.state.displayList} displayList={this.displayListView}/>
+        <div className="content">
+          <div>
+          <CreateNote />
+          </div>
+          <div >
+            <div className>
+            <p  className="pinned">PINNED:</p>
+            </div>
+            <div style={{display:listStyle.display,width:listStyle.width}} className="pinnedCards">
+            {notesCardPinned}
+            </div>
+          </div>
+          <div >
+          <div>
+            <p className="others" >OTHER NOTES:</p>
+            </div>
+            <div style={{display:listStyle.display,width:listStyle.width}} className="otherCards">
+          {notesCard}
+          </div>
+        </div>
+        </div>
       </div>
     )
   }

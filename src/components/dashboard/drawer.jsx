@@ -12,6 +12,13 @@ import AddAlertIcon from '@material-ui/icons/AddAlert';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import DeleteIcon from '@material-ui/icons/Delete';
 class DrawerNav extends React.Component {
+    constructor(props){
+        super(props);
+    
+    }
+    handleArchive=()=>{
+        this.props.handleTheArchive();
+    }
     render() {
         return (
             <div>
@@ -32,8 +39,8 @@ class DrawerNav extends React.Component {
                             <ListItemText primary="Reminder" />
                         </ListItem>
                         <Divider />
-                        <ListItem button key="Archive">
-                            <ListItemIcon><ArchiveIcon /></ListItemIcon>
+                        <ListItem button key="Archive" onClick={this.handleArchive}>
+                            <ListItemIcon><ArchiveIcon   /></ListItemIcon>
                             <ListItemText primary="Archive" />
                         </ListItem>
                         <Divider />
