@@ -119,14 +119,23 @@ class CreateNoteDashboard extends React.Component {
     });
   }
   handleSetTodayTime=()=>{
+    this.handleCloseRemainder()
     this.setState({remainder:"today,8:00pm"})
 }
   handleSetTommoTime=()=>{
+    this.handleCloseRemainder()
     this.setState({remainder:"tommorrow,8:00pm"})
   }
   handleSetNextWeekTime=()=>{
-    this.setState({remainder:(Date(Date.now()).toString())})
+    this.handleCloseRemainder()
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
+    var date = new Date().toDateString();
+    date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
+    date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
+    var reminder1 = date + ", 8:00 AM";
+    this.setState({ remainder: reminder1 })
   }
+
   handleSetDate=()=>{}
   render() {
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;

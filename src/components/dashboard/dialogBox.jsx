@@ -63,7 +63,13 @@ class DailogBox extends Component {
     this.setState({remainder:"tommorrow,8:00pm"})
   }
   handleSetNextWeekTime=()=>{
-    this.setState({remainder:(Date(Date.now()).toString())})
+    this.handleCloseRemainder()
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
+    var date = new Date().toDateString();
+    date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
+    date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
+    var remainder1 = date + ", 8:00 AM";
+    this.setState({ remainder: remainder1 })
   }
   handleSetDate=()=>{}
   updateNote = () => {
@@ -73,7 +79,8 @@ class DailogBox extends Component {
       id: this.state.id,
       color:this.state.color,
       archive:this.state.archive,
-      pin:this.state.pin
+      pin:this.state.pin,
+      remainder:this.state.remainder
     };
     noteUpdate(noteData).then(res => {
       console.log(res);

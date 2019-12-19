@@ -8,9 +8,19 @@
 import React from "react";
 import DailogBox from "./dialogBox.jsx";
 import Menu from "@material-ui/core/Menu";
-import { Card, IconButton, Snackbar, Typography,Tooltip } from "@material-ui/core";
+import {
+  Card,
+  IconButton,
+  Snackbar,
+  Typography,
+  Tooltip
+} from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import { archiveData, notePinned } from "../../controller/userController.js";
+import {
+  archiveData,
+  notePinned,
+  remainderUpdate
+} from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import DeleteNote from "../../controller/userController.js";
 import ImageIcon from "@material-ui/icons/Image";
@@ -35,7 +45,7 @@ class GetCards extends React.Component {
       snackbarMsg: "",
       snackbarOpen: false,
       iconDisplay: false,
-      remainder:this.props.data.data().remainder
+      remainder: this.props.data.data().remainder
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
@@ -66,19 +76,45 @@ class GetCards extends React.Component {
   handleCloseRemainder = () => {
     this.setState({ anchorEl: null });
   };
-  handleSetTodayTime=()=>{
-    this.setState({remainder:"today,8:00pm"})
-}
-  handleSetTommoTime=()=>{
-    this.setState({remainder:"tommorrow,8:00pm"})
-  }
-  handleSetNextWeekTime=()=>{
-    this.setState({remainder:(Date(Date.now()).toString())})
-  }
-  handleSetDate=()=>{}
-  handleRemainderDelete=()=>{
-this.setState({remainder:null});
-  }
+  handleSetTodayTime = () => {
+    this.setState({ remainder: "today,8:00pm" });
+    this.updateRemainder();
+  };
+  handleSetTommoTime = () => {
+    this.setState({ remainder: "tommorrow,8:00pm" });
+    this.updateRemainder();
+  };
+  handleSetNextWeekTime = () => {
+    this.handleCloseRemainder();
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
+    var date = new Date().toDateString();
+    date = date.replace(
+      new Date().getDate().toString(),
+      new Date().getDate() + 7
+    );
+    date = date.replace(
+      days[new Date().getDay() - 1],
+      days[new Date().getDay()]
+    );
+    var reminder1 = date + ", 8:00 AM";
+    this.setState({ reminder: reminder1 });
+  };
+  handleSetDate = () => {
+    this.updateRemainder();
+  };
+  updateRemainder = () => {
+    let remainderDetails = {
+      id: this.props.data.id,
+      remainder: this.state.remainder
+    };
+    remainderUpdate(remainderDetails).then(res => {
+      console.log(res);
+    });
+  };
+  handleRemainderDelete = () => {
+    this.setState({ remainder: '' });
+    this.updateRemainder();
+  };
   handleDeleteNote = () => {
     this.setState({ deleteIcon: null });
     const data = { doc_id: this.state.id };
@@ -127,102 +163,96 @@ this.setState({remainder:null});
     let iconsContent = !this.state.iconDisplay ? (
       <div className="cardsHover" />
     ) : (
-      <div className="cardsHover" >
-         <IconButton
-                aria-label="more"
-                aria-controls="remainder-menu"
-                aria-haspopup="true"
-                onClick={this.handleRemainderClick}
-              >
-                <Tooltip title="Remainder">
-                  <AddAlertIcon />
-                </Tooltip>
-              </IconButton>           
-              <Menu
-                  id="remainder-menu"
-                  anchorEl={this.state.anchorEl}
-                  open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleCloseRemainder}
-                >
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Remainder :
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetTodayTime}>
-                  <div>  Later today</div>
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetTommoTime}>
-                    Tommorrow
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetNextWeekTime}>
-                    Next week
-                  </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Select Date and Time
-                  </MenuItem>
-                </Menu>
+      <div className="cardsHover">
+        <IconButton
+          aria-label="more"
+          aria-controls="remainder-menu"
+          aria-haspopup="true"
+          onClick={this.handleRemainderClick}
+        >
+          <Tooltip title="Remainder">
+            <AddAlertIcon />
+          </Tooltip>
+        </IconButton>
+        <Menu
+          id="remainder-menu"
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleCloseRemainder}
+        >
+          <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
+          <MenuItem onClick={this.handleSetTodayTime}>
+            <div> Later today</div>
+          </MenuItem>
+          <MenuItem onClick={this.handleSetTommoTime}>Tommorrow</MenuItem>
+          <MenuItem onClick={this.handleSetNextWeekTime}>Next week</MenuItem>
+          <MenuItem onClick={this.handleCloseRemainder}>
+            Select Date and Time
+          </MenuItem>
+        </Menu>
         <IconButton>
           <PersonAddIcon />
         </IconButton>
         <IconButton
-                aria-label="more"
-                aria-controls="color-menu"
-                aria-haspopup="true"
-                onClick={this.closeColorMenu}
-              >
-                <Tooltip title="Add Color">
-                  <ColorLensIcon />
-                </Tooltip>
-              </IconButton>
-              <Menu
-                id="color-menu"
-                anchorEl={this.state.anchorEl1}
-                keepMounted
-                open={Boolean(this.state.anchorEl1)}
-                onClose={this.closeColorMenu}
-              >
-                <div>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#f28b82" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#cbf0f8" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                </div>
-                <div>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#faebd7" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#6B8E23" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                </div>
-                <div>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#4BB8C0" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                  <IconButton>
-                    <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#3BDEDE" }}
-                      onClick={this.colorChange}
-                    />
-                  </IconButton>
-                </div>
-              </Menu>
+          aria-label="more"
+          aria-controls="color-menu"
+          aria-haspopup="true"
+          onClick={this.closeColorMenu}
+        >
+          <Tooltip title="Add Color">
+            <ColorLensIcon />
+          </Tooltip>
+        </IconButton>
+        <Menu
+          id="color-menu"
+          anchorEl={this.state.anchorEl1}
+          keepMounted
+          open={Boolean(this.state.anchorEl1)}
+          onClose={this.closeColorMenu}
+        >
+          <div>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#f28b82" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#cbf0f8" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+          </div>
+          <div>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#faebd7" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#6B8E23" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+          </div>
+          <div>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#4BB8C0" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+            <IconButton>
+              <RadioButtonUncheckedRoundedIcon
+                style={{ backgroundColor: "#3BDEDE" }}
+                onClick={this.colorChange}
+              />
+            </IconButton>
+          </div>
+        </Menu>
         <IconButton>
           <ImageIcon />
         </IconButton>
@@ -248,8 +278,12 @@ this.setState({remainder:null});
       </div>
     );
     return (
-      <div style={{ backgroundColor: this.state.color }} className="addedNoteCards" onMouseOver={this.handleMouseOver}  onMouseLeave={this.handleMouseClose} 
- >
+      <div
+        style={{ backgroundColor: this.state.color }}
+        className="addedNoteCards"
+        onMouseOver={this.handleMouseOver}
+        onMouseLeave={this.handleMouseClose}
+      >
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={this.state.snackbarOpen}
@@ -270,15 +304,15 @@ this.setState({remainder:null});
           style={{ backgroundColor: this.props.data.data().color }}
         >
           <div>
-            <div onClick={this.NoteOpenForEdit}>
+            <div>
               <div className="pinAndTxtFld">
-                <div className="paddingInCards">
+                <div className="paddingInCards" onClick={this.NoteOpenForEdit}>
                   <Typography className="titleinGetCards">
                     <b>{this.props.data.data().title}</b>
                   </Typography>
                 </div>
               </div>
-              <div className="paddingInCards">
+              <div className="paddingInCards"  onClick={this.NoteOpenForEdit}>
                 <Typography className="descIn">
                   {this.props.data.data().description}
                 </Typography>
@@ -288,9 +322,9 @@ this.setState({remainder:null});
                   {this.state.remainder}
                 </Typography>
                 <IconButton
-                color="inherit"
-                onClick={this.handleRemainderDelete}
-              ></IconButton>
+                  color="inherit"
+                  onClick={this.handleRemainderDelete}
+                ></IconButton>
               </div>
             </div>
             {iconsContent}

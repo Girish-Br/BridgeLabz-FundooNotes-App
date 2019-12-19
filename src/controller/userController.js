@@ -168,7 +168,8 @@ export async function noteUpdate(data){
     "id":data.id,
     "color":data.color,
     "archive":data.archive,
-    "pin":data.pin
+    "pin":data.pin,
+    "remainder":data.remainder
     
  })
 .then(res=>{
@@ -200,10 +201,23 @@ export async function archiveData(data){
 }
 export async function notePinned(data){
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
-   "pinned":data.pinned
+   "pin":data.pinned
 }).then(res=>{
  return res
 }).catch(error=>{
  return error.message
+})
+}
+export async function remainderUpdate(data){
+  console.log()
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+    "remainder":data.remainder
+    })
+.then(res=>{
+  res=true;
+  return res
+})
+.catch(error=>{
+  return error.message
 })
 }
