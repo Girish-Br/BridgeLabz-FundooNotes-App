@@ -33,25 +33,36 @@ class DisplayNote extends React.Component {
         pinnedNotes.push(
           <GetCards data={item} displayNotes={this.getAllCards} />
         );
+        if (item.data().reminder !== "") {
+          reminderNotes.push(
+            <GetCards data={item} displayNotes={this.getAllCards} />
+          );
+        }
         console.log("aaaaaaaaa", pinnedNotes);
       } else if (item.data().pin === false && item.data().archive === false) {
         unpinnedNotes.push(
           <GetCards data={item} displayNotes={this.getAllCards} />
         );
+        if (item.data().reminder !== "") {
+          reminderNotes.push(
+            <GetCards data={item} displayNotes={this.getAllCards} />
+          );
+        }
       } else {
         archieveNotes.push(
           <GetCards data={item} displayNotes={this.getAllCards} />
         );
+        if (item.data().reminder !== "") {
+          reminderNotes.push(
+            <GetCards data={item} displayNotes={this.getAllCards} />
+          );
+        }
       }
     });
-    this.state.notes.map(item => {
-      if (item.data().reminder !== "") {
-        reminderNotes.push(
-          <GetCards data={item} displayNotes={this.getAllCards} />
-        );
-      }
-    });
-    return !this.props.archiveCards ? (
+  
+ 
+  
+    return !this.props.archiveCards && !this.props.reminderNotes ? (
       <div>
         <div>
           <div className>
@@ -82,7 +93,18 @@ class DisplayNote extends React.Component {
           </div>
         </div>
       </div>
-    ) : (
+    ) :
+    !this.props.archiveCards && this.props.reminderNotes ?
+    <div
+    style={{
+      display: this.props.style.display,
+      width: this.props.style.width
+    }}
+    className="pinnedCards"
+  >
+    {reminderNotes}
+  </div>
+    : (
       <div
         style={{
           display: this.props.style.display,
@@ -96,3 +118,8 @@ class DisplayNote extends React.Component {
   }
 }
 export default DisplayNote;
+
+
+
+
+

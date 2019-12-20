@@ -16,6 +16,7 @@ import {
   Tooltip
 } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import {
   archiveData,
   notePinned,
@@ -41,7 +42,7 @@ class GetCards extends React.Component {
       id: this.props.data.id,
       color: "",
       anchorEl1: null,
-      pinned: this.props.data.data().pinned,
+      pin: this.props.data.data().pinned,
       snackbarMsg: "",
       snackbarOpen: false,
       iconDisplay: false,
@@ -78,11 +79,11 @@ class GetCards extends React.Component {
   };
   handleSetTodayTime = () => {
     this.setState({ reminder: "today,8:00pm" });
-    this.updatereminder();
+    this.updateReminder();
   };
   handleSetTommoTime = () => {
     this.setState({ reminder: "tommorrow,8:00pm" });
-    this.updatereminder();
+    this.updateReminder();
   };
   handleSetNextWeekTime = () => {
     this.handleClosereminder();
@@ -135,19 +136,32 @@ class GetCards extends React.Component {
     });
   };
   archiveNoteCreation = () => {
-    const data = {
-      id: this.props.data.id
+    let data;
+    if(this.props.data.data().archive){
+       data = {
+        id: this.props.data.id,
+        archive:false,
+        pin:false
+      }
+    }
+    else{
+     data={
+        id: this.props.data.id,
+        archive:true,
+        pin:false
+      }
     }
     archiveData(data).then(res=>
       console.log(res)
      ) 
      this.props.displayNotes()
-  }
+
+}
   pinTheNote = () => {
-    this.setState({ pinned: !this.state.pinned });
+    this.setState({ pin: !this.state.pin });
     const data = {
       id: this.state.id,
-      pinned: this.state.pinned
+      pin: this.state.pin
     };
     notePinned(data);
   };
@@ -158,6 +172,19 @@ class GetCards extends React.Component {
     this.setState({ iconDisplay: false });
   };
   render() {
+    let archiveIcon = !this.props.data.data().archive ?
+    <IconButton onClick={this.archiveNoteCreation}>
+      <Tooltip title="Archive">
+        <ArchiveIcon />
+      </Tooltip>
+    </IconButton>
+    :
+    <IconButton onClick={this.archiveNoteCreation}>
+      <Tooltip title="UnArchive">
+      <UnarchiveIcon />
+      </Tooltip>
+    </IconButton>
+     let archiveIconDisplay = !this.state.iconDisplay ? <IconButton ></IconButton> :archiveIcon
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
     let svg = !this.state.iconDisplay ? (
       <IconButton></IconButton>
@@ -260,9 +287,7 @@ class GetCards extends React.Component {
         <IconButton>
           <ImageIcon />
         </IconButton>
-        <IconButton>
-          <ArchiveIcon onClick={this.archiveNoteCreation} />
-        </IconButton>
+  {archiveIconDisplay}
         <IconButton
           aria-label="more"
           aria-controls="delete-menu"
@@ -311,9 +336,13 @@ class GetCards extends React.Component {
             <div>
               <div className="pinAndTxtFld">
                 <div className="paddingInCards" onClick={this.NoteOpenForEdit}>
+                  <div>
                   <Typography className="titleinGetCards">
                     <b>{this.props.data.data().title}</b>
                   </Typography>
+                  </div>
+                  <div className="pinDiv">
+                  </div>
                 </div>
               </div>
               <div className="paddingInCards" onClick={this.NoteOpenForEdit}>

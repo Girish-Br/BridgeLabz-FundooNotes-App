@@ -156,7 +156,8 @@ return error.message
 }
 export async function archiveData(data){
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
-   "archive":true
+   "archive":data.archive,
+   "pin":data.pin
 }).then(res=>{
  return res
 }).catch(error=>{
@@ -165,7 +166,7 @@ export async function archiveData(data){
 }
 export async function notePinned(data){
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
-   "pin":data.pinned
+   "pin":data.pin
 }).then(res=>{
  return res
 }).catch(error=>{
@@ -175,7 +176,7 @@ export async function notePinned(data){
 export async function ReminderUpdate(data){
   console.log()
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
-    "remainder":data.remainder
+    "reminder":data.reminder
     })
 .then(res=>{
   res=true;

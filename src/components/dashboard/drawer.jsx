@@ -22,6 +22,9 @@ class DrawerNav extends React.Component {
     handleNotes=()=>{
         this.props.handleTheNotes();
     }
+    handleReminder=()=>{
+        this.props.handleTheReminder();
+    }
     render() {
         return (
             <div>
@@ -37,7 +40,7 @@ class DrawerNav extends React.Component {
                             <ListItemText primary="Note" />
                         </ListItem>
                         <Divider/>
-                        <ListItem button key="Reminder">
+                        <ListItem button key="Reminder" onClick={this.handleReminder}>
                             <ListItemIcon><AddAlertIcon /></ListItemIcon>
                             <ListItemText primary="Reminder" />
                         </ListItem>
