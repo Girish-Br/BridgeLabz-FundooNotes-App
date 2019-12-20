@@ -108,15 +108,15 @@ pinTheNote=()=>{
               {svgPin}
             </IconButton>
           </div>
-          <div className="paddingInCards">
+          <div className="paddingInCards1">
             <InputBase
               value={this.state.description}
               onChange={this.onChange}
               name="description"
             />
           </div>
-          <div className="paddingInCards">
-                <Typography className="remainderIncards">
+          <div className="remainderIncards">
+                <Typography >
                   {this.state.remainder}
                 </Typography>
               </div>
@@ -202,7 +202,7 @@ pinTheNote=()=>{
                   </IconButton>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#6B8E23" }}
+                      style={{ backgroundColor: "#6B5B95" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>
@@ -210,13 +210,13 @@ pinTheNote=()=>{
                 <div>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#4BB8C0" }}
+                      style={{ backgroundColor: "#92A8D1" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#3BDEDE" }}
+                      style={{ backgroundColor: "#DDDDDD" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>

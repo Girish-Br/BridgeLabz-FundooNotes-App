@@ -1,79 +1,88 @@
-import React from 'react'
-import GetCards from './getNote.jsx'
-import Appbar from './appBar.jsx'
-import CreateNote from './createNote';
-import  {GetNote,GetNoteForNotPinned,getArchivedNotes}  from '../../controller/userController'
+import React from "react";
+import GetCards from "./getNote.jsx";
+import Appbar from "./appBar.jsx";
+import { withRouter } from "react-router-dom";
+import CreateNote from "./createNote";
+import {
+  GetNote,
+} from "../../controller/userController";
 class DisplayNote extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      notes: [],
-      pinnedNotes:[],
-    }
+      notes: []
+    };
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
 
   componentDidMount() {
-this.getAllCards()
+    this.getAllCards();
   }
-  getAllCards=()=>{
-    GetNoteForNotPinned().then(res => {
-      this.setState({ pinnedNotes: res })
-      console.log(res)
-    })
+  getAllCards = () => {
     GetNote().then(res => {
-      this.setState({ notes: res })
-      console.log(res)
-    })
-    getArchivedNotes().then(res=>{
-      this.setState({archivedData:res})
-      console.log(res)
-    })
-  }
+      if (Array.isArray(res)) {
+        this.setState({ notes: res });
+      }
+      console.log(res);
+    });
+  };
   render() {
-    let listStyle=!this.state.displayList?({display:"flex",width:"100%"}) : ({display:"block",width:"60%"}) 
-    let notesCardPinned=this.state.pinnedNotes.map(item=>{
-      return(<GetCards data={item} displayAllNote={this.getAllCards}/>)
-    })
-    let notesCard = this.state.notes.map(item => {
-      return (
-        <GetCards data={item} dsiplayAllNote={this.getAllCards}/>
-      )
-    })
-    let archivedCards = this.state.archivedData.map(item => {
-      return (
-        <GetCards data={item} />
-      )
-    })
-    let cardsArchived=this.state.archiveCards ? archivedCards:
-    <div className="content">
-    <div>
-    <CreateNote />
-    </div>
-    <div >
-      <div className>
-      <p  className="pinned">PINNED:</p>
-      </div>
-      <div style={{display:listStyle.display,width:listStyle.width}} className="pinnedCards">
-      {notesCardPinned}
-      </div>
-    </div>
-    <div >
-    <div>
-      <p className="others" >OTHER NOTES:</p>
-      </div>
-      <div style={{display:listStyle.display,width:listStyle.width}} className="otherCards">
-    {notesCard}
-    </div>
-  </div>
-  </div>
+    let pinnedNotes = [],
+      unpinnedNotes = [],
+      archieveNotes = [];
+    this.state.notes.map(item => {
+      if (item.data().pin === true && item.data().archive === false) {
+        pinnedNotes.push(<GetCards data={item}
+          displayNotes={this.getAllCards}/>);
+          console.log("aaaaaaaaa",pinnedNotes)
+      } else if (
+        item.data().pin === false &&
+        item.data().archive === false
+      ) {
+        unpinnedNotes.push(<GetCards data={item}
+          displayNotes={this.getAllCards}/>);
+      } else {
+        archieveNotes.push(<GetCards data={item}
+          displayNotes={this.getAllCards}/>);
+      }
+    });
 
-return (
-  <div className="dashboardMainDiv">
-    <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive}/>
-    {cardsArchived}
-  </div>
-)
+    return !this.props.archiveCards ? (
+        <div>
+        <div>
+            <div className>
+              <p className="pinned">PINNED:</p>
+            </div>
+            <div
+              style={{ display: this.props.style.display, width: this.props.style.width }}
+              className="pinnedCards"
+            >
+              {pinnedNotes}
+            </div>
+          </div>
+          <div>
+            <div>
+              <p className="others">OTHER NOTES:</p>
+            </div>
+            <div
+              style={{ display: this.props.style.display, width: this.props.style.width }}
+              className="otherCards"
+            >
+              {unpinnedNotes}
+            </div>
+          </div>
+</div>
+    ) : (
+      <div>
+        <div>
+          <div
+            style={{ display: this.props.style.display, width: this.props.style.width }}
+            className="pinnedCards"
+          ></div>
+          {archieveNotes}
+        </div>
+      </div>
+    );
   }
 }
 export default DisplayNote;

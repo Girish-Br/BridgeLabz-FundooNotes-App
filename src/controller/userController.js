@@ -111,43 +111,7 @@ export  async function GetNote(){
     const token=localStorage.usertoken
     const decodedJwt=jwt_decode(token)
     var notes=[];
-    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("pin","==",false).where("archive","==",false)
-    .get().then(function(querySnapshot){
-      querySnapshot.forEach(function(doc){
-        notes.push(doc)
-      });
-      })
-console.log(notes);
-return(notes)
-  }
-  catch(error){
-    return error.message
-  }
-}
-export  async function GetNoteForNotPinned(){
-  try{
-    const token=localStorage.usertoken
-    const decodedJwt=jwt_decode(token)
-    var notes=[];
-    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("archive","==",false).where("pin","==",true)
-    .get().then(function(querySnapshot){
-      querySnapshot.forEach(function(doc){
-        notes.push(doc)
-      });
-      })
-console.log(notes);
-return(notes)
-  }
-  catch(error){
-    return error.message
-  }
-}
-export async function getArchivedNotes(){
-  try{
-    const token=localStorage.usertoken
-    const decodedJwt=jwt_decode(token)
-    var notes=[];
-    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id).where("archive","==",true)
+    await servicesConstant.firestore.collection("notes").where("user_id","==", decodedJwt.user_id)
     .get().then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
         notes.push(doc)

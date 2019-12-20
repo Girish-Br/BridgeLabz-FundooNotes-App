@@ -84,10 +84,10 @@ class Appbar extends React.Component {
   }
   handleDrawerToggle = () => {
     this.setState({ drawerOpen: !this.state.drawerOpen });
-  };
+  }
   handleGrid = () => {
-    this.props.displayList();
-  };
+    this.props.displayList()
+  }
   render() {
     return (
       <div className="root">
@@ -145,7 +145,7 @@ class Appbar extends React.Component {
                 <LongMenu />
               </div>
             </Toolbar>
-            <DrawerNav open={this.state.drawerOpen} handleTheArchive={this.props.handleArchive} />
+            <DrawerNav open={this.state.drawerOpen} handleTheArchive={this.props.handleArchive} handleTheNotes={this.props.handleNotes}/>
           </AppBar>
         </MuiThemeProvider>
       </div>

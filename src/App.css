@@ -478,7 +478,6 @@ margin-left: 20px;
 }
 .paddingInCards1{
   padding-left: 10px;
-  padding-top:10px;
 }
 
 
@@ -588,16 +587,17 @@ margin-left: 20px;
       flex-wrap: wrap;
     }
 .remainderIncards{
+  padding-left: 10px;
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
   padding-top: 10px;
-  
-}
-.remainderIncardstypo{
-  border-radius: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-family: serif;
-  font-size:x-small;
+  width: 70%;
+  border-radius: 10px;
+  /* padding-left: 10px;
+  background-color: silver;
+  display: flex;
+  align-content: center;
+  padding: 5px;
+
+} */
 }

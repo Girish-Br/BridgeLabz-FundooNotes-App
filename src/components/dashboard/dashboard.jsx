@@ -7,41 +7,24 @@
  *****************************************************************************************/
 import React from 'react'
 import { withRouter } from "react-router-dom";
-import GetCards from './getNote.jsx'
-import {Tooltip,CardActions} from '@material-ui/core'
 import Appbar from './appBar.jsx'
 import CreateNote from './createNote';
-import  {GetNote,GetNoteForNotPinned,getArchivedNotes}  from '../../controller/userController'
+import DisplayNote from './displayItems.jsx'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notes: [],
-      pinnedNotes:[],
       dialogBox: false,
       displayList:false,
       archiveCards:false,
-      archivedData:[]
-    }
-    // this.handleSearchBar = this.handleSearchBar.bind(this);
-  }
-
-  componentDidMount() {
-    GetNoteForNotPinned().then(res => {
-      this.setState({ pinnedNotes: res })
-      console.log(res)
-    })
-    GetNote().then(res => {
-      this.setState({ notes: res })
-      console.log(res)
-    })
-    getArchivedNotes().then(res=>{
-      this.setState({archivedData:res})
-      console.log(res)
-    })
+   }
+    this.dsiplayNote = React.createRef();
   }
   handleArchive=()=>{
     this.setState({archiveCards:!(this.state.archiveCards)})
+}
+handleTheNotes=()=>{
+  this.setState({archiveCards:false})
 }
   handleDialogBox() {
     this.setState({ dialogBox: true })
@@ -56,48 +39,26 @@ class Dashboard extends React.Component {
     this.setState({displayList: !this.state.displayList})
   }
   render() {
-    let listStyle=!this.state.displayList?({display:"flex",width:"100%"}) : ({display:"block",width:"60%"}) 
-    let notesCardPinned=this.state.pinnedNotes.map(item=>{
-      return(<GetCards data={item}/>)
-    })
-    let notesCard = this.state.notes.map(item => {
+    let listStyle=!this.state.displayList ? ({display:"flex",width:"100%"}) : ({display:"block",width:"60%"}) 
       return (
-        <GetCards data={item} />
-      )
-    })
-    let archivedCards = this.state.archivedData.map(item => {
-      return (
-        <GetCards data={item} />
-      )
-    })
-        let cardsArchived=this.state.archiveCards ? archivedCards:
+      !this.state.archiveCards ?
+      <div className="dashboardMainDiv">
+        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive}  handleNotes={this.handleTheNotes}/>
         <div className="content">
         <div>
         <CreateNote />
         </div>
-        <div >
-          <div className>
-          <p  className="pinned">PINNED:</p>
-          </div>
-          <div style={{display:listStyle.display,width:listStyle.width}} className="pinnedCards">
-          {notesCardPinned}
-          </div>
-        </div>
-        <div >
         <div>
-          <p className="others" >OTHER NOTES:</p>
-          </div>
-          <div style={{display:listStyle.display,width:listStyle.width}} className="otherCards">
-        {notesCard}
+        <DisplayNote archiveCards={this.state.archiveCards} style={{display:listStyle.display,width:listStyle.width}}/>
+       </div>
         </div>
-      </div>
-      </div>
-  
-    return (
-      <div className="dashboardMainDiv">
-        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive}/>
-        {cardsArchived}
-      </div>
+        </div>
+    :  <div className="dashboardMainDiv">
+    <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleNotes={this.handleTheNotes}/>
+    <div className="content">
+    <DisplayNote archiveCards={this.state.archiveCards}style={{display:listStyle.display,width:listStyle.width}}/>
+    </div>
+    </div>
     )
   }
 }

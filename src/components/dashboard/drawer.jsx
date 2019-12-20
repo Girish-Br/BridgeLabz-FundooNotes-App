@@ -17,7 +17,10 @@ class DrawerNav extends React.Component {
     
     }
     handleArchive=()=>{
-        this.props.handleTheArchive();
+        this.props.handleTheArchive()
+    }
+    handleNotes=()=>{
+        this.props.handleTheNotes();
     }
     render() {
         return (
@@ -29,7 +32,7 @@ class DrawerNav extends React.Component {
                     width={250}
                 >
                     <List>
-                        <ListItem button key="Note">
+                        <ListItem button key="Note" onClick={this.handleNotes}>
                             <ListItemIcon><NotesIcon /></ListItemIcon>
                             <ListItemText primary="Note" />
                         </ListItem>

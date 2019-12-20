@@ -205,7 +205,7 @@ class CreateNoteDashboard extends React.Component {
             {svgPin}
           </IconButton>
         </div>
-        <div className="paddingInCards">
+        <div className="paddingInCards1">
           <TextField
             multiline
             InputProps={{ disableUnderline: true }}
@@ -215,7 +215,7 @@ class CreateNoteDashboard extends React.Component {
             onChange={this.onChange}
           ></TextField>
         </div>
-        <div>{this.state.remainder}</div>
+        <div className="remainderIncards">{this.state.remainder}</div>
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
