@@ -15,7 +15,7 @@ import {
   Typography,
   Tooltip
 } from "@material-ui/core";
-import { noteUpdate } from "../../controller/userController";
+import { noteUpdate,archiveData } from "../../controller/userController";
 import SvgPin from "../../icons/pin.js";
 import SvgPinned from "../../icons/pinned.js";
 import ImageIcon from "@material-ui/icons/Image";
@@ -38,7 +38,7 @@ class DailogBox extends Component {
       color:this.props.data.data().color,
       pin:this.props.data.data().pin,
       anchorEl:null,
-      remainder:this.props.data.data().remainder
+      reminder:this.props.data.data().reminder
     };
   }
   closeColorMenu = e => {
@@ -50,26 +50,26 @@ class DailogBox extends Component {
       anchorEl1: null
     });
   };
-  handleRemainderClick = e => {
+  handlereminderClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
-  handleCloseRemainder = () => {
+  handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
   handleSetTodayTime=()=>{
-    this.setState({remainder:"today,8:00pm"})
+    this.setState({reminder:"today,8:00pm"})
 }
   handleSetTommoTime=()=>{
-    this.setState({remainder:"tommorrow,8:00pm"})
+    this.setState({reminder:"tommorrow,8:00pm"})
   }
   handleSetNextWeekTime=()=>{
-    this.handleCloseRemainder()
+    this.handleClosereminder()
     let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
     var date = new Date().toDateString();
     date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
     date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
-    var remainder1 = date + ", 8:00 AM";
-    this.setState({ remainder: remainder1 })
+    var reminder1 = date + ", 8:00 AM";
+    this.setState({ reminder: reminder1 })
   }
   handleSetDate=()=>{}
   updateNote = () => {
@@ -80,7 +80,7 @@ class DailogBox extends Component {
       color:this.state.color,
       archive:this.state.archive,
       pin:this.state.pin,
-      remainder:this.state.remainder
+      reminder:this.state.reminder
     };
     noteUpdate(noteData).then(res => {
       console.log(res);
@@ -92,6 +92,18 @@ class DailogBox extends Component {
   };
 pinTheNote=()=>{
     this.setState({pin:!this.state.pin})
+}
+archiveNoteCreation = () => {
+  this.props.closeDialog()
+  const data = {
+    id: this.props.data.id
+  }
+  archiveData(data).then(res=>{
+    console.log(res)
+    this.props.displayNotes()
+  }
+   ) 
+  
 }
   render() {
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
@@ -115,9 +127,9 @@ pinTheNote=()=>{
               name="description"
             />
           </div>
-          <div className="remainderIncards">
+          <div className="reminderIncards">
                 <Typography >
-                  {this.state.remainder}
+                  {this.state.reminder}
                 </Typography>
               </div>
           <div classname="onClickCard">
@@ -125,23 +137,23 @@ pinTheNote=()=>{
               <div className="onClickCardIcons">
               <IconButton
                 aria-label="more"
-                aria-controls="remainder-menu"
+                aria-controls="reminder-menu"
                 aria-haspopup="true"
-                onClick={this.handleRemainderClick}
+                onClick={this.handlereminderClick}
               >
-                <Tooltip title="Remainder">
+                <Tooltip title="reminder">
                   <AddAlertIcon />
                 </Tooltip>
               </IconButton>
               <div>
               <Menu
-                  id="remainder-menu"
+                  id="reminder-menu"
                   anchorEl={this.state.anchorEl}
                   open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleCloseRemainder}
+                  onClose={this.handleClosereminder}
                 >
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Remainder :
+                  <MenuItem onClick={this.handleClosereminder}>
+                    reminder :
                   </MenuItem>
                   <MenuItem onClick={this.handleSetTodayTime}>
                   <div>  Later today</div>
@@ -152,7 +164,7 @@ pinTheNote=()=>{
                   <MenuItem onClick={this.handleSetNextWeekTime}>
                     Next week
                   </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
+                  <MenuItem onClick={this.handleClosereminder}>
                     Select Date and Time
                   </MenuItem>
                 </Menu>

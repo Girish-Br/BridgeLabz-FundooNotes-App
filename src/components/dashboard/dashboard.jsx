@@ -18,7 +18,10 @@ class Dashboard extends React.Component {
       displayList:false,
       archiveCards:false,
    }
-    this.dsiplayNote = React.createRef();
+    this.DisplayNote = React.createRef();
+  }
+  handleRef=()=>{
+this.DisplayNote.current.getAllCards()
   }
   handleArchive=()=>{
     this.setState({archiveCards:!(this.state.archiveCards)})
@@ -46,17 +49,17 @@ handleTheNotes=()=>{
         <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive}  handleNotes={this.handleTheNotes}/>
         <div className="content">
         <div>
-        <CreateNote />
+        <CreateNote handleRef={this.handleRef}/>
         </div>
         <div>
-        <DisplayNote archiveCards={this.state.archiveCards} style={{display:listStyle.display,width:listStyle.width}}/>
+        <DisplayNote archiveCards={this.state.archiveCards} style={{display:listStyle.display,width:listStyle.width}}ref={this.DisplayNote}/>
        </div>
         </div>
         </div>
     :  <div className="dashboardMainDiv">
     <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleNotes={this.handleTheNotes}/>
     <div className="content">
-    <DisplayNote archiveCards={this.state.archiveCards}style={{display:listStyle.display,width:listStyle.width}}/>
+    <DisplayNote archiveCards={this.state.archiveCards}style={{display:listStyle.display,width:listStyle.width}} ref={this.DisplayNote}/>
     </div>
     </div>
     )

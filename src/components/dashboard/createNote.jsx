@@ -43,7 +43,7 @@ class CreateNoteDashboard extends React.Component {
       archive: false,
       snackbarMsg: "",
       snackbarOpen: false,
-      remainder:"",
+      reminder:"",
       pin: false
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
@@ -51,10 +51,10 @@ class CreateNoteDashboard extends React.Component {
   snackbarClose = () => {
     this.setState({ snackbarOpen: false });
   };
-  handleRemainderClick = e => {
+  handlereminderClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
-  handleCloseRemainder = () => {
+  handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
   onChange = e => {
@@ -75,19 +75,33 @@ class CreateNoteDashboard extends React.Component {
       archive: this.state.archive,
       color: this.state.color,
       pin: this.state.pin,
-      remainder:this.state.remainder
+      reminder:this.state.reminder
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {
         if (res === "success") {
           this.setState({
             snackbarMsg: "Notes added",
-            snackbarOpen: true
-          });
+            snackbarOpen: true,
+            title: "",
+            description: "",
+            color: "",
+            pin: false
+          })
+          this.props.handleRef()
         } else {
           this.setState({
-            snackbarMsg: res,
-            snackbarOpen: true
+            snackbarMsg:res,
+            snackbarOpen:true,
+            openCard: false,
+            title: "",
+            description: "",
+            anchorEl: null,
+            color: "",
+            anchorEl1: null,
+            archive: false,
+            reminder:"",
+            pin: false
           });
         }
 
@@ -119,21 +133,21 @@ class CreateNoteDashboard extends React.Component {
     });
   }
   handleSetTodayTime=()=>{
-    this.handleCloseRemainder()
-    this.setState({remainder:"today,8:00pm"})
+    this.handleClosereminder()
+    this.setState({reminder:"today,8:00pm"})
 }
   handleSetTommoTime=()=>{
-    this.handleCloseRemainder()
-    this.setState({remainder:"tommorrow,8:00pm"})
+    this.handleClosereminder()
+    this.setState({reminder:"tommorrow,8:00pm"})
   }
   handleSetNextWeekTime=()=>{
-    this.handleCloseRemainder()
+    this.handleClosereminder()
     let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
     var date = new Date().toDateString();
     date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
     date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
     var reminder1 = date + ", 8:00 AM";
-    this.setState({ remainder: reminder1 })
+    this.setState({ reminder: reminder1 })
   }
 
   handleSetDate=()=>{}
@@ -215,29 +229,29 @@ class CreateNoteDashboard extends React.Component {
             onChange={this.onChange}
           ></TextField>
         </div>
-        <div className="remainderIncards">{this.state.remainder}</div>
+        <div className="reminderIncards">{this.state.reminder}</div>
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
               <IconButton
                 aria-label="more"
-                aria-controls="remainder-menu"
+                aria-controls="reminder-menu"
                 aria-haspopup="true"
-                onClick={this.handleRemainderClick}
+                onClick={this.handlereminderClick}
               >
-                <Tooltip title="Remainder">
+                <Tooltip title="reminder">
                   <AddAlertIcon />
                 </Tooltip>
               </IconButton>
               <div>
                 <Menu
-                  id="remainder-menu"
+                  id="reminder-menu"
                   anchorEl={this.state.anchorEl}
                   open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleCloseRemainder}
+                  onClose={this.handleClosereminder}
                 >
-                  <MenuItem onClick={this.handleCloseRemainder}>
-                    Remainder :
+                  <MenuItem onClick={this.handleClosereminder}>
+                    reminder :
                   </MenuItem>
                   <MenuItem onClick={this.handleSetTodayTime}>
                   <div>  Later today</div>
@@ -248,9 +262,18 @@ class CreateNoteDashboard extends React.Component {
                   <MenuItem onClick={this.handleSetNextWeekTime}>
                     Next week
                   </MenuItem>
-                  <MenuItem onClick={this.handleCloseRemainder}>
+                  <MenuItem  aria-label="more"
+                aria-controls="datePicker-menu"
+                aria-haspopup="true"
+                onClick={this.handlereminderClick}>
                     Select Date and Time
                   </MenuItem>
+                  <Menu      id="datePicker-menu"
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleClosereminder}>
+                    <MenuItem></MenuItem>
+                    </Menu>
                 </Menu>
               </div>
               <IconButton>
@@ -298,7 +321,7 @@ class CreateNoteDashboard extends React.Component {
                   </IconButton>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#6B8E23" }}
+                      style={{ backgroundColor: "#6B5B95" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>
@@ -306,13 +329,13 @@ class CreateNoteDashboard extends React.Component {
                 <div>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#4BB8C0" }}
+                      style={{ backgroundColor: "#92A8D1" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>
                   <IconButton>
                     <RadioButtonUncheckedRoundedIcon
-                      style={{ backgroundColor: "#3BDEDE" }}
+                      style={{ backgroundColor: "#DDDDDD" }}
                       onClick={this.colorChange}
                     />
                   </IconButton>

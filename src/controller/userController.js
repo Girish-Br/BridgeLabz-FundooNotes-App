@@ -96,7 +96,7 @@ export async function CreateNote(notes) {
       archive:notes.archive,
       pin:notes.pin,
       user_id:servicesConstant.firebaseAuthorization.currentUser.uid,
-      remainder:notes.remainder
+      reminder:notes.reminder
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
     return 'success';
@@ -133,7 +133,7 @@ export async function noteUpdate(data){
     "color":data.color,
     "archive":data.archive,
     "pin":data.pin,
-    "remainder":data.remainder
+    "reminder":data.reminder
     
  })
 .then(res=>{
@@ -156,7 +156,7 @@ return error.message
 }
 export async function archiveData(data){
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
-   "archieve":true
+   "archive":true
 }).then(res=>{
  return res
 }).catch(error=>{
@@ -172,7 +172,7 @@ export async function notePinned(data){
  return error.message
 })
 }
-export async function remainderUpdate(data){
+export async function ReminderUpdate(data){
   console.log()
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
     "remainder":data.remainder

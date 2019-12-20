@@ -19,7 +19,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {
   archiveData,
   notePinned,
-  remainderUpdate
+  ReminderUpdate
 } from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import DeleteNote from "../../controller/userController.js";
@@ -45,7 +45,7 @@ class GetCards extends React.Component {
       snackbarMsg: "",
       snackbarOpen: false,
       iconDisplay: false,
-      remainder: this.props.data.data().remainder
+      reminder: this.props.data.data().reminder
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
   }
@@ -70,22 +70,22 @@ class GetCards extends React.Component {
   snackbarClose = () => {
     this.setState({ snackbarOpen: false });
   };
-  handleRemainderClick = e => {
+  handlereminderClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
-  handleCloseRemainder = () => {
+  handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
   handleSetTodayTime = () => {
-    this.setState({ remainder: "today,8:00pm" });
-    this.updateRemainder();
+    this.setState({ reminder: "today,8:00pm" });
+    this.updatereminder();
   };
   handleSetTommoTime = () => {
-    this.setState({ remainder: "tommorrow,8:00pm" });
-    this.updateRemainder();
+    this.setState({ reminder: "tommorrow,8:00pm" });
+    this.updatereminder();
   };
   handleSetNextWeekTime = () => {
-    this.handleCloseRemainder();
+    this.handleClosereminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
     var date = new Date().toDateString();
     date = date.replace(
@@ -100,20 +100,20 @@ class GetCards extends React.Component {
     this.setState({ reminder: reminder1 });
   };
   handleSetDate = () => {
-    this.updateRemainder();
+    this.updateReminder();
   };
-  updateRemainder = () => {
-    let remainderDetails = {
-      id: this.props.data.id,
-      remainder: this.state.remainder
+  updateReminder = () => {
+    let reminderDetails = {
+      id: this.state.id,
+      reminder: this.state.reminder
     };
-    remainderUpdate(remainderDetails).then(res => {
+    ReminderUpdate(reminderDetails).then(res => {
       console.log(res);
     });
   };
-  handleRemainderDelete = () => {
-    this.setState({ remainder: '' });
-    this.updateRemainder();
+  handleReminderDelete = () => {
+    this.setState({ reminder: "" });
+    this.updateReminder();
   };
   handleDeleteNote = () => {
     this.setState({ deleteIcon: null });
@@ -125,6 +125,7 @@ class GetCards extends React.Component {
           snackbarMsg: "Note deleted",
           snackbarOpen: false
         });
+        this.props.displayNotes();
       } else {
         this.setState({
           snackbarMsg: res,
@@ -133,12 +134,15 @@ class GetCards extends React.Component {
       }
     });
   };
-  archiveNote = () => {
+  archiveNoteCreation = () => {
     const data = {
-      id: this.state.id
-    };
-    archiveData(data);
-  };
+      id: this.props.data.id
+    }
+    archiveData(data).then(res=>
+      console.log(res)
+     ) 
+     this.props.displayNotes()
+  }
   pinTheNote = () => {
     this.setState({ pinned: !this.state.pinned });
     const data = {
@@ -166,27 +170,27 @@ class GetCards extends React.Component {
       <div className="cardsHover">
         <IconButton
           aria-label="more"
-          aria-controls="remainder-menu"
+          aria-controls="reminder-menu"
           aria-haspopup="true"
-          onClick={this.handleRemainderClick}
+          onClick={this.handlereminderClick}
         >
-          <Tooltip title="Remainder">
+          <Tooltip title="reminder">
             <AddAlertIcon />
           </Tooltip>
         </IconButton>
         <Menu
-          id="remainder-menu"
+          id="reminder-menu"
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
-          onClose={this.handleCloseRemainder}
+          onClose={this.handleClosereminder}
         >
-          <MenuItem onClick={this.handleCloseRemainder}>Remainder :</MenuItem>
+          <MenuItem onClick={this.handleClosereminder}>reminder :</MenuItem>
           <MenuItem onClick={this.handleSetTodayTime}>
             <div> Later today</div>
           </MenuItem>
           <MenuItem onClick={this.handleSetTommoTime}>Tommorrow</MenuItem>
           <MenuItem onClick={this.handleSetNextWeekTime}>Next week</MenuItem>
-          <MenuItem onClick={this.handleCloseRemainder}>
+          <MenuItem onClick={this.handleClosereminder}>
             Select Date and Time
           </MenuItem>
         </Menu>
@@ -233,7 +237,7 @@ class GetCards extends React.Component {
             </IconButton>
             <IconButton>
               <RadioButtonUncheckedRoundedIcon
-                style={{ backgroundColor: "#6B8E23" }}
+                style={{ backgroundColor: "#6B5B95" }}
                 onClick={this.colorChange}
               />
             </IconButton>
@@ -241,13 +245,13 @@ class GetCards extends React.Component {
           <div>
             <IconButton>
               <RadioButtonUncheckedRoundedIcon
-                style={{ backgroundColor: "#4BB8C0" }}
+                style={{ backgroundColor: "#92A8D1" }}
                 onClick={this.colorChange}
               />
             </IconButton>
             <IconButton>
               <RadioButtonUncheckedRoundedIcon
-                style={{ backgroundColor: "#3BDEDE" }}
+                style={{ backgroundColor: "#DDDDDD" }}
                 onClick={this.colorChange}
               />
             </IconButton>
@@ -257,7 +261,7 @@ class GetCards extends React.Component {
           <ImageIcon />
         </IconButton>
         <IconButton>
-          <ArchiveIcon />
+          <ArchiveIcon onClick={this.archiveNoteCreation} />
         </IconButton>
         <IconButton
           aria-label="more"
@@ -312,18 +316,18 @@ class GetCards extends React.Component {
                   </Typography>
                 </div>
               </div>
-              <div className="paddingInCards"  onClick={this.NoteOpenForEdit}>
+              <div className="paddingInCards" onClick={this.NoteOpenForEdit}>
                 <Typography className="descIn">
                   {this.props.data.data().description}
                 </Typography>
               </div>
-              <div className="remainderIncards">
-                <Typography className="remainderIncardstypo">
-                  {this.state.remainder}
+              <div className="reminderIncards">
+                <Typography className="reminderIncardstypo">
+                  {this.state.reminder}
                 </Typography>
                 <IconButton
                   color="inherit"
-                  onClick={this.handleRemainderDelete}
+                  onClick={this.handlereminderDelete}
                 ></IconButton>
               </div>
             </div>
@@ -334,7 +338,8 @@ class GetCards extends React.Component {
           open={this.state.noteOpen}
           data={this.props.data}
           closeDialog={this.NoteOpenForEdit}
-        />
+          displayNotes={this.props.displayNotes}
+          />
       </div>
     );
   }
