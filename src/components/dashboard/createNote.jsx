@@ -7,6 +7,8 @@
  *****************************************************************************************/
 import React from "react";
 import { CreateNote } from "../../controller/userController";
+import EventIcon from "@material-ui/icons/Event";
+import Chip from "@material-ui/core/Chip";
 import {
   Card,
   Snackbar,
@@ -137,13 +139,22 @@ class CreateNoteDashboard extends React.Component {
     this.setState({reminder:"today,8:00pm"})
 }
   handleSetTommoTime=()=>{
-    this.handleClosereminder()
-    this.setState({reminder:"tommorrow,8:00pm"})
+    this.updateReminder();
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var date = new Date().toDateString();
+    date = date.replace(new Date().getDate(), new Date().getDate() + 1);
+    date = date.replace(
+      days[new Date().getDay() - 1],
+      days[new Date().getDay()]
+    );
+    let reminder1 = date + ", 8:am";
+    this.setState({ reminder: reminder1 });
   }
   handleSetNextWeekTime=()=>{
     this.handleClosereminder()
-    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
+    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
     var date = new Date().toDateString();
+    console.log(new Date())
     date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
     date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
     var reminder1 = date + ", 8:00 AM";
@@ -229,7 +240,16 @@ class CreateNoteDashboard extends React.Component {
             onChange={this.onChange}
           ></TextField>
         </div>
-        <div className="reminderIncards">{this.state.reminder}</div>
+        {this.state.reminder !== "" ? (
+                  <Chip
+                    icon={<EventIcon />}
+                    label={this.state.reminder}
+                    onDelete={this.handleReminderDelete}
+                    variant="outlined"
+                  />
+                ) : (
+                  <div className="reminderIncards"/>
+                )}
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
@@ -254,7 +274,7 @@ class CreateNoteDashboard extends React.Component {
                     reminder :
                   </MenuItem>
                   <MenuItem onClick={this.handleSetTodayTime}>
-                  <div>  Later today</div>
+                  Later today
                   </MenuItem>
                   <MenuItem onClick={this.handleSetTommoTime}>
                     Tommorrow
@@ -262,18 +282,9 @@ class CreateNoteDashboard extends React.Component {
                   <MenuItem onClick={this.handleSetNextWeekTime}>
                     Next week
                   </MenuItem>
-                  <MenuItem  aria-label="more"
-                aria-controls="datePicker-menu"
-                aria-haspopup="true"
-                onClick={this.handlereminderClick}>
+                  <MenuItem >
                     Select Date and Time
                   </MenuItem>
-                  <Menu      id="datePicker-menu"
-                  anchorEl={this.state.anchorEl}
-                  open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleClosereminder}>
-                    <MenuItem></MenuItem>
-                    </Menu>
                 </Menu>
               </div>
               <IconButton>

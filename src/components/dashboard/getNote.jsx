@@ -8,6 +8,8 @@
 import React from "react";
 import DailogBox from "./dialogBox.jsx";
 import Menu from "@material-ui/core/Menu";
+import EventIcon from "@material-ui/icons/Event";
+import Chip from "@material-ui/core/Chip";
 import {
   Card,
   IconButton,
@@ -16,7 +18,8 @@ import {
   Tooltip
 } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import UnarchiveIcon from '@material-ui/icons/Unarchive';
+import UnarchiveIcon from "@material-ui/icons/Unarchive";
+
 import {
   archiveData,
   notePinned,
@@ -82,12 +85,20 @@ class GetCards extends React.Component {
     this.updateReminder();
   };
   handleSetTommoTime = () => {
-    this.setState({ reminder: "tommorrow,8:00pm" });
     this.updateReminder();
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var date = new Date().toDateString();
+    date = date.replace(new Date().getDate(), new Date().getDate() + 1);
+    date = date.replace(
+      days[new Date().getDay() - 1],
+      days[new Date().getDay()]
+    );
+    let reminder1 = date + ", 8:am";
+    this.setState({ reminder: reminder1 });
   };
   handleSetNextWeekTime = () => {
     this.handleClosereminder();
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(
       new Date().getDate().toString(),
@@ -137,26 +148,22 @@ class GetCards extends React.Component {
   };
   archiveNoteCreation = () => {
     let data;
-    if(this.props.data.data().archive){
-       data = {
+    if (this.props.data.data().archive) {
+      data = {
         id: this.props.data.id,
-        archive:false,
-        pin:false
-      }
-    }
-    else{
-     data={
+        archive: false,
+        pin: false
+      };
+    } else {
+      data = {
         id: this.props.data.id,
-        archive:true,
-        pin:false
-      }
+        archive: true,
+        pin: false
+      };
     }
-    archiveData(data).then(res=>
-      console.log(res)
-     ) 
-     this.props.displayNotes()
-
-}
+    archiveData(data).then(res => console.log(res));
+    this.props.displayNotes();
+  };
   pinTheNote = () => {
     this.setState({ pin: !this.state.pin });
     const data = {
@@ -172,19 +179,24 @@ class GetCards extends React.Component {
     this.setState({ iconDisplay: false });
   };
   render() {
-    let archiveIcon = !this.props.data.data().archive ?
-    <IconButton onClick={this.archiveNoteCreation}>
-      <Tooltip title="Archive">
-        <ArchiveIcon />
-      </Tooltip>
-    </IconButton>
-    :
-    <IconButton onClick={this.archiveNoteCreation}>
-      <Tooltip title="UnArchive">
-      <UnarchiveIcon />
-      </Tooltip>
-    </IconButton>
-     let archiveIconDisplay = !this.state.iconDisplay ? <IconButton ></IconButton> :archiveIcon
+    let archiveIcon = !this.props.data.data().archive ? (
+      <IconButton onClick={this.archiveNoteCreation}>
+        <Tooltip title="Archive">
+          <ArchiveIcon />
+        </Tooltip>
+      </IconButton>
+    ) : (
+      <IconButton onClick={this.archiveNoteCreation}>
+        <Tooltip title="UnArchive">
+          <UnarchiveIcon />
+        </Tooltip>
+      </IconButton>
+    );
+    let archiveIconDisplay = !this.state.iconDisplay ? (
+      <IconButton></IconButton>
+    ) : (
+      archiveIcon
+    );
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
     let svg = !this.state.iconDisplay ? (
       <IconButton></IconButton>
@@ -287,7 +299,7 @@ class GetCards extends React.Component {
         <IconButton>
           <ImageIcon />
         </IconButton>
-  {archiveIconDisplay}
+        {archiveIconDisplay}
         <IconButton
           aria-label="more"
           aria-controls="delete-menu"
@@ -337,12 +349,11 @@ class GetCards extends React.Component {
               <div className="pinAndTxtFld">
                 <div className="paddingInCards" onClick={this.NoteOpenForEdit}>
                   <div>
-                  <Typography className="titleinGetCards">
-                    <b>{this.props.data.data().title}</b>
-                  </Typography>
+                    <Typography className="titleinGetCards">
+                      <b>{this.props.data.data().title}</b>
+                    </Typography>
                   </div>
-                  <div className="pinDiv">
-                  </div>
+                  <div className="pinDiv"></div>
                 </div>
               </div>
               <div className="paddingInCards" onClick={this.NoteOpenForEdit}>
@@ -351,13 +362,19 @@ class GetCards extends React.Component {
                 </Typography>
               </div>
               <div className="reminderIncards">
-                <Typography className="reminderIncardstypo">
+                {this.state.reminder !== "" ? (
+                  <Chip
+                    icon={<EventIcon />}
+                    label={this.state.reminder}
+                    onDelete={this.handleReminderDelete}
+                    variant="outlined"
+                  />
+                ) : (
+                  <div className="reminderIncards"/>
+                )}
+                {/* <Typography className="reminderIncardstypo">
                   {this.state.reminder}
-                </Typography>
-                <IconButton
-                  color="inherit"
-                  onClick={this.handlereminderDelete}
-                ></IconButton>
+                </Typography> */}
               </div>
             </div>
             {iconsContent}
@@ -368,7 +385,7 @@ class GetCards extends React.Component {
           data={this.props.data}
           closeDialog={this.NoteOpenForEdit}
           displayNotes={this.props.displayNotes}
-          />
+        />
       </div>
     );
   }

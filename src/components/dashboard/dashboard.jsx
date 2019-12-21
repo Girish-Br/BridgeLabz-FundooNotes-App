@@ -31,7 +31,7 @@ handleTheReminder=()=>{
   this.setState({reminder:true,archiveCards:false})
 }
 handleTheNotes=()=>{
-  this.setState({archiveCards:false})
+  this.setState({archiveCards:false,reminder:false})
 }
   handleDialogBox() {
     this.setState({ dialogBox: true })
@@ -55,7 +55,7 @@ handleTheNotes=()=>{
         <div>
         <CreateNote handleRef={this.handleRef}/>
         </div>
-        <div>
+        <div className="heightOfCards">
         <DisplayNote archiveCards={this.state.archiveCards} reminderNotes={this.state.reminder} style={{display:listStyle.display,width:listStyle.width}}ref={this.DisplayNote}/>
        </div>
         </div>

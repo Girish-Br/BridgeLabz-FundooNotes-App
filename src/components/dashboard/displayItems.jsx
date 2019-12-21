@@ -1,8 +1,5 @@
 import React from "react";
 import GetCards from "./getNote.jsx";
-import Appbar from "./appBar.jsx";
-import { withRouter } from "react-router-dom";
-import CreateNote from "./createNote";
 import { GetNote } from "../../controller/userController";
 class DisplayNote extends React.Component {
   constructor(props) {
@@ -59,10 +56,7 @@ class DisplayNote extends React.Component {
         }
       }
     });
-  
- 
-  
-    return !this.props.archiveCards && !this.props.reminderNotes ? (
+     return !this.props.archiveCards && !this.props.reminderNotes ? (
       <div>
         <div>
           <div className>

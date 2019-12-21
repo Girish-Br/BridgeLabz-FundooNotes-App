@@ -305,6 +305,7 @@ justify-content: space-between;
 } 
 .cardshadow{
   justify-content: space-between;
+  height: 150px;
 }
 /* .root{
   display: "flex";
