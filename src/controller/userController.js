@@ -186,3 +186,16 @@ export async function ReminderUpdate(data){
   return error.message
 })
 }
+export async function colorUpdate(data){
+  console.log()
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+    "color":data.color
+    })
+.then(res=>{
+  res=true;
+  return res
+})
+.catch(error=>{
+  return error.message
+})
+}

@@ -22,7 +22,8 @@ import UnarchiveIcon from "@material-ui/icons/Unarchive";
 import {
   archiveData,
   notePinned,
-  ReminderUpdate
+  ReminderUpdate,
+  colorUpdate
 } from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import DeleteNote from "../../controller/userController.js";
@@ -60,13 +61,13 @@ class GetCards extends React.Component {
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
-  //  let data={
-  //     color:this.state.color,
-  //     id:this.state.id
-  //   }
-  //   updateColor=(data)=>{
-
-  //   }
+   let data={
+      color:this.state.color,
+      id:this.props.data.id
+    }
+    colorUpdate(data).then(res => {
+        console.log(res);
+      })
   };
   NoteOpenForEdit = () => {
     this.setState({ noteOpen: !this.state.noteOpen });
@@ -86,15 +87,12 @@ class GetCards extends React.Component {
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-  handleSetTodayTime=()=>{
+   handleSetTodayTime=async()=>{
+   await this.setState({ reminder: "today,8:00pm" });
     this.updateReminder();
-    var date = new Date().toDateString();
-    let reminder1 = date + ", 8:am";
-    this.setState({ reminder: reminder1 });
-}
-  handleSetTommoTime = () => {
-    this.updateReminder();
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  };
+ handleSetTommoTime= async()=>{
+   let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(new Date().getDate(), new Date().getDate() + 1);
     date = date.replace(
@@ -102,9 +100,10 @@ class GetCards extends React.Component {
       days[new Date().getDay()]
     );
     let reminder1 = date + ", 8:am";
-    this.setState({ reminder: reminder1 });
+   await this.setState({ reminder: reminder1 });
+    this.updateReminder();
   };
-  handleSetNextWeekTime = () => {
+  handleSetNextWeekTime= async()=>{
     this.handleClosereminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
@@ -117,7 +116,8 @@ class GetCards extends React.Component {
       days[new Date().getDay()]
     );
     var reminder1 = date + ", 8:00 AM";
-    this.setState({ reminder: reminder1 });
+   await this.setState({ reminder: reminder1 });
+    this.updateReminder();
   };
   handleSetDate = () => {
     this.updateReminder();
@@ -129,6 +129,7 @@ class GetCards extends React.Component {
     };
     ReminderUpdate(reminderDetails).then(res => {
       console.log(res);
+      this.props.displayNotes()
     });
   };
   handleReminderDelete =async () => {
