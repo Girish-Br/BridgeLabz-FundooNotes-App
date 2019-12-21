@@ -5,9 +5,15 @@
  *  @version        : v0.1
  *  @since          : 9-12-2019
  *****************************************************************************************/
-import React from "react";
+import React  from "react";
 import { CreateNote } from "../../controller/userController";
 import EventIcon from "@material-ui/icons/Event";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+  KeyboardTimePicker
+} from "@material-ui/pickers";
 import Chip from "@material-ui/core/Chip";
 import {
   Card,
@@ -16,7 +22,8 @@ import {
   Tooltip,
   CardActions,
   IconButton,
-  Button
+  Button,
+  Grid
 } from "@material-ui/core";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
@@ -30,7 +37,6 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SvgPin from "../../icons/pin.js";
-import  {GetNote,GetNoteForNotPinned}  from '../../controller/userController'
 import SvgPinned from "../../icons/pinned.js";
 class CreateNoteDashboard extends React.Component {
   constructor(props) {
@@ -42,25 +48,31 @@ class CreateNoteDashboard extends React.Component {
       anchorEl: null,
       color: "",
       anchorEl1: null,
+      openReminderMenu: false,
       archive: false,
       snackbarMsg: "",
       snackbarOpen: false,
-      reminder:"",
+      reminder: "",
+      date:"",
+      time: "",
       pin: false
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
   }
+
   snackbarClose = () => {
     this.setState({ snackbarOpen: false });
   };
   handlereminderClick = e => {
     this.setState({ anchorEl: e.currentTarget });
   };
+  setDateOpen = e => {
+    this.setState({ openReminderMenu: !this.state.openReminderMenu });
+  };
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-  onChange = e => {
-    e.preventDefault();
+  onChange = (e)=> {
     this.setState({ [e.target.name]: e.target.value });
   };
   cardOpen = () => {
@@ -77,7 +89,7 @@ class CreateNoteDashboard extends React.Component {
       archive: this.state.archive,
       color: this.state.color,
       pin: this.state.pin,
-      reminder:this.state.reminder
+      reminder: this.state.reminder
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {
@@ -89,12 +101,12 @@ class CreateNoteDashboard extends React.Component {
             description: "",
             color: "",
             pin: false
-          })
-          this.props.handleRef()
+          });
+          this.props.handleRef();
         } else {
           this.setState({
-            snackbarMsg:res,
-            snackbarOpen:true,
+            snackbarMsg: res,
+            snackbarOpen: true,
             openCard: false,
             title: "",
             description: "",
@@ -102,20 +114,18 @@ class CreateNoteDashboard extends React.Component {
             color: "",
             anchorEl1: null,
             archive: false,
-            reminder:"",
+            reminder: "",
             pin: false
           });
         }
-
       });
     }
   };
-  archiveNoteCreation = async() => {
+  archiveNoteCreation = async () => {
     try {
-       await this.setState({ archive: true, pin: false });
-        this.closeCard();
-      }
-  catch (error) {
+      await this.setState({ archive: true, pin: false });
+      this.closeCard();
+    } catch (error) {
       console.log(error);
     }
   };
@@ -128,20 +138,20 @@ class CreateNoteDashboard extends React.Component {
   closeColorMenu = e => {
     this.setState({ anchorEl1: e.currentTarget });
   };
-  colorChange = (e) => {
+  colorChange = e => {
     this.setState({
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
-  }
-  handleSetTodayTime=()=>{
-    this.updateReminder();
+  };
+  handleSetTodayTime = () => {
+    this.handleClosereminder();
     var date = new Date().toDateString();
     let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
-}
-  handleSetTommoTime=()=>{
-    this.updateReminder();
+  };
+  handleSetTommoTime = () => {
+    this.handleClosereminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(new Date().getDate(), new Date().getDate() + 1);
@@ -151,20 +161,97 @@ class CreateNoteDashboard extends React.Component {
     );
     let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
-  }
-  handleSetNextWeekTime=()=>{
-    this.handleClosereminder()
-    let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+  };
+  handleSetNextWeekTime = () => {
+    this.handleClosereminder();
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
-    console.log(new Date())
-    date=date.replace(new Date().getDate().toString(),new Date().getDate()+7);
-    date=date.replace(days[new Date().getDay()-1],days[new Date().getDay()]);
+    console.log(new Date());
+    date = date.replace(
+      new Date().getDate().toString(),
+      new Date().getDate() + 7
+    );
+    date = date.replace(
+      days[new Date().getDay() - 1],
+      days[new Date().getDay()]
+    );
     var reminder1 = date + ", 8:00 AM";
-    this.setState({ reminder: reminder1 })
+    this.setState({ reminder: reminder1 });
+  };
+  handleDate=(v,e)=>{
+   
+    console.log("datae",v)
+    this.setState({date:e.value})
   }
-
-  handleSetDate=()=>{}
+  handleTime=(e)=>{
+    this.setState({time:e.value})
+  }
+  handleSave=()=>{
+    this.handleClosereminder();
+    this.setState({ reminder: this.state.date +''+ this.state.time });
+    this.setState({openReminderMenu:!this.state.openReminderMenu})
+  }
   render() {
+    let reminderMenuItem = !this.state.openReminderMenu ? (
+      <div>
+        <Menu
+          id="reminder-menu"
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleClosereminder}
+        >
+          <MenuItem onClick={this.handleClosereminder}>Reminder :</MenuItem>
+          <MenuItem onClick={this.handleSetTodayTime}>Later today</MenuItem>
+          <MenuItem onClick={this.handleSetTommoTime}>Tommorrow</MenuItem>
+          <MenuItem onClick={this.handleSetNextWeekTime}>Next week</MenuItem>
+          <MenuItem onClick={this.setDateOpen}>Select Date and Time</MenuItem>
+        </Menu>
+      </div>
+    ) : (
+      <div>
+        <Menu
+          id="reminder-menu"
+          anchorEl={this.state.anchorEl}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleClosereminder}
+        >
+          <div className="dateAndReminder">
+          <div>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  name="date"
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  label={this.state.date}
+                  value={this.state.date}
+                  onChange={(value,event)=>this.handleDate(value,event)}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date"
+                  }}
+                />
+            </MuiPickersUtilsProvider>
+            </div>
+            <div>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardTimePicker
+                  name="time"
+                  margin="normal"
+                  id="time-picker"
+                  label={this.state.time}
+                  value={this.state.time}
+                  onChange={this.handleTime}
+                  KeyboardButtonProps={{
+                    "aria-label": "change time"
+                  }}
+                />
+            </MuiPickersUtilsProvider>
+            </div>
+            </div>
+            <div className="saveInReminder"><Button onClick={this.handleSave} style={{backgroundColor:"silver"}}>Save</Button></div>
+        </Menu>
+      </div>
+    );
     let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
     return !this.state.openCard ? (
       <div className="create-note-card">
@@ -218,7 +305,10 @@ class CreateNoteDashboard extends React.Component {
         </div>
       </div>
     ) : (
-      <div  className="create-note-card" style={{ backgroundColor: this.state.color }}>
+      <div
+        className="create-note-card"
+        style={{ backgroundColor: this.state.color }}
+      >
         <div className="paddingInCards">
           <TextField
             multiline
@@ -243,15 +333,15 @@ class CreateNoteDashboard extends React.Component {
           ></TextField>
         </div>
         {this.state.reminder !== "" ? (
-                  <Chip
-                    icon={<EventIcon />}
-                    label={this.state.reminder}
-                    onDelete={this.handleReminderDelete}
-                    variant="outlined"
-                  />
-                ) : (
-                  <div className="reminderIncards"/>
-                )}
+             <Chip
+               icon={<EventIcon />}
+               label={this.state.reminder}
+               onDelete={this.handleReminderDelete}
+               variant="outlined"
+             />
+        ) : (
+          <div className="reminderIncards" />
+        )}
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
@@ -265,30 +355,7 @@ class CreateNoteDashboard extends React.Component {
                   <AddAlertIcon />
                 </Tooltip>
               </IconButton>
-              <div>
-                <Menu
-                  id="reminder-menu"
-                  anchorEl={this.state.anchorEl}
-                  open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleClosereminder}
-                >
-                  <MenuItem onClick={this.handleClosereminder}>
-                    reminder :
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetTodayTime}>
-                  Later today
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetTommoTime}>
-                    Tommorrow
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSetNextWeekTime}>
-                    Next week
-                  </MenuItem>
-                  <MenuItem >
-                    Select Date and Time
-                  </MenuItem>
-                </Menu>
-              </div>
+              {reminderMenuItem}
               <IconButton>
                 <Tooltip title="Add colaborator">
                   <PersonAddIcon />

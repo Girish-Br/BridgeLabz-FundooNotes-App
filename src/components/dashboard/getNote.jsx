@@ -87,12 +87,17 @@ class GetCards extends React.Component {
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-   handleSetTodayTime=async()=>{
-   await this.setState({ reminder: "today,8:00pm" });
+  handleSetTodayTime=async()=>{
+    this.handleClosereminder();
     this.updateReminder();
-  };
+    var date = new Date().toDateString();
+    let reminder1 = date + ", 8:am";
+   await this.setState({ reminder: reminder1 });
+   this.updateReminder();
+}
  handleSetTommoTime= async()=>{
-   let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  this.handleClosereminder();
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(new Date().getDate(), new Date().getDate() + 1);
     date = date.replace(
@@ -120,6 +125,8 @@ class GetCards extends React.Component {
     this.updateReminder();
   };
   handleSetDate = () => {
+    this.handleClosereminder();
+
     this.updateReminder();
   };
   updateReminder = () => {
