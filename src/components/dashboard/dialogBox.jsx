@@ -57,11 +57,23 @@ class DailogBox extends Component {
     this.setState({ anchorEl: null });
   };
   handleSetTodayTime=()=>{
-    this.setState({reminder:"today,8:00pm"})
+    this.updateReminder();
+    var date = new Date().toDateString();
+    let reminder1 = date + ", 8:am";
+    this.setState({ reminder: reminder1 });
 }
-  handleSetTommoTime=()=>{
-    this.setState({reminder:"tommorrow,8:00pm"})
-  }
+handleSetTommoTime=()=>{
+  this.updateReminder();
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  var date = new Date().toDateString();
+  date = date.replace(new Date().getDate(), new Date().getDate() + 1);
+  date = date.replace(
+    days[new Date().getDay() - 1],
+    days[new Date().getDay()]
+  );
+  let reminder1 = date + ", 8:am";
+  this.setState({ reminder: reminder1 });
+}
   handleSetNextWeekTime=()=>{
     this.handleClosereminder()
     let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Mon"]
@@ -84,6 +96,7 @@ class DailogBox extends Component {
     };
     noteUpdate(noteData).then(res => {
       console.log(res);
+      this.props.displayNotes()
       this.props.closeDialog();
     });
   };

@@ -19,7 +19,6 @@ import {
 } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import UnarchiveIcon from "@material-ui/icons/Unarchive";
-
 import {
   archiveData,
   notePinned,
@@ -43,7 +42,7 @@ class GetCards extends React.Component {
       anchorEl: null,
       deleteIcon: null,
       id: this.props.data.id,
-      color: "",
+      color: this.props.data.data().color,
       anchorEl1: null,
       pin: this.props.data.data().pinned,
       snackbarMsg: "",
@@ -61,6 +60,13 @@ class GetCards extends React.Component {
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
+  //  let data={
+  //     color:this.state.color,
+  //     id:this.state.id
+  //   }
+  //   updateColor=(data)=>{
+
+  //   }
   };
   NoteOpenForEdit = () => {
     this.setState({ noteOpen: !this.state.noteOpen });
@@ -80,10 +86,12 @@ class GetCards extends React.Component {
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-  handleSetTodayTime = () => {
-    this.setState({ reminder: "today,8:00pm" });
+  handleSetTodayTime=()=>{
     this.updateReminder();
-  };
+    var date = new Date().toDateString();
+    let reminder1 = date + ", 8:am";
+    this.setState({ reminder: reminder1 });
+}
   handleSetTommoTime = () => {
     this.updateReminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -123,8 +131,8 @@ class GetCards extends React.Component {
       console.log(res);
     });
   };
-  handleReminderDelete = () => {
-    this.setState({ reminder: "" });
+  handleReminderDelete =async () => {
+   await this.setState({ reminder: "" });
     this.updateReminder();
   };
   handleDeleteNote = () => {
@@ -342,7 +350,7 @@ class GetCards extends React.Component {
         />
         <Card
           className="cardshadow"
-          style={{ backgroundColor: this.props.data.data().color }}
+          style={{ backgroundColor: this.state.color }}
         >
           <div>
             <div>

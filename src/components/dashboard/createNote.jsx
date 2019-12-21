@@ -135,8 +135,10 @@ class CreateNoteDashboard extends React.Component {
     });
   }
   handleSetTodayTime=()=>{
-    this.handleClosereminder()
-    this.setState({reminder:"today,8:00pm"})
+    this.updateReminder();
+    var date = new Date().toDateString();
+    let reminder1 = date + ", 8:am";
+    this.setState({ reminder: reminder1 });
 }
   handleSetTommoTime=()=>{
     this.updateReminder();
