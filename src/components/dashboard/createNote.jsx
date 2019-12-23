@@ -5,7 +5,7 @@
  *  @version        : v0.1
  *  @since          : 9-12-2019
  *****************************************************************************************/
-import React  from "react";
+import React from "react";
 import { CreateNote } from "../../controller/userController";
 import EventIcon from "@material-ui/icons/Event";
 import DateFnsUtils from "@date-io/date-fns";
@@ -53,7 +53,7 @@ class CreateNoteDashboard extends React.Component {
       snackbarMsg: "",
       snackbarOpen: false,
       reminder: "",
-      date:"",
+      date: "",
       time: "",
       pin: false
     };
@@ -72,7 +72,7 @@ class CreateNoteDashboard extends React.Component {
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-  onChange = (e)=> {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   cardOpen = () => {
@@ -115,7 +115,9 @@ class CreateNoteDashboard extends React.Component {
             anchorEl1: null,
             archive: false,
             reminder: "",
-            pin: false
+            pin: false,
+            date:"",
+            time:""
           });
         }
       });
@@ -146,7 +148,9 @@ class CreateNoteDashboard extends React.Component {
   };
   handleSetTodayTime = () => {
     this.handleClosereminder();
+    console.log(new Date());
     var date = new Date().toDateString();
+    console.log(new Date().toDateString());
     let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
   };
@@ -155,10 +159,12 @@ class CreateNoteDashboard extends React.Component {
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(new Date().getDate(), new Date().getDate() + 1);
+    console.log(new Date().getDate());
     date = date.replace(
       days[new Date().getDay() - 1],
       days[new Date().getDay()]
     );
+    console.log(new Date().getDay());
     let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
   };
@@ -178,19 +184,22 @@ class CreateNoteDashboard extends React.Component {
     var reminder1 = date + ", 8:00 AM";
     this.setState({ reminder: reminder1 });
   };
-  handleDate=(v,e)=>{
-   
-    console.log("datae",v)
-    this.setState({date:e.value})
-  }
-  handleTime=(e)=>{
-    this.setState({time:e.value})
-  }
-  handleSave=()=>{
+  handleDate = (v, e) => {
+    let date1 = v.toString().slice(3, 15);
+    this.setState({ date :date1 });
+    console.log(this.state.date);
+  };
+  handleTime = (v,e) => {
+    let time1=v.toString().slice(15,24)
+    this.setState({ time:time1 });
+    console.log(this.state.time)
+  };
+  handleSave = () => {
     this.handleClosereminder();
-    this.setState({ reminder: this.state.date +''+ this.state.time });
-    this.setState({openReminderMenu:!this.state.openReminderMenu})
-  }
+    this.setState({ reminder: this.state.date +","+ this.state.time });
+    this.setState({ openReminderMenu: !this.state.openReminderMenu });
+    this.props.handleRef();
+  };
   render() {
     let reminderMenuItem = !this.state.openReminderMenu ? (
       <div>
@@ -216,8 +225,8 @@ class CreateNoteDashboard extends React.Component {
           onClose={this.handleClosereminder}
         >
           <div className="dateAndReminder">
-          <div>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <div>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   name="date"
                   variant="inline"
@@ -225,30 +234,37 @@ class CreateNoteDashboard extends React.Component {
                   margin="normal"
                   label={this.state.date}
                   value={this.state.date}
-                  onChange={(value,event)=>this.handleDate(value,event)}
+                  onChange={(value, event) => this.handleDate(value, event)}
                   KeyboardButtonProps={{
                     "aria-label": "change date"
                   }}
                 />
-            </MuiPickersUtilsProvider>
+              </MuiPickersUtilsProvider>
             </div>
             <div>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
                   name="time"
                   margin="normal"
                   id="time-picker"
                   label={this.state.time}
                   value={this.state.time}
-                  onChange={this.handleTime}
+                  onChange={(value, event) => this.handleTime(value, event)}
                   KeyboardButtonProps={{
                     "aria-label": "change time"
                   }}
                 />
-            </MuiPickersUtilsProvider>
+              </MuiPickersUtilsProvider>
             </div>
-            </div>
-            <div className="saveInReminder"><Button onClick={this.handleSave} style={{backgroundColor:"silver"}}>Save</Button></div>
+          </div>
+          <div className="saveInReminder">
+            <Button
+              onClick={this.handleSave}
+              style={{ backgroundColor: "silver" }}
+            >
+              Save
+            </Button>
+          </div>
         </Menu>
       </div>
     );
@@ -333,12 +349,12 @@ class CreateNoteDashboard extends React.Component {
           ></TextField>
         </div>
         {this.state.reminder !== "" ? (
-             <Chip
-               icon={<EventIcon />}
-               label={this.state.reminder}
-               onDelete={this.handleReminderDelete}
-               variant="outlined"
-             />
+          <Chip
+            icon={<EventIcon />}
+            label={this.state.reminder}
+            onDelete={this.handleReminderDelete}
+            variant="outlined"
+          />
         ) : (
           <div className="reminderIncards" />
         )}
