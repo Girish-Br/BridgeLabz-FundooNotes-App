@@ -36,9 +36,9 @@ class DrawerNav extends React.Component {
     this.setState({ archive: false, reminder: true, notes: false });
   };
   render() {
-    let noteDisplay = this.state.notes && "#EFC050";
-    let reminderDisplay = this.state.reminder && "#EFC050";
-    let archiveDisplay = this.state.archive && "#EFC050";
+    let noteDisplay = this.state.notes && "#feefc3";
+    let reminderDisplay = this.state.reminder && "#feefc3";
+    let archiveDisplay = this.state.archive && "#feefc3";
     return (
       <div>
         <Drawer

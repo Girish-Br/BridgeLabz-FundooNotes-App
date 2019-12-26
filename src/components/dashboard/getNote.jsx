@@ -91,7 +91,7 @@ class GetCards extends React.Component {
     this.handleClosereminder();
     this.updateReminder();
     var date = new Date().toDateString();
-    let reminder1 = date + ", 8:am";
+    let reminder1 = date + ", 8:AM";
    await this.setState({ reminder: reminder1 });
    this.updateReminder();
 }
@@ -104,7 +104,7 @@ class GetCards extends React.Component {
       days[new Date().getDay() - 1],
       days[new Date().getDay()]
     );
-    let reminder1 = date + ", 8:am";
+    let reminder1 = date + ", 8:AM";
    await this.setState({ reminder: reminder1 });
     this.updateReminder();
   };

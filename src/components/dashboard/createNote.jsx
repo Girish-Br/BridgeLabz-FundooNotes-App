@@ -100,7 +100,8 @@ class CreateNoteDashboard extends React.Component {
             title: "",
             description: "",
             color: "",
-            pin: false
+            pin: false,
+            reminder:""
           });
           this.props.handleRef();
         } else {
@@ -151,7 +152,7 @@ class CreateNoteDashboard extends React.Component {
     console.log(new Date());
     var date = new Date().toDateString();
     console.log(new Date().toDateString());
-    let reminder1 = date + ", 8:am";
+    let reminder1 = date + ", 8:AM";
     this.setState({ reminder: reminder1 });
   };
   handleSetTommoTime = () => {
@@ -165,7 +166,7 @@ class CreateNoteDashboard extends React.Component {
       days[new Date().getDay()]
     );
     console.log(new Date().getDay());
-    let reminder1 = date + ", 8:am";
+    let reminder1 = date + ", 8:AM";
     this.setState({ reminder: reminder1 });
   };
   handleSetNextWeekTime = () => {
@@ -190,13 +191,17 @@ class CreateNoteDashboard extends React.Component {
     console.log(this.state.date);
   };
   handleTime = (v,e) => {
-    let time1=v.toString().slice(15,24)
+    let time1=v
+    console.log(time1)
     this.setState({ time:time1 });
     console.log(this.state.time)
   };
   handleSave = () => {
     this.handleClosereminder();
-    this.setState({ reminder: this.state.date +","+ this.state.time });
+    let time1=this.state.time;
+    let time=time1.toString().slice(15,24)
+    console.log(time)
+    this.setState({ reminder: this.state.date +","+ time });
     this.setState({ openReminderMenu: !this.state.openReminderMenu });
     this.props.handleRef();
   };
@@ -246,7 +251,6 @@ class CreateNoteDashboard extends React.Component {
                   name="time"
                   margin="normal"
                   id="time-picker"
-                  label={this.state.time}
                   value={this.state.time}
                   onChange={(value, event) => this.handleTime(value, event)}
                   KeyboardButtonProps={{
@@ -348,13 +352,15 @@ class CreateNoteDashboard extends React.Component {
           ></TextField>
         </div>
         {this.state.reminder !== "" ? (
+          <div className="reminderIncards">
           <Chip
             icon={<EventIcon />}
             label={this.state.reminder}
             onDelete={this.handleReminderDelete}
             variant="outlined"
           />
-        ) : (
+          </div>
+        ): (
           <div className="reminderIncards" />
         )}
         <div classname="onClickCard">
