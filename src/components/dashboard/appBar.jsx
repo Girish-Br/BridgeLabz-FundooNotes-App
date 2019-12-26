@@ -88,8 +88,12 @@ class Appbar extends React.Component {
   handleGrid = () => {
     this.props.displayList()
   }
+  handleRefresh=()=>{
+    window.location.reload();
+  }
   render() {
-    return (
+    let listIcon=!this.props.view ? <List/> : <Grid/>
+    return ( 
       <div className="root">
         <MuiThemeProvider theme={theme}>
           <AppBar color="inherit">
@@ -105,9 +109,12 @@ class Appbar extends React.Component {
                     <MenuIcon />
                   </IconButton>
                 </div>
+                <img src={require('../../assets/fundoo.png')} className="fundooIcon"/>
                 <div className="fundoonote">
-                  <Typography variant="h6">Fundoonote</Typography>
+                  <Typography variant="h6">fundooNotes</Typography>
                 </div>
+                </div>
+                <div className="searchAndIcon">
                 <div className="searchbar">
                   <div className="searchIconAppBar">
                     <Tooltip>
@@ -124,15 +131,16 @@ class Appbar extends React.Component {
                       className="inputBase"
                     ></InputBase>
                   </div>
-                </div>
+                  </div>
+                  <div className="iconsDivAppBar">
                 <div className="refreshIcon">
-                  <IconButton>
+                  <IconButton onClick={this.handleRefresh}>
                     <RefreshIcon />
                   </IconButton>
                 </div>
                 <div className="gridIcon">
                   <IconButton onClick={this.handleGrid}>
-                    <Grid />
+                   {listIcon}
                   </IconButton>
                 </div>
                 <div className="settingsIcon">
@@ -140,7 +148,8 @@ class Appbar extends React.Component {
                     <SettingsIcon />
                   </IconButton>
                 </div>
-              </div>
+                </div>
+                </div>
               <div className="Avatar">
                 <LongMenu />
               </div>
