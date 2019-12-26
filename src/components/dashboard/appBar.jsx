@@ -14,10 +14,13 @@ import {
   Typography,
   MuiThemeProvider,
   createMuiTheme,
-  Tooltip
+  Tooltip,
+  Popover
 } from "@material-ui/core";
 import Grid from "../../icons/Grid.js";
 import List from "../../icons/List.js";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import CloseIcon from "@material-ui/icons/Close";
 import SettingsIcon from "@material-ui/icons/Settings";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -78,22 +81,29 @@ class Appbar extends React.Component {
     this.state = {
       drawerOpen: false,
       notes: [],
-      dialogBox: false
+      dialogBox: false,
+      anchorElSearch:null
     };
     // this.handleSearchBar = this.handleSearchBar.bind(this);
   }
   handleDrawerToggle = () => {
     this.setState({ drawerOpen: !this.state.drawerOpen });
-  }
+  };
   handleGrid = () => {
-    this.props.displayList()
-  }
-  handleRefresh=()=>{
+    this.props.displayList();
+  };
+  handleRefresh = () => {
     window.location.reload();
+  };
+  openMobileSearch=(e)=>{
+    this.setState({anchorElSearch:e.currentTarget})
+  }
+  closeMobileSearch=()=>{
+    this.setState({anchorElSearch:null})
   }
   render() {
-    let listIcon=!this.props.view ? <List/> : <Grid/>
-    return ( 
+    let listIcon = !this.props.view ? <List /> : <Grid />;
+    return (
       <div className="root">
         <MuiThemeProvider theme={theme}>
           <AppBar color="inherit">
@@ -109,17 +119,53 @@ class Appbar extends React.Component {
                     <MenuIcon />
                   </IconButton>
                 </div>
-                <img src={require('../../assets/fundoo.png')} className="fundooIcon"/>
+                <img
+                  src={require("../../assets/fundoo.png")}
+                  className="fundooIcon"
+                />
                 <div className="fundoonote">
                   <Typography variant="h6">fundooNotes</Typography>
                 </div>
-                </div>
-                <div className="searchAndIcon">
+              </div>
+              <div className="searchAndIcon">
                 <div className="searchbar">
-                  <div className="searchIconAppBar">
-                    <Tooltip>
-                      <SearchIcon />
-                    </Tooltip>
+                  <div>
+                    <IconButton
+                      aria-controls="search-field"
+                      aria-haspopup="true"
+                      onClick={this.openMobileSearch}
+                    >
+                      <Tooltip>
+                        <SearchIcon />
+                      </Tooltip>
+                    </IconButton>
+                    <Popover
+                      id="search-field"
+                      anchorEl={this.state.anchorElSearch}
+                      open={Boolean(this.state.anchorElSearch)}
+                      onClose={this.closeMobileSearch}
+                      anchorOrigin={{
+                        vertical: "center",
+                        horizontal: "center"
+                      }}
+                      transformOrigin={{
+                        vertical: "center",
+                        horizontal: "center"
+                      }}
+                    >
+                      <IconButton onClick={this.closeMobileSearch}>
+                        <ArrowBackIcon />
+                      </IconButton>
+                      <InputBase
+                        value={this.state.searchNote}
+                        onChange={this.handleSearchBar}
+                        placeholder="Search"
+                        id="inputRoot"
+                      />
+                      <IconButton onClick={this.closeMobileSearch}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Popover>
                   </div>
                   <div className="inputbasediv">
                     <InputBase
@@ -131,30 +177,35 @@ class Appbar extends React.Component {
                       className="inputBase"
                     ></InputBase>
                   </div>
+                </div>
+                <div className="iconsDivAppBar">
+                  <div className="refreshIcon">
+                    <IconButton onClick={this.handleRefresh}>
+                      <RefreshIcon />
+                    </IconButton>
                   </div>
-                  <div className="iconsDivAppBar">
-                <div className="refreshIcon">
-                  <IconButton onClick={this.handleRefresh}>
-                    <RefreshIcon />
-                  </IconButton>
+                  <div className="gridIcon">
+                    <IconButton onClick={this.handleGrid}>
+                      {listIcon}
+                    </IconButton>
+                  </div>
+                  <div className="settingsIcon">
+                    <IconButton>
+                      <SettingsIcon />
+                    </IconButton>
+                  </div>
                 </div>
-                <div className="gridIcon">
-                  <IconButton onClick={this.handleGrid}>
-                   {listIcon}
-                  </IconButton>
-                </div>
-                <div className="settingsIcon">
-                  <IconButton>
-                    <SettingsIcon />
-                  </IconButton>
-                </div>
-                </div>
-                </div>
+              </div>
               <div className="Avatar">
                 <LongMenu />
               </div>
             </Toolbar>
-            <DrawerNav open={this.state.drawerOpen} handleTheReminder={this.props.handleReminder} handleTheArchive={this.props.handleArchive} handleTheNotes={this.props.handleNotes}/>
+            <DrawerNav
+              open={this.state.drawerOpen}
+              handleTheReminder={this.props.handleReminder}
+              handleTheArchive={this.props.handleArchive}
+              handleTheNotes={this.props.handleNotes}
+            />
           </AppBar>
         </MuiThemeProvider>
       </div>
@@ -162,3 +213,41 @@ class Appbar extends React.Component {
   }
 }
 export default Appbar;
+
+{
+  /* <div className="mobile-search">
+                                    <IconButton
+                                        aria-controls="search-field"
+                                        aria-haspopup="true"
+                                    onClick={this.mobileSearchOpen}>
+                                    <Tooltip title="Search">
+                                        <SearchIcon />
+                                    </Tooltip>
+                                    </IconButton>
+                                </div>
+                                <Popover
+                                    id="search-field"
+                                    anchorEl={this.state.SearchAnchorEl}
+                                    open={Boolean(this.state.SearchAnchorEl)}
+                                    onClose={this.mobileSearchClose}
+                                    anchorOrigin={{
+                                        vertical: 'center',
+                                        horizontal: 'center',
+                                      }}
+                                      transformOrigin={{
+                                        vertical: 'center',
+                                        horizontal: 'center',
+                                    }} >
+                                    <IconButton onClick={this.mobileSearchClose}>
+                                        <ArrowBackIcon/>
+                                    </IconButton>
+                                    <InputBase
+                                            value={this.state.searchNote}
+                                            onChange={this.handleSearchBar}
+                                            placeholder="Search"
+                                        id="inputRoot" />
+                                    <IconButton onClick={this.mobileSearchClose}>
+                                    <CloseIcon/>
+                                    </IconButton>
+                                </Popover> */
+}
