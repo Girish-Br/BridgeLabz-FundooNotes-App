@@ -127,18 +127,25 @@ class Appbar extends React.Component {
                   <Typography variant="h6">fundooNotes</Typography>
                 </div>
               </div>
-              <div className="searchAndIcon">
-                <div className="searchbar">
-                  <div>
-                    <IconButton
+              <div className="searchIconLap">
+              <IconButton
                       aria-controls="search-field"
                       aria-haspopup="true"
                       onClick={this.openMobileSearch}
                     >
+                <Tooltip>
+                  <SearchIcon/>
+                  </Tooltip>
+                  </IconButton>
+              </div>
+              <div className="searchAndIcon">
+                <div className="searchbar">
+                  <div className="searchIcon">
+                    <IconButton>               
                       <Tooltip>
                         <SearchIcon />
                       </Tooltip>
-                    </IconButton>
+                      </IconButton>
                     <Popover
                       id="search-field"
                       anchorEl={this.state.anchorElSearch}

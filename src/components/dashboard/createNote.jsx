@@ -232,7 +232,6 @@ class CreateNoteDashboard extends React.Component {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  label={this.state.date}
                   value={this.state.date}
                   onChange={(value, event) => this.handleDate(value, event)}
                   KeyboardButtonProps={{

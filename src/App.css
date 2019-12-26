@@ -605,5 +605,18 @@ background-color: rgb(206, 206, 223);
 .heightOfCards{
   margin-top: 4%;
 }
-
+.searchIconLap{
+  background-color:#f1f3f4 ;
+  border-radius: 5px;
+}
+@media only screen and (min-width: 426px) {
+  .searchIconLap{
+    display:none;
+  }
+}
+@media only screen and (max-width: 426px) {
+  .searchbar{
+    display:none;
+  }
+}
 
