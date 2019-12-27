@@ -78,8 +78,11 @@ export default class ForgotPwd extends React.Component {
   };
   render() {
     return (
-      <Card className="fCard">
+      <div className="fcomp">
+      <Card class="fCard">
+        <div >
         <p className="forgotpwd_head">Enter Email</p>
+        </div>
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={this.state.snackbarOpen}
@@ -120,6 +123,7 @@ export default class ForgotPwd extends React.Component {
           </div>
         </form>
       </Card>
+      </div>
     );
   }
 }

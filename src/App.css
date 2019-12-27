@@ -3,7 +3,7 @@
 }
 .lcard {
   margin:auto;
-  border: 2px solid rgb(176, 172, 197);
+box-shadow: 1px 1px 8px 1px;
   margin-top: 88px;
   background-color: white;
 }
@@ -47,8 +47,7 @@
   margin: auto;
   margin-top: 50px;
   padding: 0%;
-  border: 2px solid rgb(213, 211, 224);
-
+  box-shadow: 1px 1px 8px 1px;
 }
 .typo{
   color:white;
@@ -66,7 +65,7 @@
 .rname{
 color:#3f51b5;
 background-color: rgb(206, 206, 223);
-padding-left: 55px;
+padding-left: 60px;
 }
 .rlbutton{
   margin-bottom: 20px;
@@ -93,22 +92,24 @@ padding-left: 55px;
   margin-top: 50px;
 }
 .forgotpwd_head {
+  margin-top: 5px;
   font-size: 180%;
   color: #3f51b5;
   font-family: -webkit-body;
   background-color: rgb(206, 206, 223);
 }
 .fCard {
+  height: 220px;
   position: relative;
   margin: auto;
-  color: blue;
   margin-top: 20px;
-  border: 2px solid rgb(176, 172, 197);
+  color:2px #3f51b5;
+  box-shadow: 1px 1px 8px 1px;
   align-items: center;
   text-align: center;
 }
 .fSubmitButton{
-  margin-top: 10px;
+  margin-top: 18px;
   margin-bottom: 20px;
   color: rgb(206, 206, 223);
 }
@@ -118,6 +119,7 @@ padding-left: 55px;
 .fsButton{
   color: rgb(206, 206, 223);
   margin-bottom: 10px;
+  margin-top: 17px;
 }
 
 
@@ -184,7 +186,6 @@ padding-left: 55px;
   margin: auto;
   margin-top: 50px;
   padding: 0%;
-  border: 2px solid rgb(213, 211, 224);
 
 }
 .text-area{
@@ -267,6 +268,9 @@ background-color: rgb(206, 206, 223);
     .searchbar{
       width: 80%;
     }
+    .onClickCardClose{
+      margin-left:30%;
+    }
 
 }
 
@@ -310,7 +314,6 @@ background-color: rgb(206, 206, 223);
     width: 450px;
     margin:auto;
     position: relative;
-    border: 2px solid rgb(176, 172, 197);
     margin-top: 88px;
     background-color: white;
   }
@@ -327,7 +330,6 @@ background-color: rgb(206, 206, 223);
   margin: auto;
   margin-top: 50px;
   padding: 0%;
-  border: 2px solid rgb(213, 211, 224);
 width: 400px;
 }
 .typo{
@@ -344,7 +346,7 @@ width: 400px;
 
 .rname{
 color:#3f51b5;
-padding-left: 83px;
+padding-left: 100px;
 background-color: rgb(206, 206, 223);
 }
 .rlbutton{
@@ -549,9 +551,7 @@ background-color: rgb(206, 206, 223);
 .cardTxtFld{
   margin-left: 3%;
 }
-.onClickCardClose{
-  margin-left:30%;
-}
+
 
 @media only screen and (max-width: 450px) {
   .fundoonote{
@@ -619,4 +619,9 @@ background-color: rgb(206, 206, 223);
     display:none;
   }
 }
-
+.labelNotes{
+  display: flex;
+}
+.addIconLabel{
+  
+}

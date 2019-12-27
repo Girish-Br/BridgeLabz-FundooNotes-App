@@ -23,8 +23,12 @@ import {
   CardActions,
   IconButton,
   Button,
-  Grid
+  Grid,
+  BottomNavigation,
+  InputBase,
+  Divider
 } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import ArchiveIcon from "@material-ui/icons/Archive";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import ImageIcon from "@material-ui/icons/Image";
@@ -55,7 +59,10 @@ class CreateNoteDashboard extends React.Component {
       reminder: "",
       date: "",
       time: "",
-      pin: false
+      pin: false,
+      anchorElMore: null,
+      labelClick: false,
+      labelValue: ""
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
   }
@@ -101,7 +108,7 @@ class CreateNoteDashboard extends React.Component {
             description: "",
             color: "",
             pin: false,
-            reminder:""
+            reminder: ""
           });
           this.props.handleRef();
         } else {
@@ -117,8 +124,9 @@ class CreateNoteDashboard extends React.Component {
             archive: false,
             reminder: "",
             pin: false,
-            date:"",
-            time:""
+            date: "",
+            time: "",
+           
           });
         }
       });
@@ -187,25 +195,74 @@ class CreateNoteDashboard extends React.Component {
   };
   handleDate = (v, e) => {
     let date1 = v.toString().slice(3, 15);
-    this.setState({ date :date1 });
+    this.setState({ date: date1 });
     console.log(this.state.date);
   };
-  handleTime = (v,e) => {
-    let time1=v
-    console.log(time1)
-    this.setState({ time:time1 });
-    console.log(this.state.time)
+  handleTime = (v, e) => {
+    let time1 = v;
+    console.log(time1);
+    this.setState({ time: time1 });
+    console.log(this.state.time);
   };
   handleSave = () => {
     this.handleClosereminder();
-    let time1=this.state.time;
-    let time=time1.toString().slice(15,24)
-    console.log(time)
-    this.setState({ reminder: this.state.date +","+ time });
+    let time1 = this.state.time;
+    let time = time1.toString().slice(15, 24);
+    console.log(time);
+    this.setState({ reminder: this.state.date + "," + time });
     this.setState({ openReminderMenu: !this.state.openReminderMenu });
     this.props.handleRef();
   };
+  handleMoreMenu = e => {
+    this.setState({ anchorElMore: e.currentTarget });
+  };
+  handleCloseMoreMenu = () => {
+    this.setState({ anchorElMore: null });
+    this.setState({labelClick:!this.state.labelClick})
+  };
+  handleLabelClick = () => {
+    this.setState({ labelClick: !this.state.labelClick });
+  };
+  handleLabelValue=(e)=>{
+    this.setState({labelValue:e.target.value})
+  }
   render() {
+    let labelMenu = !this.state.labelClick ? (
+      <Menu
+        id="more-menu"
+        anchorEl={this.state.anchorElMore}
+        keepMounted
+        open={Boolean(this.state.anchorElMore)}
+        onClose={this.handleCloseMoreMenu}
+      >
+        <MenuItem onClick={this.handleLabelClick}>Add Label</MenuItem>
+        <MenuItem>Add Drawing</MenuItem>
+        <MenuItem>Show Tick Boxes</MenuItem>
+      </Menu>
+    ) : (
+      <Menu
+        id="more-menu"
+        anchorEl={this.state.anchorElMore}
+        keepMounted
+        open={Boolean(this.state.anchorElMore)}
+        onClose={this.handleCloseMoreMenu}
+      >
+        <MenuItem>Label Note</MenuItem>
+        <MenuItem>
+          <InputBase
+            value={this.state.labelValue}
+            onChange={this.handleLabelValue}
+            placeholder="Enter Label Name"
+            id="inputRoot"
+          />
+        </MenuItem>
+    <Divider/>
+    <MenuItem onClick={this.handleCloseMoreMenu}>
+    <div className="labelNotes"><Tooltip title="create label" className="addIconLabel" ><AddIcon/></Tooltip>
+    <p>Create </p><p>`{this.state.labelValue}`</p></div>
+    </MenuItem>
+      </Menu>
+    );
     let reminderMenuItem = !this.state.openReminderMenu ? (
       <div>
         <Menu
@@ -353,16 +410,28 @@ class CreateNoteDashboard extends React.Component {
         </div>
         {this.state.reminder !== "" ? (
           <div className="reminderIncards">
-          <Chip
-            icon={<EventIcon />}
-            label={this.state.reminder}
-            onDelete={this.handleReminderDelete}
-            variant="outlined"
-          />
+            <Chip
+              icon={<EventIcon />}
+              label={this.state.reminder}
+              onDelete={this.handleReminderDelete}
+              variant="outlined"
+            />
           </div>
-        ): (
+        ) : (
           <div className="reminderIncards" />
         )}
+          {/* {this.state.labelValue !== "" ? (
+          <div className="reminderIncards">
+            <Chip
+              icon={<EventIcon />}
+              label={this.state.labelValue}
+              onDelete={this.handlelabelDelete}
+              variant="outlined"
+            />
+          </div>
+        ) : (
+          <div className="reminderIncards" />
+        )} */}
         <div classname="onClickCard">
           <CardActions disableSpacing>
             <div className="onClickCardIcons">
@@ -452,11 +521,17 @@ class CreateNoteDashboard extends React.Component {
                   <ArchiveIcon onClick={this.archiveNoteCreation} />
                 </Tooltip>
               </IconButton>
-              <IconButton>
+              <IconButton
+                aria-label="more"
+                aria-controls="more-menu"
+                aria-haspopup="true"
+                onClick={this.handleMoreMenu}
+              >
                 <Tooltip title="More">
                   <MoreVertIcon />
                 </Tooltip>
               </IconButton>
+              {labelMenu}
             </div>
             <div className="onClickCardClose">
               <Button onClick={this.closeCard} class="closeButton">
