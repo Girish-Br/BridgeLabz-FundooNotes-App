@@ -62,7 +62,8 @@ class CreateNoteDashboard extends React.Component {
       pin: false,
       anchorElMore: null,
       labelClick: false,
-      labelValue: ""
+      labelValue: "",
+      trash:false
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
   }
@@ -96,7 +97,8 @@ class CreateNoteDashboard extends React.Component {
       archive: this.state.archive,
       color: this.state.color,
       pin: this.state.pin,
-      reminder: this.state.reminder
+      reminder: this.state.reminder,
+      trash:this.state.trash
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {

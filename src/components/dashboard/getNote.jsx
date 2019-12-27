@@ -19,11 +19,15 @@ import {
 } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import UnarchiveIcon from "@material-ui/icons/Unarchive";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import RestoreFromTrashIcon from "@material-ui/icons/RestoreFromTrash";
 import {
   archiveData,
   notePinned,
   ReminderUpdate,
-  colorUpdate
+  colorUpdate,
+  noteToTrash,
+  deleteNote
 } from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import DeleteNote from "../../controller/userController.js";
@@ -49,6 +53,7 @@ class GetCards extends React.Component {
       snackbarMsg: "",
       snackbarOpen: false,
       iconDisplay: false,
+      trash: false,
       reminder: this.props.data.data().reminder
     };
     this.NoteOpenForEdit = this.NoteOpenForEdit.bind(this);
@@ -61,13 +66,13 @@ class GetCards extends React.Component {
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
-   let data={
-      color:this.state.color,
-      id:this.props.data.id
-    }
+    let data = {
+      color: this.state.color,
+      id: this.props.data.id
+    };
     colorUpdate(data).then(res => {
-        console.log(res);
-      })
+      console.log(res);
+    });
   };
   NoteOpenForEdit = () => {
     this.setState({ noteOpen: !this.state.noteOpen });
@@ -87,17 +92,17 @@ class GetCards extends React.Component {
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
   };
-  handleSetTodayTime=async()=>{
+  handleSetTodayTime = async () => {
     this.handleClosereminder();
     this.updateReminder();
     var date = new Date().toDateString();
     let reminder1 = date + ", 8:AM";
-   await this.setState({ reminder: reminder1 });
-   this.updateReminder();
-}
- handleSetTommoTime= async()=>{
-  this.handleClosereminder();
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    await this.setState({ reminder: reminder1 });
+    this.updateReminder();
+  };
+  handleSetTommoTime = async () => {
+    this.handleClosereminder();
+    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     date = date.replace(new Date().getDate(), new Date().getDate() + 1);
     date = date.replace(
@@ -105,10 +110,10 @@ class GetCards extends React.Component {
       days[new Date().getDay()]
     );
     let reminder1 = date + ", 8:AM";
-   await this.setState({ reminder: reminder1 });
+    await this.setState({ reminder: reminder1 });
     this.updateReminder();
   };
-  handleSetNextWeekTime= async()=>{
+  handleSetNextWeekTime = async () => {
     this.handleClosereminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
@@ -121,7 +126,7 @@ class GetCards extends React.Component {
       days[new Date().getDay()]
     );
     var reminder1 = date + ", 8:00 AM";
-   await this.setState({ reminder: reminder1 });
+    await this.setState({ reminder: reminder1 });
     this.updateReminder();
   };
   handleSetDate = () => {
@@ -136,21 +141,40 @@ class GetCards extends React.Component {
     };
     ReminderUpdate(reminderDetails).then(res => {
       console.log(res);
-      this.props.displayNotes()
+      this.props.displayNotes();
     });
   };
-  handleReminderDelete =async () => {
-   await this.setState({ reminder: "" });
+  handleReminderDelete = async () => {
+    await this.setState({ reminder: "" });
     this.updateReminder();
   };
-  handleDeleteNote = () => {
-    this.setState({ deleteIcon: null });
-    const data = { doc_id: this.state.id };
-    DeleteNote(data).then(res => {
+  handleDelete=()=>{
+    const data={doc_id:this.state.id};
+    deleteNote(data).then(res => {
       console.log(res);
       if (res) {
         this.setState({
-          snackbarMsg: "Note deleted",
+          snackbarMsg: "Note Deleted",
+          snackbarOpen: false
+        });
+        this.props.displayNotes();
+      }
+       else {
+        this.setState({
+          snackbarMsg: res,
+          snackbarOpen: false
+        });
+      }
+    });
+  }
+  handleTrash = () => {
+    this.setState({ deleteIcon: null, trash: !this.state.trash });
+    const data = { doc_id: this.state.id };
+    noteToTrash(data).then(res => {
+      console.log(res);
+      if (res) {
+        this.setState({
+          snackbarMsg: "Note moved to trash",
           snackbarOpen: false
         });
         this.props.displayNotes();
@@ -213,14 +237,27 @@ class GetCards extends React.Component {
     ) : (
       archiveIcon
     );
-    let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
-    let svg = !this.state.iconDisplay ? (
-      <IconButton></IconButton>
-    ) : (
-      <IconButton onClick={this.pinTheNote}>{svgPin}</IconButton>
-    );
+    // let svgPin = !this.state.pin ? <SvgPin /> : <SvgPinned />;
+    // let svg = !this.state.iconDisplay ? (
+    //   <IconButton></IconButton>
+    // ) : (
+    //   <IconButton onClick={this.pinTheNote}>{svgPin}</IconButton>
+    // );
     let iconsContent = !this.state.iconDisplay ? (
       <div className="cardsHover" />
+    ) : this.props.trash ? (
+      <div className="cardsHover">
+        <IconButton onClick={this.handleDelete}>
+          <Tooltip title="Delete Forever">
+            <DeleteForeverIcon />
+          </Tooltip>
+        </IconButton>
+        <IconButton onClick={this.handleRestore}>
+          <Tooltip title="Restore">
+            <RestoreFromTrashIcon />
+          </Tooltip>
+        </IconButton>
+      </div>
     ) : (
       <div className="cardsHover">
         <IconButton
@@ -330,7 +367,7 @@ class GetCards extends React.Component {
           open={Boolean(this.state.deleteIcon)}
           onClose={this.handleCloseDeleteIcon}
         >
-          <MenuItem onClick={this.handleDeleteNote}>Delete</MenuItem>
+          <MenuItem onClick={this.handleTrash}>Move To Trash</MenuItem>
         </Menu>
       </div>
     );
@@ -386,7 +423,7 @@ class GetCards extends React.Component {
                     variant="outlined"
                   />
                 ) : (
-                  <div className="reminderIncards"/>
+                  <div className="reminderIncards" />
                 )}
                 {/* <Typography className="reminderIncardstypo">
                   {this.state.reminder}

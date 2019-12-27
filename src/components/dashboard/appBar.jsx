@@ -212,6 +212,7 @@ class Appbar extends React.Component {
               handleTheReminder={this.props.handleReminder}
               handleTheArchive={this.props.handleArchive}
               handleTheNotes={this.props.handleNotes}
+              handleTheTrash={this.props.handleTrash}
             />
           </AppBar>
         </MuiThemeProvider>

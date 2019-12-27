@@ -96,7 +96,8 @@ export async function CreateNote(notes) {
       archive:notes.archive,
       pin:notes.pin,
       user_id:servicesConstant.firebaseAuthorization.currentUser.uid,
-      reminder:notes.reminder
+      reminder:notes.reminder,
+      trash:false
     }
    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
     return 'success';
@@ -144,8 +145,10 @@ export async function noteUpdate(data){
   return error.message
 })
 }
-export default async function DeleteNote(data){
-await servicesConstant.firestore.collection("notes").doc(data.doc_id).delete()
+export  async function noteToTrash(data){
+await servicesConstant.firestore.collection("notes").doc(data.doc_id).update({
+  "trash":true
+})
 .then(res=>{
   res=true;
   return res
@@ -154,6 +157,16 @@ await servicesConstant.firestore.collection("notes").doc(data.doc_id).delete()
 return error.message
 })
 }
+export  async function deleteNote(data){
+  await servicesConstant.firestore.collection("notes").doc(data.doc_id).delete()
+  .then(res=>{
+    res=true;
+    return res
+  })
+  .catch(error=>{
+  return error.message
+  })
+  }
 export async function archiveData(data){
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
    "archive":data.archive,

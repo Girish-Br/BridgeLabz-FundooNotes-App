@@ -21,24 +21,29 @@ import DeleteIcon from "@material-ui/icons/Delete";
 class DrawerNav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { notes: true, archive: false, reminder: false };
+    this.state = { notes: true, archive: false, reminder: false,trash:false };
   }
   handleArchive = () => {
     this.props.handleTheArchive();
-    this.setState({ archive: true, reminder: false, notes: false });
+    this.setState({ archive: true, reminder: false, notes: false,trash:false });
   };
   handleNotes = () => {
     this.props.handleTheNotes();
-    this.setState({ archive: false, reminder: false, notes: true });
+    this.setState({ archive: false, reminder: false, notes: true ,trash:false});
   };
   handleReminder = () => {
     this.props.handleTheReminder();
-    this.setState({ archive: false, reminder: true, notes: false });
+    this.setState({ archive: false, reminder: true, notes: false,trash:false });
   };
+  handleTrash=()=>{
+    this.props.handleTheTrash();
+    this.setState({ archive: false, reminder: false, notes: false,trash:true });
+  }
   render() {
     let noteDisplay = this.state.notes && "#feefc3";
     let reminderDisplay = this.state.reminder && "#feefc3";
     let archiveDisplay = this.state.archive && "#feefc3";
+    let trashDisplay=this.state.trash && "#feefc3";
     return (
       <div>
         <Drawer
@@ -84,7 +89,9 @@ class DrawerNav extends React.Component {
               <ListItemText primary="Archive" />
             </ListItem>
             <Divider />
-            <ListItem button key="Trash">
+            <ListItem button key="Trash" 
+             onClick={this.handleTrash}
+             style={{ backgroundColor: trashDisplay }}>
               <ListItemIcon>
                 <DeleteIcon />
               </ListItemIcon>

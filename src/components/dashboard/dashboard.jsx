@@ -17,7 +17,8 @@ class Dashboard extends React.Component {
       dialogBox: false,
       displayList:false,
       archiveCards:false,
-      reminder:false
+      reminder:false,
+      trash:false
    }
     this.DisplayNote = React.createRef();
   }
@@ -25,13 +26,16 @@ class Dashboard extends React.Component {
 this.DisplayNote.current.getAllCards()
   }
   handleArchive=()=>{
-    this.setState({archiveCards:true,reminder:false})
+    this.setState({archiveCards:true,reminder:false,trash:false})
 }
 handleTheReminder=()=>{
-  this.setState({reminder:true,archiveCards:false})
+  this.setState({reminder:true,archiveCards:false,trash:false})
 }
 handleTheNotes=()=>{
-  this.setState({archiveCards:false,reminder:false})
+  this.setState({archiveCards:false,reminder:false,trash:false})
+}
+handleTheTrash=()=>{
+  this.setState({trash:true,archiveCards:false})
 }
   handleDialogBox() {
     this.setState({ dialogBox: true })
@@ -50,20 +54,24 @@ handleTheNotes=()=>{
       return (
       !this.state.archiveCards ?
       <div className="dashboardMainDiv">
-        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder}  handleNotes={this.handleTheNotes}/>
+        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder}  handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
         <div className="content">
         <div>
         <CreateNote handleRef={this.handleRef}/>
         </div>
         <div className="heightOfCards">
-        <DisplayNote archiveCards={this.state.archiveCards} reminderNotes={this.state.reminder} style={{display:listStyle.display,width:listStyle.width}}ref={this.DisplayNote}/>
+        <DisplayNote 
+        archiveCards={this.state.archiveCards} 
+        reminderNotes={this.state.reminder} 
+        trash={this.state.trash}
+        style={{display:listStyle.display,width:listStyle.width}}ref={this.DisplayNote}/>
        </div>
         </div>
         </div>
     :  <div className="dashboardMainDiv">
-    <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder} handleNotes={this.handleTheNotes}/>
+    <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder} handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
     <div className="content">
-    <DisplayNote archiveCards={this.state.archiveCards} reminderNotes={this.state.reminder} style={{display:listStyle.display,width:listStyle.width}} ref={this.DisplayNote}/>
+    <DisplayNote  trash={this.state.trash} archiveCards={this.state.archiveCards} reminderNotes={this.state.reminder} style={{display:listStyle.display,width:listStyle.width}} ref={this.DisplayNote}/>
     </div>
     </div>
     )
