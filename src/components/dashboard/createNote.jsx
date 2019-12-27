@@ -6,7 +6,7 @@
  *  @since          : 9-12-2019
  *****************************************************************************************/
 import React from "react";
-import { CreateNote,createLabel } from "../../controller/userController";
+import { CreateNote, createLabel } from "../../controller/userController";
 import EventIcon from "@material-ui/icons/Event";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -28,7 +28,7 @@ import {
   InputBase,
   Divider
 } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import ImageIcon from "@material-ui/icons/Image";
@@ -125,8 +125,7 @@ class CreateNoteDashboard extends React.Component {
             reminder: "",
             pin: false,
             date: "",
-            time: "",
-           
+            time: ""
           });
         }
       });
@@ -218,21 +217,23 @@ class CreateNoteDashboard extends React.Component {
   };
   handleCloseMoreMenu = () => {
     this.setState({ anchorElMore: null });
-    this.setState({labelClick:!this.state.labelClick})
+    this.setState({ labelClick: !this.state.labelClick });
   };
   handleLabelClick = () => {
     this.setState({ labelClick: !this.state.labelClick });
   };
-  handleLabelValue=(e)=>{
-    this.setState({labelValue:e.target.value})
-  }
-  handleCreateLabel=()=>{
-    let labelData=this.state.labelValue
+  handleLabelValue = e => {
+    this.setState({ labelValue: e.target.value });
+  };
+  handleCreateLabel = () => {
+    this.handleCloseMoreMenu();
+    console.log(this.state.labelValue);
+    const labelData = { labelData: this.state.labelValue };
     createLabel(labelData).then(res => {
-      console.log('result label',res)
-      this.setState({labels:res})
-  })
-  }
+      console.log("result label", res);
+      this.setState({ labels: res });
+    });
+  };
   render() {
     let labelMenu = !this.state.labelClick ? (
       <Menu
@@ -263,11 +264,18 @@ class CreateNoteDashboard extends React.Component {
             id="inputRoot"
           />
         </MenuItem>
-    <Divider/>
-    <MenuItem onClick={this.handleCreateLabel}>
-    <div className="labelNotes"><Tooltip title="create label" ><AddIcon className="addIconLabel" /></Tooltip>
-    <p className="CreateLabelP">Create </p><p><b> ` {this.state.labelValue} ` </b></p></div>
-    </MenuItem>
+        <Divider />
+        <MenuItem onClick={this.handleCreateLabel}>
+          <div className="labelNotes">
+            <Tooltip title="create label">
+              <AddIcon className="addIconLabel" />
+            </Tooltip>
+            <p className="CreateLabelP">Create </p>
+            <p>
+              <b> ` {this.state.labelValue} ` </b>
+            </p>
+          </div>
+        </MenuItem>
       </Menu>
     );
     let reminderMenuItem = !this.state.openReminderMenu ? (
@@ -427,7 +435,7 @@ class CreateNoteDashboard extends React.Component {
         ) : (
           <div className="reminderIncards" />
         )}
-          {/* {this.state.labelValue !== "" ? (
+        {/* {this.state.labelValue !== "" ? (
           <div className="reminderIncards">
             <Chip
               icon={<EventIcon />}

@@ -204,7 +204,7 @@ export async function createLabel(labelData) {
   const token = localStorage.usertoken
   const decoded = jwt_decode(token)
   const dataOfLabel = {
-    label: labelData.label,
+    label: labelData.labelData,
     isDeleted: false,
     note_id: null,
     user_id:decoded.user_id
@@ -220,10 +220,31 @@ export async function createLabel(labelData) {
            labels.push(doc)
         });
     })
+    console.log(labels)
     return labels
   }
   catch (error) {
     console.log(error)
     return error.message
   }
+}
+export async function getAllLabels(){
+  try{
+   const token = localStorage.usertoken
+ const decoded = jwt_decode(token)
+ var labels = [];
+ await servicesConstant.firestore.collection("labels")
+     .where("user_id", "==", decoded.user_id)
+     .where("isDeleted","==",false)
+     .get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          labels.push(doc)
+       });
+   })
+   return labels
+ }
+ catch (error) {
+   console.log(error)
+   return error.message
+ }
 }

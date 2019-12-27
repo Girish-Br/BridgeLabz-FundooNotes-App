@@ -12,9 +12,20 @@ import {
   Button,
   TextField,
   Snackbar,
+  MuiThemeProvider,
+  createMuiTheme,
   IconButton
 } from "@material-ui/core";
 import { forgotpassword } from "../controller/userController";
+const theme = createMuiTheme({
+  overrides: {
+    MuiButton:{
+      contained: {
+      color: "white"
+    }
+  }
+}
+});
 export default class ForgotPwd extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +35,7 @@ export default class ForgotPwd extends React.Component {
       snackbarMsg: ""
     };
   }
+
   //function to handle when we click submit button
   handleClick = () => {
     //validating inputs
@@ -78,26 +90,29 @@ export default class ForgotPwd extends React.Component {
   };
   render() {
     return (
-      <div className="fcomp">
-      <Card class="fCard">
-        <div >
-        <p className="forgotpwd_head"><u>Enter Email</u></p>
-        </div>
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={this.state.snackbarOpen}
-          autoHideDuration={6000}
-          onClose={this.snackbarClose}
-          message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-          action={
-            <IconButton
-              key="close"
-              arial-label="close"
-              color="inherit"
-              onClick={this.snackbarClose}
-            ></IconButton>
-          }
-        />
+      <MuiThemeProvider theme={theme}>
+        <div className="fcomp">
+          <Card class="fCard">
+            <div>
+              <p className="forgotpwd_head">
+                <u>Enter Email</u>
+              </p>
+            </div>
+            <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              open={this.state.snackbarOpen}
+              autoHideDuration={6000}
+              onClose={this.snackbarClose}
+              message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+              action={
+                <IconButton
+                  key="close"
+                  arial-label="close"
+                  color="inherit"
+                  onClick={this.snackbarClose}
+                ></IconButton>
+              }
+            />
             <TextField
               id="email"
               label="Email"
@@ -109,17 +124,18 @@ export default class ForgotPwd extends React.Component {
               value={this.state.email}
               onChange={this.onChangeEmail}
             />
-          <div className="fSubmitButton">
-          <Button
-            onClick={this.handleClick}
-            variant="contained"
-            style={{ color: "#212121", backgroundColor: " rgb(206, 206, 223)" }}
-          >
-            Submit
-          </Button>
-          </div>
-      </Card>
-      </div>
+            <div className="fSubmitButton">
+              <Button
+                onClick={this.handleClick}
+                variant="contained"
+                style={{ color: "primary", backgroundColor: "#3f51b5" }}
+              >
+                Submit
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
