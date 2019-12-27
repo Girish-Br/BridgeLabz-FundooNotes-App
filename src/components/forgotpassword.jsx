@@ -81,7 +81,7 @@ export default class ForgotPwd extends React.Component {
       <div className="fcomp">
       <Card class="fCard">
         <div >
-        <p className="forgotpwd_head">Enter Email</p>
+        <p className="forgotpwd_head"><u>Enter Email</u></p>
         </div>
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -98,8 +98,6 @@ export default class ForgotPwd extends React.Component {
             ></IconButton>
           }
         />
-        <form>
-          <div className="textFieldfcard">
             <TextField
               id="email"
               label="Email"
@@ -111,7 +109,6 @@ export default class ForgotPwd extends React.Component {
               value={this.state.email}
               onChange={this.onChangeEmail}
             />
-          </div>
           <div className="fSubmitButton">
           <Button
             onClick={this.handleClick}
@@ -121,7 +118,6 @@ export default class ForgotPwd extends React.Component {
             Submit
           </Button>
           </div>
-        </form>
       </Card>
       </div>
     );

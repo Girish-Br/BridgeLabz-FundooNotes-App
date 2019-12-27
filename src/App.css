@@ -96,13 +96,13 @@ padding-left: 60px;
   font-size: 180%;
   color: #3f51b5;
   font-family: -webkit-body;
-  background-color: rgb(206, 206, 223);
 }
 .fCard {
   height: 220px;
   position: relative;
   margin: auto;
-  margin-top: 20px;
+  padding: 1%;
+  margin-top: 5%;
   color:2px #3f51b5;
   box-shadow: 1px 1px 8px 1px;
   align-items: center;
@@ -621,7 +621,11 @@ background-color: rgb(206, 206, 223);
 }
 .labelNotes{
   display: flex;
+ 
 }
 .addIconLabel{
-  
+  padding-top: 15px;
+}
+.createLabelP{
+  padding-left: 8px;
 }

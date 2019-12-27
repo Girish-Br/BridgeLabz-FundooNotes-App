@@ -6,7 +6,7 @@
  *  @since          : 9-12-2019
  *****************************************************************************************/
 import React from "react";
-import { CreateNote } from "../../controller/userController";
+import { CreateNote,createLabel } from "../../controller/userController";
 import EventIcon from "@material-ui/icons/Event";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -226,6 +226,13 @@ class CreateNoteDashboard extends React.Component {
   handleLabelValue=(e)=>{
     this.setState({labelValue:e.target.value})
   }
+  handleCreateLabel=()=>{
+    let labelData=this.state.labelValue
+    createLabel(labelData).then(res => {
+      console.log('result label',res)
+      this.setState({labels:res})
+  })
+  }
   render() {
     let labelMenu = !this.state.labelClick ? (
       <Menu
@@ -257,9 +264,9 @@ class CreateNoteDashboard extends React.Component {
           />
         </MenuItem>
     <Divider/>
-    <MenuItem onClick={this.handleCloseMoreMenu}>
-    <div className="labelNotes"><Tooltip title="create label" className="addIconLabel" ><AddIcon/></Tooltip>
-    <p>Create </p><p>`{this.state.labelValue}`</p></div>
+    <MenuItem onClick={this.handleCreateLabel}>
+    <div className="labelNotes"><Tooltip title="create label" ><AddIcon className="addIconLabel" /></Tooltip>
+    <p className="CreateLabelP">Create </p><p><b> ` {this.state.labelValue} ` </b></p></div>
     </MenuItem>
       </Menu>
     );

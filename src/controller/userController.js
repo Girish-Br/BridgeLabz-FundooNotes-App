@@ -199,3 +199,31 @@ export async function colorUpdate(data){
   return error.message
 })
 }
+export async function createLabel(labelData) {
+  try{
+  const token = localStorage.usertoken
+  const decoded = jwt_decode(token)
+  const dataOfLabel = {
+    label: labelData.label,
+    isDeleted: false,
+    note_id: null,
+    user_id:decoded.user_id
+  }
+    await servicesConstant.firestore.collection('labels').doc().set(dataOfLabel)
+    var labels = [];
+  await servicesConstant.firestore.collection("labels")
+      .where("user_id", "==", decoded.user_id)
+      .where("note_id", "==", null)
+      .where("isDeleted","==",false)
+      .get().then(function(querySnapshot) {
+         querySnapshot.forEach(function(doc) {
+           labels.push(doc)
+        });
+    })
+    return labels
+  }
+  catch (error) {
+    console.log(error)
+    return error.message
+  }
+}
