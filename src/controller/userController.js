@@ -134,7 +134,7 @@ export async function noteUpdate(data){
     "color":data.color,
     "archive":data.archive,
     "pin":data.pin,
-    "reminder":data.reminder
+    "reminder":data.reminder,
     
  })
 .then(res=>{
@@ -190,6 +190,19 @@ export async function ReminderUpdate(data){
   console.log()
   await servicesConstant.firestore.collection("notes").doc(data.id).update({
     "reminder":data.reminder
+    })
+.then(res=>{
+  res=true;
+  return res
+})
+.catch(error=>{
+  return error.message
+})
+}
+export async function restoreUpdate(data){
+  console.log()
+  await servicesConstant.firestore.collection("notes").doc(data.id).update({
+    trash:false
     })
 .then(res=>{
   res=true;

@@ -27,10 +27,10 @@ import {
   ReminderUpdate,
   colorUpdate,
   noteToTrash,
-  deleteNote
+  deleteNote,
+  restoreUpdate
 } from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
-import DeleteNote from "../../controller/userController.js";
 import ImageIcon from "@material-ui/icons/Image";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -157,7 +157,6 @@ class GetCards extends React.Component {
           snackbarMsg: "Note Deleted",
           snackbarOpen: false
         });
-        this.props.displayNotes();
       }
        else {
         this.setState({
@@ -165,6 +164,7 @@ class GetCards extends React.Component {
           snackbarOpen: false
         });
       }
+      this.props.displayNotes();
     });
   }
   handleTrash = () => {
@@ -177,15 +177,22 @@ class GetCards extends React.Component {
           snackbarMsg: "Note moved to trash",
           snackbarOpen: false
         });
-        this.props.displayNotes();
+       
       } else {
         this.setState({
           snackbarMsg: res,
           snackbarOpen: false
         });
       }
+      this.props.displayNotes();
     });
   };
+  handleRestore=()=>{
+    const data = {id: this.state.id };
+    restoreUpdate(data).then(res=>
+      console.log(res))
+      this.props.displayNotes();
+  }
   archiveNoteCreation = () => {
     let data;
     if (this.props.data.data().archive) {
