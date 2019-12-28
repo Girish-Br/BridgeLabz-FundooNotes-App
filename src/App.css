@@ -99,6 +99,7 @@ padding-left: 60px;
 }
 .fCard {
   height: 220px;
+  width: 28%;
   position: relative;
   margin: auto;
   padding: 1%;
@@ -169,9 +170,7 @@ padding-left: 60px;
   }
  
 
-  .fCard{
-    width: 350px;
-  }
+
   .rCard{
     width: 400px;
   }
@@ -369,10 +368,6 @@ background-color: rgb(206, 206, 223);
   margin-left: 20px;
   margin-right: 20px;
 }
-
-  .fCard{
-    width: 400px;
-  }
 
   .content{
     justify-content: center;

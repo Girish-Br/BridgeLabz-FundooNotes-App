@@ -16,6 +16,9 @@ import {
   AppBar,
   Typography
 } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { withRouter } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
@@ -24,7 +27,8 @@ class Login extends React.Component {
       email: "",
       password: "",
       snackbarOpen: false,
-      snackbarMsg: ""
+      snackbarMsg: "",
+      showPassword: false
     };
   }
   //used to display brief message
@@ -88,9 +92,13 @@ class Login extends React.Component {
     this.props.history.push("/forgot");
   };
   //function to store valueshistory
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  handleClickShowPassword=()=>{
+    this.setState({ showPassword: !this.state.showPassword });
+    console.log("error at handleClickShowPassword in login");
+  }
   //to display
   render() {
     return (
@@ -103,55 +111,53 @@ class Login extends React.Component {
                 color="inherit"
                 aria-label="menu"
               ></IconButton>
-                <p  variant="h6" color="inherit" className="typo">
+              <p variant="h6" color="inherit" className="typo">
                 WELCOME TO FUNDOO-NOTES
-                </p>
+              </p>
             </Toolbar>
           </AppBar>
         </div>
         <div>
-        <Card class="lcard">
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            open={this.state.snackbarOpen}
-            autoHideDuration={6000}
-            onClose={this.snackbarClose}
-            message={<span id="messege-id">{this.state.snackbarMsg}</span>}
-            action={
-              <IconButton
-                key="close"
-                arial-label="close"
-                color="inherit"
-                onClick={this.snackbarClose}
-              ></IconButton>
-            }
-          />
-          <div className="login">
-            <form>
-              <div>
-                <p className="loginName">
-                  <u>
-                LOGIN PAGE
-                </u>
-                </p>
-              </div>
-              <div>
-                <div className="firsttxtField">
-                  <TextField
-                    id="outlined-email-input"
-                    label="Email"
-                    type="email"
-                    name="email"
-                    autoComplete="on"
-                    margin="normal"
-                    variant="outlined"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    className="txtFieldWidth"
-                  />
+          <Card class="lcard">
+            <Snackbar
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              open={this.state.snackbarOpen}
+              autoHideDuration={6000}
+              onClose={this.snackbarClose}
+              message={<span id="messege-id">{this.state.snackbarMsg}</span>}
+              action={
+                <IconButton
+                  key="close"
+                  arial-label="close"
+                  color="inherit"
+                  onClick={this.snackbarClose}
+                ></IconButton>
+              }
+            />
+            <div className="login">
+              <form>
+                <div>
+                  <p className="loginName">
+                    <u>LOGIN PAGE</u>
+                  </p>
                 </div>
-                <div className="secondtxtField">
-                  <TextField
+                <div>
+                  <div className="firsttxtField">
+                    <TextField
+                      id="outlined-email-input"
+                      label="Email"
+                      type="email"
+                      name="email"
+                      autoComplete="on"
+                      margin="normal"
+                      variant="outlined"
+                      value={this.state.email}
+                      onChange={this.onChange}
+                      className="txtFieldWidth"
+                    />
+                  </div>
+                  <div className="secondtxtField">
+                    {/* <TextField
                     required
                     id="outlined-pass-input"
                     className="txtFieldWidth"
@@ -162,42 +168,69 @@ class Login extends React.Component {
                     variant="outlined"
                     value={this.state.password}
                     onChange={this.onChange}
-                  />
+                  /> */}
+                    <TextField
+                      variant="outlined"
+                      className="txtFieldWidth"
+                      id="outlined-pass-input"
+                      type={this.state.showPassword ? "text" : "password"}
+                      label="password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChange}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="Toggle password visibility"
+                              onClick={this.handleClickShowPassword}
+                            >
+                              {this.state.showPassword ? (
+                                <Visibility />
+                              ) : (
+                                <VisibilityOff />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="loginButtondiv">
-                <Button
-                  onClick={this.handleClick}
-                  variant="contained"
-                  color="primary"
-                >
-                  Login
-                </Button>
-              </div>
-              <div className="createAndForgot">
-              <div className="cbutton">
-                <a href
-                  onClick={this.handleRegisterClick}
-                  fullwidth
-                  variant="contained"
-                  color="primary"
-                >
-                  Create Account
-                </a>
-                </div>
-                <div className="lfbuttondiv">
-                  <a
-                    href
-                    onClick={this.handleForgotClick}
-                    className="loginButton"
+                <div className="loginButtondiv">
+                  <Button
+                    onClick={this.handleClick}
+                    variant="contained"
+                    color="primary"
                   >
-                    Forgot Password??
-                  </a>
+                    Login
+                  </Button>
                 </div>
-              </div>
-            </form>
-          </div>
-        </Card>
+                <div className="createAndForgot">
+                  <div className="cbutton">
+                    <a
+                      href
+                      onClick={this.handleRegisterClick}
+                      fullwidth
+                      variant="contained"
+                      color="primary"
+                    >
+                      Create Account
+                    </a>
+                  </div>
+                  <div className="lfbuttondiv">
+                    <a
+                      href
+                      onClick={this.handleForgotClick}
+                      className="loginButton"
+                    >
+                      Forgot Password??
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </Card>
         </div>
       </div>
     );
