@@ -639,3 +639,12 @@ background-color: rgb(206, 206, 223);
 .spaceInDialog{
   margin: 5px;
 }
+.labelDrawer{
+  padding-left: 20px;
+  padding-top:10px;
+  color: #5f6368;
+  letter-spacing: .07272727em;
+  font-family: Roboto,Arial,sans-serif;
+  font-size: .6875rem;
+  font-weight: 500;
+}

@@ -63,7 +63,7 @@ handleTheTrash=()=>{
       return (
       !this.state.archiveCards ?
       <div className="dashboardMainDiv">
-        <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder}  handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
+        <Appbar labelDetails={this.state.labels} view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder}  handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
         <div className="content">
         <div>
         <CreateNote handleRef={this.handleRef} label={this.state.labels}/>
@@ -78,7 +78,7 @@ handleTheTrash=()=>{
         </div>
         </div>
     :  <div className="dashboardMainDiv">
-    <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder} handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
+    <Appbar labelDetails={this.state.labels} view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder} handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
     <div className="content">
     <DisplayNote  trash={this.state.trash} archiveCards={this.state.archiveCards} reminderNotes={this.state.reminder} style={{display:listStyle.display,width:listStyle.width}} ref={this.DisplayNote}/>
     </div>

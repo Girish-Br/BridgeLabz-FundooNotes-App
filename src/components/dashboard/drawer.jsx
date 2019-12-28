@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText
 } from "@material-ui/core";
+import LabelIcon from '@material-ui/icons/Label';
 import NotesIcon from "@material-ui/icons/Notes";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import ArchiveIcon from "@material-ui/icons/Archive";
@@ -44,6 +45,14 @@ class DrawerNav extends React.Component {
     let reminderDisplay = this.state.reminder && "#feefc3";
     let archiveDisplay = this.state.archive && "#feefc3";
     let trashDisplay=this.state.trash && "#feefc3";
+    let labels = this.props.labelDetails.map(item => {
+      return (
+          <ListItem button key="Label1">
+                  <ListItemIcon><LabelIcon /></ListItemIcon>
+                      <ListItemText primary={item.label} />
+                  </ListItem>
+      )
+  })
     return (
       <div>
         <Drawer
@@ -89,6 +98,10 @@ class DrawerNav extends React.Component {
               <ListItemText primary="Archive" />
             </ListItem>
             <Divider />
+            <Divider/>
+<ListItemText primary="Labels" className="labelDrawer"/>
+            {labels}
+            <Divider/>
             <ListItem button key="Trash" 
              onClick={this.handleTrash}
              style={{ backgroundColor: trashDisplay }}>

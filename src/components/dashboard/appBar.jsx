@@ -213,6 +213,7 @@ class Appbar extends React.Component {
               handleTheArchive={this.props.handleArchive}
               handleTheNotes={this.props.handleNotes}
               handleTheTrash={this.props.handleTrash}
+              labelDetails={this.props.labelDetails}
             />
           </AppBar>
         </MuiThemeProvider>
@@ -222,40 +223,3 @@ class Appbar extends React.Component {
 }
 export default Appbar;
 
-{
-  /* <div className="mobile-search">
-                                    <IconButton
-                                        aria-controls="search-field"
-                                        aria-haspopup="true"
-                                    onClick={this.mobileSearchOpen}>
-                                    <Tooltip title="Search">
-                                        <SearchIcon />
-                                    </Tooltip>
-                                    </IconButton>
-                                </div>
-                                <Popover
-                                    id="search-field"
-                                    anchorEl={this.state.SearchAnchorEl}
-                                    open={Boolean(this.state.SearchAnchorEl)}
-                                    onClose={this.mobileSearchClose}
-                                    anchorOrigin={{
-                                        vertical: 'center',
-                                        horizontal: 'center',
-                                      }}
-                                      transformOrigin={{
-                                        vertical: 'center',
-                                        horizontal: 'center',
-                                    }} >
-                                    <IconButton onClick={this.mobileSearchClose}>
-                                        <ArrowBackIcon/>
-                                    </IconButton>
-                                    <InputBase
-                                            value={this.state.searchNote}
-                                            onChange={this.handleSearchBar}
-                                            placeholder="Search"
-                                        id="inputRoot" />
-                                    <IconButton onClick={this.mobileSearchClose}>
-                                    <CloseIcon/>
-                                    </IconButton>
-                                </Popover> */
-}
