@@ -8,6 +8,7 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
 import Appbar from './appBar.jsx'
+import {getLabels} from '../../controller/userController.js'
 import CreateNote from './createNote';
 import DisplayNote from './displayItems.jsx'
 class Dashboard extends React.Component {
@@ -18,9 +19,13 @@ class Dashboard extends React.Component {
       displayList:false,
       archiveCards:false,
       reminder:false,
-      trash:false
+      trash:false,
+      labels:[]
    }
     this.DisplayNote = React.createRef();
+  }
+  componentDidMount(){
+    this.getAllLabels()
   }
   handleRef=()=>{
 this.DisplayNote.current.getAllCards()
@@ -49,6 +54,10 @@ handleTheTrash=()=>{
   displayListView=()=>{
     this.setState({displayList: !this.state.displayList})
   }
+  getAllLabels=()=>{
+    getLabels().then(res=>
+      this.setState({labels:res})
+    )}
   render() {
     let listStyle=!this.state.displayList ? ({display:"flex",width:"100%"}) : ({display:"block",width:"60%"}) 
       return (
@@ -57,7 +66,7 @@ handleTheTrash=()=>{
         <Appbar view={this.state.displayList} displayList={this.displayListView} handleArchive={this.handleArchive} handleReminder={this.handleTheReminder}  handleNotes={this.handleTheNotes} handleTrash={this.handleTheTrash}/>
         <div className="content">
         <div>
-        <CreateNote handleRef={this.handleRef}/>
+        <CreateNote handleRef={this.handleRef} label={this.state.labels}/>
         </div>
         <div className="heightOfCards">
         <DisplayNote 

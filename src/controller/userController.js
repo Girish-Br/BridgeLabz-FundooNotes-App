@@ -243,7 +243,7 @@ export async function createLabel(labelData) {
       .where("isDeleted","==",false)
       .get().then(function(querySnapshot) {
          querySnapshot.forEach(function(doc) {
-           labels.push(doc)
+           labels.push({id:doc.id,label:doc.data().label})
         });
     })
     console.log(labels)
@@ -254,7 +254,7 @@ export async function createLabel(labelData) {
     return error.message
   }
 }
-export async function getAllLabels(){
+export async function getLabels(){
   try{
    const token = localStorage.usertoken
  const decoded = jwt_decode(token)
@@ -264,7 +264,7 @@ export async function getAllLabels(){
      .where("isDeleted","==",false)
      .get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-          labels.push(doc)
+          labels.push({id:doc.id,label:doc.data().label})
        });
    })
    return labels

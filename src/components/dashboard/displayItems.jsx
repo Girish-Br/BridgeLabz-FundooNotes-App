@@ -1,3 +1,10 @@
+/********************************************************************************
+ *  @Purpose        : to design a component that holds all the cards
+ *  @file           :  dialogBox.jsx
+ *  @author         : Girish B R
+ *  @version        : v0.1
+ *  @since          : 13-12-2019
+ *********************************************************************************/
 import React from "react";
 import GetCards from "./getNote.jsx";
 import { GetNote } from "../../controller/userController";
@@ -14,6 +21,8 @@ class DisplayNote extends React.Component {
   }
   getAllCards = () => {
     GetNote().then(res => {
+      let notesCount = res.length;
+      console.log("aaaaaaaaaaaaaaaaaaaa" + notesCount);
       if (Array.isArray(res)) {
         this.setState({ notes: res });
       }
@@ -23,51 +32,93 @@ class DisplayNote extends React.Component {
   render() {
     let pinnedNotes = [],
       unpinnedNotes = [],
-      archieveNotes = [],
+      archiveNotes = [],
       reminderNotes = [],
-      trashedNotes=[];
+      trashedNotes = [];
+    let pinnedCount = 0,
+      unpinnedCount = 0,
+      archiveCount = 0,
+      reminderCount = 0;
     this.state.notes.map(item => {
-      if (item.data().pin === true && item.data().archive === false && item.data().trash===false) {
+      if (
+        item.data().pin === true &&
+        item.data().archive === false &&
+        item.data().trash === false
+      ) {
         pinnedNotes.push(
-          <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+          <GetCards
+            data={item}
+            displayNotes={this.getAllCards}
+            trash={this.props.trash}
+          />
         );
+        pinnedCount++;
         if (item.data().reminder !== "") {
           reminderNotes.push(
-            <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+            <GetCards
+              data={item}
+              displayNotes={this.getAllCards}
+              trash={this.props.trash}
+            />
           );
         }
-        console.log("aaaaaaaaa", pinnedNotes);
-      } else if (item.data().pin === false && item.data().archive === false && item.data().trash===false) {
+      } else if (
+        item.data().pin === false &&
+        item.data().archive === false &&
+        item.data().trash === false
+      ) {
         unpinnedNotes.push(
-          <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+          <GetCards
+            data={item}
+            displayNotes={this.getAllCards}
+            trash={this.props.trash}
+          />
         );
+        unpinnedCount++;
         if (item.data().reminder !== "") {
           reminderNotes.push(
-            <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+            <GetCards
+              data={item}
+              displayNotes={this.getAllCards}
+              trash={this.props.trash}
+            />
           );
         }
-      } 
-      else if(item.data().trash===true) {
+      } else if (item.data().trash === true) {
         trashedNotes.push(
-          <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+          <GetCards
+            data={item}
+            displayNotes={this.getAllCards}
+            trash={this.props.trash}
+          />
         );
-      }
-      else{
-        archieveNotes.push(
-          <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+      } else {
+        archiveNotes.push(
+          <GetCards
+            data={item}
+            displayNotes={this.getAllCards}
+            trash={this.props.trash}
+          />
         );
+        archiveCount++;
         if (item.data().reminder !== "") {
           reminderNotes.push(
-            <GetCards data={item} displayNotes={this.getAllCards} trash={this.props.trash}/>
+            <GetCards
+              data={item}
+              displayNotes={this.getAllCards}
+              trash={this.props.trash}
+            />
           );
         }
       }
     });
-     return !this.props.archiveCards && !this.props.reminderNotes && !this.props.trash ? (
+    return !this.props.archiveCards &&
+      !this.props.reminderNotes &&
+      !this.props.trash ? (
       <div>
         <div>
           <div className>
-            <p className="pinned">PINNED:</p>
+            <p className="pinned">PINNED:({pinnedCount})</p>
           </div>
           <div
             style={{
@@ -81,7 +132,7 @@ class DisplayNote extends React.Component {
         </div>
         <div>
           <div>
-            <p className="others">OTHER NOTES:</p>
+            <p className="others">OTHER NOTES:({unpinnedCount})</p>
           </div>
           <div
             style={{
@@ -94,18 +145,9 @@ class DisplayNote extends React.Component {
           </div>
         </div>
       </div>
-    ) :
-    !this.props.archiveCards && this.props.reminderNotes && !this.props.trash?
-    <div
-    style={{
-      display: this.props.style.display,
-      width: this.props.style.width
-    }}
-    className="pinnedCards"
-  >
-    {reminderNotes}
-  </div>
-    : !this.props.trash?(
+    ) : !this.props.archiveCards &&
+      this.props.reminderNotes &&
+      !this.props.trash ? (
       <div
         style={{
           display: this.props.style.display,
@@ -113,19 +155,32 @@ class DisplayNote extends React.Component {
         }}
         className="pinnedCards"
       >
-        {archieveNotes}
+        {reminderNotes}
       </div>
-    ):
-    this.props.trash && <div style={{
-      display: this.props.style.display,
-      width: this.props.style.width
-    }}
-    className="pinnedCards" >{trashedNotes}</div>
+    ) : !this.props.trash ? (
+      <div
+        style={{
+          display: this.props.style.display,
+          width: this.props.style.width
+        }}
+        className="pinnedCards"
+      >
+        <p className="others">ARCHIVE:({archiveCount})</p>
+        {archiveNotes}
+      </div>
+    ) : (
+      this.props.trash && (
+        <div
+          style={{
+            display: this.props.style.display,
+            width: this.props.style.width
+          }}
+          className="pinnedCards"
+        >
+          {trashedNotes}
+        </div>
+      )
+    );
   }
 }
 export default DisplayNote;
-
-
-
-
-

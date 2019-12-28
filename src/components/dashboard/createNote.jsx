@@ -14,9 +14,12 @@ import {
   KeyboardDatePicker,
   KeyboardTimePicker
 } from "@material-ui/pickers";
+import CancelIcon from '@material-ui/icons/Cancel';
 import Chip from "@material-ui/core/Chip";
 import {
   Card,
+  Checkbox,
+  FormControlLabel,
   Snackbar,
   TextField,
   Tooltip,
@@ -30,6 +33,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import ArchiveIcon from "@material-ui/icons/Archive";
+import { ReminderUpdate } from "../../controller/userController.js";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonCheckedRounded";
 import ImageIcon from "@material-ui/icons/Image";
 import Menu from "@material-ui/core/Menu";
@@ -63,7 +67,8 @@ class CreateNoteDashboard extends React.Component {
       anchorElMore: null,
       labelClick: false,
       labelValue: "",
-      trash:false
+      trash: false,
+      labels: []
     };
     this.archiveNoteCreation = this.archiveNoteCreation.bind(this);
   }
@@ -79,6 +84,9 @@ class CreateNoteDashboard extends React.Component {
   };
   handleClosereminder = () => {
     this.setState({ anchorEl: null });
+  };
+  handleReminderDelete = () => {
+    this.setState({ reminder: "" });
   };
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -98,7 +106,7 @@ class CreateNoteDashboard extends React.Component {
       color: this.state.color,
       pin: this.state.pin,
       reminder: this.state.reminder,
-      trash:this.state.trash
+      trash: this.state.trash
     };
     if (!(notes.title === "" && notes.description === "")) {
       CreateNote(notes).then(res => {
@@ -161,35 +169,27 @@ class CreateNoteDashboard extends React.Component {
     console.log(new Date());
     var date = new Date().toDateString();
     console.log(new Date().toDateString());
-    let reminder1 = date + ", 8:AM";
+    let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
   };
   handleSetTommoTime = () => {
     this.handleClosereminder();
     let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    var date = new Date().toDateString();
-    date = date.replace(new Date().getDate(), new Date().getDate() + 1);
-    console.log(new Date().getDate());
-    date = date.replace(
-      days[new Date().getDay() - 1],
-      days[new Date().getDay()]
-    );
+    var nextweek = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 7);
+    console.log('next week',nextweek)
+    let date = nextweek.toDateString();
     console.log(new Date().getDay());
-    let reminder1 = date + ", 8:AM";
+    let reminder1 = date + ", 8:am";
     this.setState({ reminder: reminder1 });
   };
+
   handleSetNextWeekTime = () => {
     this.handleClosereminder();
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     var date = new Date().toDateString();
     console.log(new Date());
     date = date.replace(
       new Date().getDate().toString(),
       new Date().getDate() + 7
-    );
-    date = date.replace(
-      days[new Date().getDay() - 1],
-      days[new Date().getDay()]
     );
     var reminder1 = date + ", 8:00 AM";
     this.setState({ reminder: reminder1 });
@@ -233,10 +233,66 @@ class CreateNoteDashboard extends React.Component {
     const labelData = { labelData: this.state.labelValue };
     createLabel(labelData).then(res => {
       console.log("result label", res);
-      this.setState({ labels: res });
+      this.setState({ labels: res ,labelValue:''});
     });
   };
+  handleCheckBoxClick = e => {
+    if (e.target.checked) {
+      // console.log('checked',e.target.value)
+      // var newStateArray = this.state.labels.slice();
+      // newStateArray.push({id:e.target.id,label:e.target.value});
+      // console.log('new state array',newStateArray)
+      // this.setState({ labels: newStateArray });
+      this.setState({
+        labels: [
+          ...this.state.labelValue,
+          { id: e.target.id, label: e.target.value }
+        ]
+      });
+    }
+  };
+  removeLabel = (e)=> {
+    console.log("remove", e.target.id);
+    const labels = this.state.labels.filter(item => item.id !== e.target.id);
+    this.setState({ labels: labels });
+  };
   render() {
+    let labels = "";
+    if (this.state.labels.length > 0) {
+      labels = this.state.labels.map(item => {
+        return (
+          <Chip
+            label={item.label}
+            id={item.id}
+            onDelete={event => this.removeLabel(event)}
+            deleteIcon={<CancelIcon id={item.id} />}
+            variant="outlined"
+          />
+        );
+      });
+    }
+    let label = "";
+    if (this.props.label.length > 0) {
+      label = this.props.label.map(item => {
+        return (
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  id={item.id}
+                  name={item.label}
+                  value={item.label}
+                  onChange={event => this.handleCheckBoxClick(event)}
+                />
+              }
+              label={item.label}
+              labelPlacement="end"
+            />
+          </div>
+        );
+      });
+    }
     let labelMenu = !this.state.labelClick ? (
       <Menu
         id="more-menu"
@@ -266,6 +322,8 @@ class CreateNoteDashboard extends React.Component {
             id="inputRoot"
           />
         </MenuItem>
+
+        <div className="currentLabels">{label}</div>
         <Divider />
         <MenuItem onClick={this.handleCreateLabel}>
           <div className="labelNotes">
@@ -435,8 +493,9 @@ class CreateNoteDashboard extends React.Component {
             />
           </div>
         ) : (
-          <div className="reminderIncards" />
+          <div />
         )}
+        <p className="labelsInCreateCard">{labels !== "" && labels}</p>
         {/* {this.state.labelValue !== "" ? (
           <div className="reminderIncards">
             <Chip

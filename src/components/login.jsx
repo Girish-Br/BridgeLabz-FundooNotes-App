@@ -157,18 +157,6 @@ class Login extends React.Component {
                     />
                   </div>
                   <div className="secondtxtField">
-                    {/* <TextField
-                    required
-                    id="outlined-pass-input"
-                    className="txtFieldWidth"
-                    label="Password"
-                    type="password"
-                    name="password"
-                    margin="normal"
-                    variant="outlined"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  /> */}
                     <TextField
                       variant="outlined"
                       className="txtFieldWidth"

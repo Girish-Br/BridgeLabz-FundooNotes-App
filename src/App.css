@@ -5,6 +5,7 @@
   margin:auto;
 box-shadow: 1px 1px 8px 1px;
   margin-top: 88px;
+  border-radius: 5px;
   background-color: white;
 }
 .login {
@@ -34,6 +35,9 @@ box-shadow: 1px 1px 8px 1px;
   display: flex;
   justify-content: space-between;
 }
+.secondtxtField{
+  margin-top: 15px;
+}
 
 
 
@@ -46,6 +50,7 @@ box-shadow: 1px 1px 8px 1px;
 .rcard {
   margin: auto;
   margin-top: 50px;
+  border-radius: 5px;
   padding: 0%;
   box-shadow: 1px 1px 8px 1px;
 }
@@ -101,6 +106,7 @@ padding-left: 60px;
   height: 220px;
   width: 28%;
   position: relative;
+  border-radius: 5px;
   margin: auto;
   padding: 1%;
   margin-top: 5%;
@@ -234,7 +240,7 @@ background-color: rgb(206, 206, 223);
     }
    
     .create-note-card{
-      width:500px;
+      width:56%;
       margin-left: 25px;
     }
     .create-note-card1{
@@ -250,6 +256,7 @@ background-color: rgb(206, 206, 223);
     .addedNoteCards{
       margin:20px;
       mask-border: 5px;
+      border-radius: 5px;
     }
     .drawerButton{
       left: 0px;
@@ -266,9 +273,6 @@ background-color: rgb(206, 206, 223);
     }
     .searchbar{
       width: 80%;
-    }
-    .onClickCardClose{
-      margin-left:30%;
     }
 
 }
@@ -287,7 +291,7 @@ background-color: rgb(206, 206, 223);
     padding-bottom:5px;
   }
   .loginButtondiv{
-    margin-top: 15px;
+    margin-top: 20px;
    color:#3f51b5 ;
    }
   .cbutton {
@@ -372,15 +376,15 @@ background-color: rgb(206, 206, 223);
   .content{
     justify-content: center;
     }
-    .create-note-card{
-      width: 56%;
-    }
     .create-note-card1{
       width:56%;
       box-shadow: 0px 5px 3px;
     }
     .create-note-textarea{
       width:300px;
+    }
+    .create-note-card{
+      width: 56%;
     }
     .searchbar{
       width: 80%;
@@ -427,7 +431,7 @@ background-color: rgb(206, 206, 223);
 }
 .create-note-card{
   box-shadow: 1px 2px 6px 0px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 .closeDiv{
   margin-left: 120px;
@@ -446,7 +450,7 @@ background-color: rgb(206, 206, 223);
   align-items: center;
 }
 .content{
-  margin-top:80px;
+  margin-top:85px;
   align-content: center;
 }
 
@@ -498,6 +502,7 @@ background-color: rgb(206, 206, 223);
         box-shadow: 1px 1px 5px -1px;
         margin: 15px;
         min-width: 315px;
+        border-radius: 5px;
       }
       .cards{
         display: flex;
@@ -537,6 +542,11 @@ background-color: rgb(206, 206, 223);
 
 } */
 }
+.labelsInCreateCard{
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 .saveInReminder{
   margin-left: 72%;
 }
@@ -575,9 +585,6 @@ background-color: rgb(206, 206, 223);
   display: flex;
   margin-left: 4%;
 }
-.fundooIcon{
-  padding-left: 5px;
-}
 .navFundooSearch{
   display: flex;
   justify-content: space-between;
@@ -599,6 +606,7 @@ background-color: rgb(206, 206, 223);
 }
 .heightOfCards{
   margin-top: 4%;
+  margin-left: 1%;
 }
 .searchIconLap{
   background-color:#f1f3f4 ;
@@ -623,4 +631,13 @@ background-color: rgb(206, 206, 223);
 }
 .createLabelP{
   padding-left: 8px;
+}
+.onClickCardClose{
+  margin-left: 8%;
+}
+.currentLabels{
+  margin: 5%;
+}
+.spaceInDialog{
+  margin: 5px;
 }
