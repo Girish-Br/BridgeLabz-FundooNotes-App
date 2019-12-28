@@ -61,8 +61,8 @@ class GetCards extends React.Component {
   closeColorMenu = e => {
     this.setState({ anchorEl1: e.currentTarget });
   };
-  colorChange = e => {
-    this.setState({
+  colorChange = async(e) => {
+   await this.setState({
       color: e.currentTarget.style.backgroundColor,
       anchorEl1: null
     });
@@ -73,6 +73,7 @@ class GetCards extends React.Component {
     colorUpdate(data).then(res => {
       console.log(res);
     });
+    this.props.displayNotes();
   };
   NoteOpenForEdit = () => {
     this.setState({ noteOpen: !this.state.noteOpen });
@@ -380,7 +381,7 @@ class GetCards extends React.Component {
     );
     return (
       <div
-        style={{ backgroundColor: this.state.color }}
+        style={{ backgroundColor: this.props.data.data().color }}
         className="addedNoteCards"
         onMouseOver={this.handleMouseOver}
         onMouseLeave={this.handleMouseClose}

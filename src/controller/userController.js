@@ -7,6 +7,7 @@
 import jwt from 'jsonwebtoken';
 import jwt_decode from 'jwt-decode'
 import { EventEmitter } from 'events';
+import * as firebase from 'firebase';
 import servicesConstant from '../const.js';
 /*
 * @Purpose :Register the validated user details
@@ -86,7 +87,7 @@ export async function logout(){
     console.log(err);
   }
 }
-export async function CreateNote(notes) {
+export async function CreateNote(notes,labels) {
   try {
     console.log(notes)
     const Notesdetails={
@@ -99,7 +100,20 @@ export async function CreateNote(notes) {
       reminder:notes.reminder,
       trash:false
     }
-   await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
+    await servicesConstant.firestore.collection('notes').doc().set(Notesdetails)
+  //  await firebase.firestore.collection('notes').doc().add(Notesdetails).then(function(docRef) {
+  //    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
+  //   if (labels.length > 0) {
+  //     console.log('doc ref id', docRef.id);
+  //   console.log('enter',labels)
+  //   labels.forEach(function (labeldetails) {
+  //     console.log('label name',labeldetails.label);
+  //     let labelDocument = servicesConstant.firestore.collection("labels").doc(labeldetails.id)
+  //     labelDocument.update({
+  //       note_id:firebase.firestore.FieldValue.arrayUnion(docRef.id)
+  //     })
+  //   })
+  // }
     return 'success';
   }
   catch (error) {

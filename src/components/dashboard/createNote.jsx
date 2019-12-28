@@ -109,7 +109,7 @@ class CreateNoteDashboard extends React.Component {
       trash: this.state.trash
     };
     if (!(notes.title === "" && notes.description === "")) {
-      CreateNote(notes).then(res => {
+      CreateNote(notes,this.state.labels).then(res => {
         if (res === "success") {
           this.setState({
             snackbarMsg: "Notes added",
