@@ -288,3 +288,46 @@ export async function getLabels(){
    return error.message
  }
 }
+export async function getCountForNotes(){
+  try{
+   const token = localStorage.usertoken
+ const decoded = jwt_decode(token)
+let pinnedNotes,unpinnedNotes,archiveNotes,trashNotes;
+ await servicesConstant.firestore.collection("notes")
+     .where("user_id", "==", decoded.user_id)
+     .where("pin","==",true).get().then(snap => {
+     pinnedNotes = snap.size
+});
+await servicesConstant.firestore.collection("notes")
+     .where("user_id", "==", decoded.user_id)
+     .where("pin","==",false)
+     .where("archive","==",false)
+     .where("trash","==",false)
+     .get().then(snap => {
+     unpinnedNotes = snap.size 
+});
+await servicesConstant.firestore.collection("notes")
+     .where("user_id", "==", decoded.user_id)
+     .where("archive","==",true).get().then(snap => {
+     archiveNotes = snap.size // will return the collection size
+});
+await servicesConstant.firestore.collection("notes")
+     .where("user_id", "==", decoded.user_id)
+     .where("trash","==",true).get().then(snap => {
+     trashNotes = snap.size // will return the collection size
+});
+console.log(pinnedNotes+"aaaaaa"+unpinnedNotes+" "+archiveNotes+" "+trashNotes)
+const result={
+  pinned:pinnedNotes,
+  unpinned:unpinnedNotes,
+  archive:archiveNotes,
+  trash:trashNotes
+}
+console.log("aaaaaaaaaa"+result)
+return result
+  }
+  catch (error) {
+   console.log(error)
+   return error.message
+ }
+}

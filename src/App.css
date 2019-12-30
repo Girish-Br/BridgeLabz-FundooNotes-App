@@ -68,8 +68,8 @@ box-shadow: 1px 1px 8px 1px;
 }
 
 .rname{
-color:#3f51b5;
-background-color: rgb(206, 206, 223);
+color:white;
+background-color:#3f51b5;
 padding-left: 60px;
 }
 .rlbutton{
@@ -210,9 +210,7 @@ padding-left: 60px;
 
 
 .rname{
-color:#3f51b5;
 padding-left: 83px;
-background-color: rgb(206, 206, 223);
 }
 .rlbutton{
   margin-bottom: 20px;
@@ -348,9 +346,7 @@ width: 400px;
 }
 
 .rname{
-color:#3f51b5;
 padding-left: 100px;
-background-color: rgb(206, 206, 223);
 }
 .rlbutton{
   margin-bottom: 20px;
@@ -647,4 +643,13 @@ background-color: rgb(206, 206, 223);
   font-family: Roboto,Arial,sans-serif;
   font-size: .6875rem;
   font-weight: 500;
+}
+.piechart-icon{
+  display: flex;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+#icons{
+  display: flex;
+  align-items: center;
 }

@@ -204,7 +204,10 @@ class Appbar extends React.Component {
                 </div>
               </div>
               <div className="Avatar">
-                <LongMenu />
+                <LongMenu   pinnedCount={this.props.pinnedCount}
+              unpinnedCount={this.props.unpinnedCount}
+              archiveCount={this.props.archiveCount}
+              trashCount={this.props.trashCount}/>
               </div>
             </Toolbar>
             <DrawerNav

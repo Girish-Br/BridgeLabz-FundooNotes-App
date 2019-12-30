@@ -54,7 +54,8 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-15": "^1.4.1",
     "enzyme-adapter-react-16": "^1.15.1",
-    "firebase": "^7.6.1"
+    "firebase": "^7.6.1",
+    "react-minimal-pie-chart": "^6.0.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
